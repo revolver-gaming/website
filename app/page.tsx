@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Cylinder, { HeroBackdrop } from "@/components/Cylinder";
 import GameCard from "@/components/GameCard";
-import { partnerStudios, operators, contact } from "@/lib/data";
-import { listGames, listNews, newsDate } from "@/lib/cms";
+import {
+    getContact, getSocials, listGames, listNews,
+    listOperators, listPartnerStudios, newsDate,
+} from "@/lib/cms";
 
 const tickerItems = [
     "31 original titles", "100% HTML5", "Real money · Social · Sweepstakes",
@@ -12,7 +14,9 @@ const tickerItems = [
 export const revalidate = 300;
 
 export default async function Home() {
-    const [news, games] = await Promise.all([listNews(6), listGames()]);
+    const [news, games, partnerStudios, operators, contact, socials] = await Promise.all([
+        listNews(6), listGames(), listPartnerStudios(), listOperators(), getContact(), getSocials(),
+    ]);
     const featuredGames = games.filter((g) => g.featured);
     return (
         <main>
@@ -208,25 +212,23 @@ export default async function Home() {
                             </div>
                         </div>
                     </div>
-                    <form className="contact-form" action={`mailto:${contact.email}`} method="post">
-                        <label>
-                            Name
-                            <input type="text" name="name" placeholder="Your name" required />
-                        </label>
-                        <label>
-                            Company
-                            <input type="text" name="company" placeholder="Company or brand" />
-                        </label>
-                        <label>
-                            Email
-                            <input type="email" name="email" placeholder="you@company.com" required />
-                        </label>
-                        <label>
-                            Message
-                            <textarea name="message" placeholder="What are you looking to launch?" required />
-                        </label>
-                        <button type="submit" className="btn btn-fire">Send message</button>
-                    </form>
+                    <div className="contact-reach">
+                        <a className="btn btn-fire" href={`mailto:${contact.email}`}>Email the team</a>
+                        <div className="social-block">
+                            <h3>Follow the studio</h3>
+                            <p>Launches, partnerships and news from the chamber.</p>
+                            <ul className="social-list">
+                                {socials.map((s) => (
+                                    <li key={s.label}>
+                                        <a href={s.url} target="_blank" rel="noopener">
+                                            {s.label}
+                                            <span className="arrow">→</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>

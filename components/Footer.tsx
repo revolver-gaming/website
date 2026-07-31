@@ -1,20 +1,20 @@
 import Link from "next/link";
-import { contact } from "@/lib/data";
+import { getContact, getFooterLinks } from "@/lib/cms";
 
-export default function Footer() {
+export default async function Footer() {
+    const [contact, links] = await Promise.all([getContact(), getFooterLinks()]);
     return (
         <footer className="footer">
             <div className="shell footer-inner">
                 <p className="license">
-                    {contact.license}
+                    {contact.license}{" "}
+                    <a href={contact.license_url} target="_blank" rel="noopener">UKGC register</a>
                     <br />
                     We are committed to responsible gambling.
                 </p>
                 <ul className="footer-links">
                     <li><Link href="/games">Games</Link></li>
-                    <li><a href="https://revolvergaming.com/terms-conditions/">Terms</a></li>
-                    <li><a href="https://revolvergaming.com/privacy-policy/">Privacy</a></li>
-                    <li><a href="https://revolvergaming.com/job/">Careers</a></li>
+                    {links.map((l) => <li key={l.label}><a href={l.url}>{l.label}</a></li>)}
                 </ul>
                 <span className="age" aria-label="18 plus only">18+</span>
             </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import GamesExplorer from "./GamesExplorer";
-import { listGames } from "@/lib/cms";
+import { listGames, listPartnerStudios } from "@/lib/cms";
 
 export const revalidate = 300;
 
@@ -10,5 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async function GamesPage() {
-    return <GamesExplorer games={await listGames()} />;
+    const [games, partnerStudios] = await Promise.all([listGames(), listPartnerStudios()]);
+    return <GamesExplorer games={games} partnerStudios={partnerStudios} />;
 }

@@ -82,5 +82,42 @@ export async function getGame(slug: string): Promise<GameDetail | null> {
     return data as unknown as GameDetail | null;
 }
 
+export type Contact = {
+    email: string;
+    phone: string;
+    address: string[];
+    license: string;
+    license_url: string;
+};
+
+export type LinkItem = { label: string; url: string };
+
+export type PartnerStudio = { name: string; knownFor: string; genre: string };
+
+async function content<T>(key: string): Promise<T> {
+    const { data, error } = await supabase.from("site_content").select("value").eq("key", key).single();
+    if (error) throw error;
+    return data.value as T;
+}
+
+export const getContact = () => content<Contact>("contact");
+export const getSocials = () => content<LinkItem[]>("socials");
+export const getFooterLinks = () => content<LinkItem[]>("footer_links");
+
+export async function listPartnerStudios(): Promise<PartnerStudio[]> {
+    const { data, error } = await supabase
+        .from("partner_studios")
+        .select("name, knownFor:known_for, genre")
+        .order("sort_order");
+    if (error) throw error;
+    return data;
+}
+
+export async function listOperators(): Promise<string[]> {
+    const { data, error } = await supabase.from("operators").select("name").order("sort_order");
+    if (error) throw error;
+    return data.map((o) => o.name);
+}
+
 export const newsDate = (iso: string) =>
     new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
