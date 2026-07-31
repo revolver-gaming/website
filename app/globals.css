@@ -1040,6 +1040,19 @@ section[data-chamber] {
     border-radius: var(--radius);
 }
 
+.article-body ul,
+.article-body ol {
+    margin-left: 22px;
+}
+
+.article-body li {
+    margin-top: 6px;
+}
+
+.job-apply {
+    margin-top: 32px;
+}
+
 /* ---- game detail --------------------------------------------------------- */
 
 .game-detail {

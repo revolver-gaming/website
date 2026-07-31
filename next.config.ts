@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
                     "https://jqsgkwtgtdtssuudtwqe.supabase.co/storage/v1/object/public/media/pdf/:file",
                 permanent: true,
             },
+            // old-site pages whose content now lives elsewhere
+            { source: "/about-us", destination: "/", permanent: true },
+            { source: "/news-archived", destination: "/news", permanent: true },
         ];
     },
 };

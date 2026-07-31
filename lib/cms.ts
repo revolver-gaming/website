@@ -119,5 +119,49 @@ export async function listOperators(): Promise<string[]> {
     return data.map((o) => o.name);
 }
 
+export type Page = { slug: string; title: string; content_html: string };
+
+export type Job = {
+    slug: string;
+    title: string;
+    content_html: string;
+    published_at: string;
+};
+
+export async function getPage(slug: string): Promise<Page | null> {
+    const { data, error } = await supabase
+        .from("pages")
+        .select("slug, title, content_html")
+        .eq("slug", slug)
+        .maybeSingle();
+    if (error) throw error;
+    return data;
+}
+
+export async function listPages(): Promise<Pick<Page, "slug">[]> {
+    const { data, error } = await supabase.from("pages").select("slug");
+    if (error) throw error;
+    return data;
+}
+
+export async function listJobs(): Promise<Job[]> {
+    const { data, error } = await supabase
+        .from("jobs")
+        .select("slug, title, content_html, published_at")
+        .order("published_at", { ascending: false });
+    if (error) throw error;
+    return data;
+}
+
+export async function getJob(slug: string): Promise<Job | null> {
+    const { data, error } = await supabase
+        .from("jobs")
+        .select("slug, title, content_html, published_at")
+        .eq("slug", slug)
+        .maybeSingle();
+    if (error) throw error;
+    return data;
+}
+
 export const newsDate = (iso: string) =>
     new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
