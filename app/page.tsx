@@ -1,14 +1,19 @@
 import Link from "next/link";
 import Cylinder, { HeroBackdrop } from "@/components/Cylinder";
 import GameCard from "@/components/GameCard";
-import { games, featuredGames, partnerStudios, operators, news, contact } from "@/lib/data";
+import { partnerStudios, operators, contact } from "@/lib/data";
+import { listGames, listNews, newsDate } from "@/lib/cms";
 
 const tickerItems = [
     "31 original titles", "100% HTML5", "Real money · Social · Sweepstakes",
     "UKGC licensed", "Studio + Aggregator", "London, W1",
 ];
 
-export default function Home() {
+export const revalidate = 300;
+
+export default async function Home() {
+    const [news, games] = await Promise.all([listNews(6), listGames()]);
+    const featuredGames = games.filter((g) => g.featured);
     return (
         <main>
             {/* CH.01 — the cylinder */}
@@ -167,17 +172,14 @@ export default function Home() {
                     </div>
                     <div className="news-list">
                         {news.map((n) => (
-                            <a
-                                className="news-row"
-                                key={n.slug}
-                                href={`https://revolvergaming.com/news/${n.slug}/`}
-                            >
-                                <span className="date">{n.date}</span>
+                            <Link className="news-row" key={n.slug} href={`/news/${n.slug}`}>
+                                <span className="date">{newsDate(n.published_at)}</span>
                                 <h3>{n.title}</h3>
                                 <span className="arrow">→</span>
-                            </a>
+                            </Link>
                         ))}
                     </div>
+                    <Link className="news-all" href="/news">View all news →</Link>
                 </div>
             </section>
 

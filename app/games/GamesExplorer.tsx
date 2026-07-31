@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import GameCard from "@/components/GameCard";
-import { games, partnerStudios } from "@/lib/data";
+import { partnerStudios } from "@/lib/data";
+import type { Game } from "@/lib/cms";
 
 type Filter = "all" | "originals" | "partners";
 
@@ -12,7 +13,7 @@ const filters: { key: Filter; label: string }[] = [
     { key: "partners", label: "Partner studios" },
 ];
 
-export default function GamesExplorer() {
+export default function GamesExplorer({ games }: { games: Game[] }) {
     const [filter, setFilter] = useState<Filter>("all");
     const [query, setQuery] = useState("");
 

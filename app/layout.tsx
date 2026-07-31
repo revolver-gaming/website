@@ -23,6 +23,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://revolvergaming.com"),
     title: "Revolver Gaming — Lock, Slot & Barrel",
     description:
         "London-based slot studio and game aggregation platform. Original HTML5 slots, third-party studios and a growing network of operator clients.",

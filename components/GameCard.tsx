@@ -1,8 +1,9 @@
-import type { Game } from "@/lib/data";
+import Link from "next/link";
+import type { Game } from "@/lib/cms";
 
 export default function GameCard({ game, showBlurb }: { game: Game; showBlurb?: boolean }) {
     return (
-        <a className="game-card" href={`https://revolvergaming.com/game/${game.slug}/`}>
+        <Link className="game-card" href={`/game/${game.slug}`}>
             {game.year >= 2026 && <span className="new-flag">New</span>}
             <div className="art">
                 <img src={game.image} alt={`${game.title} artwork`} loading="lazy" />
@@ -15,6 +16,6 @@ export default function GameCard({ game, showBlurb }: { game: Game; showBlurb?: 
                 </p>
                 {showBlurb && <p className="blurb">{game.blurb}</p>}
             </div>
-        </a>
+        </Link>
     );
 }

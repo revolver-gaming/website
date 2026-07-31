@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Game } from "@/lib/data";
+import type { Game } from "@/lib/cms";
 
 const STEP = 60; // six chambers
 
