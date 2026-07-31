@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import DemoLauncher from "@/components/DemoLauncher";
+import ScreenshotGallery from "@/components/ScreenshotGallery";
 import { getGame, listGames } from "@/lib/cms";
 
 export const revalidate = 300;
@@ -39,11 +41,7 @@ export default async function GamePage({ params }: Props) {
                         <h1 className="display">{game.title}</h1>
                         <p className="game-blurb">{game.blurb}</p>
                         <div className="game-ctas">
-                            {game.demo_url && (
-                                <a className="btn btn-fire" href={game.demo_url} target="_blank" rel="noopener">
-                                    Play demo
-                                </a>
-                            )}
+                            {game.demo_url && <DemoLauncher url={game.demo_url} title={game.title} />}
                             {game.product_sheet && (
                                 <a className="btn btn-ghost" href={game.product_sheet} target="_blank" rel="noopener">
                                     Product sheet
@@ -73,11 +71,7 @@ export default async function GamePage({ params }: Props) {
                 {game.screenshots.length > 0 && (
                     <section className="shot-section">
                         <h2 className="display">Screenshots</h2>
-                        <div className="shot-grid">
-                            {game.screenshots.map((s) => (
-                                <img key={s} src={s} alt={`${game.title} screenshot`} loading="lazy" />
-                            ))}
-                        </div>
+                        <ScreenshotGallery shots={game.screenshots} title={game.title} />
                     </section>
                 )}
             </div>
