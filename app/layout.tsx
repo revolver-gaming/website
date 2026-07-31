@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Big_Shoulders, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 import "./globals.css";
 
 const display = Big_Shoulders({
@@ -37,11 +35,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
-            <body>
-                <Nav />
-                {children}
-                <Footer />
-            </body>
+            <body>{children}</body>
         </html>
     );
 }
