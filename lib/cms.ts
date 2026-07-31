@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)!,
     // Cap Next's data cache at 5 minutes so ISR pages pick up CMS edits.
     { global: { fetch: (url, options) => fetch(url, { ...options, next: { revalidate: 300 } }) } },
 );

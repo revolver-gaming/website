@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 // Browser client for the admin: keeps the login session, no fetch caching.
 export const sb = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)!,
 );
 
 export const slugify = (s: string) =>
