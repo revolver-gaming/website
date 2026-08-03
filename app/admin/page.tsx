@@ -7,6 +7,7 @@ import { sb } from "./lib";
 const cards = [
     ["/admin/news", "News", "news", "Articles on /news and the homepage"],
     ["/admin/games", "Games", "games", "Game pages, cards, screenshots, PDFs"],
+    ["/admin/provider-games", "Provider games", "provider_games", "Third-party games on /games"],
     ["/admin/jobs", "Jobs", "jobs", "Careers postings on /job"],
     ["/admin/pages", "Pages", "pages", "Terms, Privacy and other simple pages"],
     ["/admin/settings", "Settings", null, "Contact, socials, footer, studios, operators"],

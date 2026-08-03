@@ -74,11 +74,11 @@ function Login() {
                 <h1 className="display">Admin</h1>
                 <label>
                     Email
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input type="email" autoComplete="email" autoFocus value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </label>
                 <label>
                     Password
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </label>
                 {error && <p className="admin-error">{error}</p>}
                 <button className="btn btn-fire" disabled={busy}>

@@ -1885,21 +1885,74 @@ section[data-chamber]:not(.hero) {
     border-bottom: 1px solid rgba(87, 40, 90, 0.4);
 }
 
+.admin-table td.mono {
+    white-space: nowrap;
+}
+
 .admin-table td em {
     color: var(--amber);
     font-style: normal;
     font-size: 13px;
 }
 
+.admin-table .admin-row-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.admin-empty {
+    color: var(--smoke);
+    text-align: center;
+    padding: 28px 12px;
+}
+
+.admin-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 14px;
+    color: var(--smoke);
+}
+
+.admin-search {
+    font: 14px var(--font-b);
+    color: var(--bone);
+    background: var(--chamber);
+    border: 1px solid var(--velvet-3);
+    border-radius: 10px;
+    padding: 9px 13px;
+    width: min(320px, 100%);
+}
+
+.admin-search:focus {
+    outline: none;
+    border-color: var(--amber);
+}
+
+.admin-pager {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 18px;
+    color: var(--smoke);
+}
+
 .admin-table button,
-.admin-panel > button,
+.admin-row-actions a,
+.admin-pager button,
+.admin-panel > button:not(.btn),
 .admin-actions button:not(.btn),
 .admin-subhead button {
+    display: inline-block;
+    white-space: nowrap;
     font-family: var(--font-m);
     font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--bone);
     border: 1px solid var(--velvet-3);
     border-radius: 8px;
     padding: 7px 14px;
@@ -1907,18 +1960,27 @@ section[data-chamber]:not(.hero) {
 }
 
 .admin-table button:hover,
-.admin-panel > button:hover,
+.admin-row-actions a:hover,
+.admin-pager button:hover:not(:disabled),
+.admin-panel > button:not(.btn):hover,
 .admin-actions button:not(.btn):hover,
 .admin-subhead button:hover {
     color: var(--amber);
     border-color: var(--amber);
 }
 
-.admin .danger {
+.admin-pager button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.admin button.danger,
+.admin .admin-link-row .danger {
     color: #ff7a7a;
 }
 
-.admin .danger:hover {
+.admin button.danger:hover,
+.admin .admin-link-row .danger:hover {
     color: #ff4d4d;
     border-color: #ff4d4d;
 }
