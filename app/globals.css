@@ -273,7 +273,7 @@ button {
     color: rgba(42, 18, 48, 0.35);
 }
 
-section[data-chamber] {
+section[data-chamber]:not(.hero) {
     padding-block: clamp(72px, 11vw, 140px);
     position: relative;
 }
@@ -281,9 +281,11 @@ section[data-chamber] {
 /* ---- hero (CH.01) -------------------------------------------------------- */
 
 .hero {
+    --hero-pad: clamp(16px, 2.5svh, 36px);
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid rgba(87, 40, 90, 0.4);
+    padding-block: var(--hero-pad);
 }
 
 .hero-bg {
@@ -320,13 +322,12 @@ section[data-chamber] {
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     align-items: center;
     gap: clamp(32px, 5vw, 72px);
-    padding-block: clamp(36px, 5vw, 56px);
-    min-height: calc(100svh - 72px);
+    min-height: calc(100svh - 72px - 2 * var(--hero-pad));
 }
 
 .hero-copy h1 {
-    font-size: clamp(56px, 8.2vw, 112px);
-    margin: 16px 0 22px;
+    font-size: clamp(48px, min(8.2vw, 11svh), 112px);
+    margin: 14px 0 20px;
 }
 
 .hero-copy h1 .line {
@@ -354,19 +355,20 @@ section[data-chamber] {
     .hero-grid {
         grid-template-columns: 1fr;
         min-height: 0;
+        padding-block: 28px 44px;
     }
 }
 
 /* ---- the cylinder (signature) -------------------------------------------- */
 
 .cylinder-stage {
-    --size: min(464px, 80vw);
+    --size: min(464px, 80vw, 56svh);
     --r: calc(var(--size) * 0.335);
     --slot: calc(var(--size) * 0.26);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: clamp(14px, 2svh, 24px);
     user-select: none;
 }
 
