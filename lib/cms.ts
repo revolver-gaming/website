@@ -50,6 +50,7 @@ export type Game = {
     year: number;
     tags: string[];
     featured: boolean;
+    demo_url: string | null;
 };
 
 export type GameDetail = Game & {
@@ -57,11 +58,10 @@ export type GameDetail = Game & {
     features: string[];
     screenshots: string[];
     product_sheet: string | null;
-    demo_url: string | null;
     video_url: string | null;
 };
 
-const GAME_FIELDS = "slug, title, blurb, image:card_image, year, tags, featured";
+const GAME_FIELDS = "slug, title, blurb, image:card_image, year, tags, featured, demo_url";
 
 export async function listGames(): Promise<Game[]> {
     const { data, error } = await supabase
@@ -75,11 +75,30 @@ export async function listGames(): Promise<Game[]> {
 export async function getGame(slug: string): Promise<GameDetail | null> {
     const { data, error } = await supabase
         .from("games")
-        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, demo_url, video_url`)
+        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url`)
         .eq("slug", slug)
         .maybeSingle();
     if (error) throw error;
     return data as unknown as GameDetail | null;
+}
+
+export type ProviderGame = {
+    id: string;
+    provider: string;
+    slug: string;
+    title: string;
+    image: string;
+    demo_url: string | null;
+    tags: string[];
+};
+
+export async function listProviderGames(): Promise<ProviderGame[]> {
+    const { data, error } = await supabase
+        .from("provider_games")
+        .select("id, provider, slug, title, image:card_image, demo_url, tags")
+        .order("sort_order");
+    if (error) throw error;
+    return data as unknown as ProviderGame[];
 }
 
 export type Contact = {

@@ -6,8 +6,8 @@ export const sb = createClient(
     (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)!,
 );
 
-export const slugify = (s: string) =>
-    s.toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+import { slugify } from "@/lib/slug";
+export { slugify };
 
 export async function uploadMedia(folder: string, file: File): Promise<string> {
     const ext = file.name.split(".").pop()!.toLowerCase();

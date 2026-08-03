@@ -636,6 +636,69 @@ section[data-chamber]:not(.hero) {
     overflow: hidden;
 }
 
+/* provider (third-party) game cards */
+.provider-card {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border-width: 1px;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.provider-flag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    font-family: var(--font-m);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bone);
+    background: rgba(42, 18, 48, 0.82);
+    border: 1px solid rgba(201, 178, 198, 0.35);
+    padding: 5px 10px;
+    border-radius: 999px;
+}
+
+.provider-card .art {
+    position: relative;
+}
+
+.provider-card .play-hint {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-m);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bone);
+    background: rgba(42, 18, 48, 0.55);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.provider-card:hover .play-hint {
+    opacity: 1;
+}
+
+.grid-break {
+    margin-block: clamp(40px, 5vw, 56px) 24px;
+    padding-top: clamp(28px, 4vw, 40px);
+    border-top: 1px solid rgba(87, 40, 90, 0.4);
+}
+
+.game-grid + .game-grid {
+    margin-top: 24px;
+}
+
 .new-flag {
     position: absolute;
     top: 14px;
@@ -1522,6 +1585,15 @@ section[data-chamber]:not(.hero) {
     }
 }
 
+.filter-bar.sub {
+    margin: -16px 0 26px;
+}
+
+.filter-bar.sub .chip {
+    font-size: 11px;
+    padding: 8px 14px;
+}
+
 .count-line {
     font-family: var(--font-m);
     font-size: 12px;
@@ -1534,6 +1606,14 @@ section[data-chamber]:not(.hero) {
 .count-line b {
     color: var(--amber);
     font-weight: 500;
+}
+
+.count-line a {
+    color: var(--amber);
+}
+
+.count-line a:hover {
+    text-decoration: underline;
 }
 
 .partner-tile {
@@ -1550,9 +1630,14 @@ section[data-chamber]:not(.hero) {
     transition: transform 0.35s var(--detent), border-color 0.3s;
 }
 
-.partner-tile:hover {
-    transform: translateY(-6px);
-    border-color: var(--amber);
+.partner-tile .soon {
+    margin-top: 12px;
+    font-family: var(--font-m);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    opacity: 0.65;
 }
 
 .partner-tile .via {

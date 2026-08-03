@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { DemoOverlay } from "./DemoLauncher";
 import type { Game } from "@/lib/cms";
 
 const STEP = 60; // six chambers
@@ -8,7 +10,10 @@ const STEP = 60; // six chambers
 export default function Cylinder({ games }: { games: Game[] }) {
     const [active, setActive] = useState(0);
     const [turns, setTurns] = useState(0); // cumulative so the ring never unwinds
+    const [demo, setDemo] = useState<Game | null>(null);
     const paused = useRef(false);
+    const demoOpen = useRef(false);
+    demoOpen.current = demo !== null;
 
     const fire = (i: number) => {
         setTurns((t) => {
@@ -21,7 +26,7 @@ export default function Cylinder({ games }: { games: Game[] }) {
     useEffect(() => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         const id = setInterval(() => {
-            if (!paused.current) {
+            if (!paused.current && !demoOpen.current) {
                 setActive((a) => (a + 1) % 6);
                 setTurns((t) => t + 1);
             }
@@ -71,14 +76,19 @@ export default function Cylinder({ games }: { games: Game[] }) {
                 <h3>{game.title}</h3>
                 <p className="tags">{game.tags.join(" · ")}</p>
                 <div className="actions">
-                    <a className="btn btn-fire" href={`https://revolvergaming.com/game/${game.slug}/`}>
-                        Play demo
-                    </a>
-                    <a className="btn btn-ghost" href={`https://revolvergaming.com/game/${game.slug}/`}>
+                    {game.demo_url && (
+                        <button className="btn btn-fire" onClick={() => setDemo(game)}>
+                            Play demo
+                        </button>
+                    )}
+                    <Link className="btn btn-ghost" href={`/game/${game.slug}`}>
                         Details
-                    </a>
+                    </Link>
                 </div>
             </div>
+            {demo?.demo_url && (
+                <DemoOverlay url={demo.demo_url} title={demo.title} close={() => setDemo(null)} />
+            )}
         </div>
     );
 }
