@@ -62,7 +62,7 @@ export default function Cylinder({ games }: { games: Game[] }) {
                     ))}
                 </div>
                 <div className="cylinder-hub">
-                    <img src="/brand/revolver-icon.png" alt="" />
+                    <img src="/brand/emblem-white.svg" alt="" />
                 </div>
             </div>
 

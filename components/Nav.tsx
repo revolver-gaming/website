@@ -5,10 +5,7 @@ export default function Nav() {
         <header className="nav">
             <div className="shell nav-inner">
                 <Link href="/" className="nav-brand" aria-label="Revolver Gaming home">
-                    <img src="/brand/revolver-icon.png" alt="" />
-                    <span className="wordmark">
-                        Revolver<span>&nbsp;Gaming</span>
-                    </span>
+                    <img src="/brand/logo-horizontal-white.svg" alt="Revolver Gaming" />
                 </Link>
                 <ul className="nav-links">
                     <li className="nav-hide"><Link href="/games">Games</Link></li>
