@@ -168,6 +168,8 @@ export default function AdminSettings() {
                                                 onChange={(e) => setFeature({ title: e.target.value })} />
                                             <input placeholder="Feature text" value={f.text}
                                                 onChange={(e) => setFeature({ text: e.target.value })} />
+                                            <input placeholder="Link (optional)" value={f.href ?? ""}
+                                                onChange={(e) => setFeature({ href: e.target.value || undefined })} />
                                             <label className="admin-check">
                                                 <input type="checkbox" checked={!!f.roadmap}
                                                     onChange={(e) => setFeature({ roadmap: e.target.checked || undefined })} />

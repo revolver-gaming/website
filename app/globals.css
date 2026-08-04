@@ -881,12 +881,13 @@ section[data-chamber]:not(.hero) {
     font-weight: 800;
     text-transform: uppercase;
     font-size: 20px;
-    line-height: 1.05;
+    line-height: 1.2;
     margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
+}
+
+.feat-card h3 .badge-roadmap {
+    margin-left: 10px;
+    vertical-align: 2px;
 }
 
 .feat-card h3::before {
@@ -911,6 +912,172 @@ section[data-chamber]:not(.hero) {
 
 .on-bone .feat-card p {
     color: var(--ink-soft);
+}
+
+.feat-more {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--font-m);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+}
+
+.feat-more:hover {
+    text-decoration: underline;
+}
+
+.on-bone .feat-more {
+    color: #b0561a;
+}
+
+/* ---- wallet flow animation ------------------------------------------------ */
+
+.wf-block {
+    margin-top: clamp(48px, 7vw, 80px);
+}
+
+.wf {
+    margin-top: 34px;
+}
+
+.wf-track {
+    position: relative;
+    height: 64px;
+    margin-inline: 60px;
+}
+
+.wf-line {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(244, 240, 227, 0.16);
+}
+
+.wf-dot {
+    position: absolute;
+    top: 9px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 18px var(--amber);
+    transform: translate(-50%, -50%);
+    transition: left 1.1s cubic-bezier(0.5, 0, 0.2, 1), background 0.3s, box-shadow 0.3s;
+}
+
+.wf-dot.win {
+    background: #7ed957;
+    box-shadow: 0 0 18px #7ed957;
+}
+
+.wf-dot.fail {
+    background: #ff5d5d;
+    box-shadow: 0 0 18px #ff5d5d;
+}
+
+.wf-node {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.wf-pin {
+    width: 8px;
+    height: 8px;
+    margin-top: 4px;
+    border-radius: 50%;
+    background: rgba(244, 240, 227, 0.35);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.wf-node.on .wf-pin {
+    background: var(--bone);
+    box-shadow: 0 0 10px rgba(244, 240, 227, 0.8);
+}
+
+.wf-name {
+    font-family: var(--font-m);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    white-space: nowrap;
+    transition: color 0.3s;
+}
+
+.wf-node.on .wf-name {
+    color: var(--bone);
+}
+
+.wf-label {
+    min-height: 26px;
+    margin-top: 10px;
+    text-align: center;
+    font-family: var(--font-m);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--amber);
+}
+
+.wf-label.win {
+    color: #7ed957;
+}
+
+.wf-label.fail {
+    color: #ff5d5d;
+}
+
+.wf-mode {
+    color: var(--smoke);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+}
+
+@media (max-width: 640px) {
+    .wf-track {
+        margin-inline: 34px;
+    }
+
+    .wf-name {
+        font-size: 8.5px;
+        letter-spacing: 0.08em;
+    }
+}
+
+/* ---- fairness page -------------------------------------------------------- */
+
+.fair-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 18px;
+}
+
+.fair-step b {
+    display: block;
+    font-family: var(--font-m);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: #b0561a;
+    margin-bottom: 12px;
+}
+
+.fair-checks {
+    border-top-color: rgba(244, 240, 227, 0.14);
+}
+
+.fair-checks .stat span {
+    color: var(--smoke);
+    max-width: 260px;
 }
 
 .badge-roadmap {
@@ -2227,7 +2394,7 @@ section[data-chamber]:not(.hero) {
 }
 
 .admin-link-row.plat {
-    grid-template-columns: 220px 1fr auto auto;
+    grid-template-columns: 220px 1fr 130px auto auto;
 }
 
 .admin-chapter {

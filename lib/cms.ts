@@ -105,7 +105,7 @@ async function content<T>(key: string): Promise<T> {
 
 export type PlatformStat = { value: string; suffix: string; label: string };
 
-export type PlatformFeature = { title: string; text: string; roadmap?: boolean };
+export type PlatformFeature = { title: string; text: string; roadmap?: boolean; href?: string };
 
 export type PlatformChapter = {
     kicker: string;

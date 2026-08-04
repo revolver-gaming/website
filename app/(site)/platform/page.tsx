@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import WalletFlow from "@/components/WalletFlow";
 import { getPlatformPage, getPlatformStats } from "@/lib/cms";
 
 export const revalidate = 300;
@@ -37,6 +38,11 @@ export default async function Platform() {
                             </div>
                         ))}
                     </div>
+
+                    <div className="wf-block">
+                        <p className="eyebrow">Live wire — how a bet travels</p>
+                        <WalletFlow />
+                    </div>
                 </div>
             </section>
 
@@ -56,6 +62,7 @@ export default async function Platform() {
                                         {f.roadmap && <span className="badge-roadmap">In the chamber</span>}
                                     </h3>
                                     <p>{f.text}</p>
+                                    {f.href && <Link className="feat-more" href={f.href}>Learn more →</Link>}
                                 </div>
                             ))}
                         </div>

@@ -93,8 +93,15 @@ One long, chaptered page (reuse CH.xx labels). Sections, each backed by live cap
 
 ## 6. Phasing
 
-1. **Copy & stats pass** — beef up CH.03 + ticker + stat strip with verified numbers; Book-a-demo CTA.
-2. **`/platform` page** — the four chapters above; nav + footer links; CMS tables/keys + admin.
-3. **Studio upgrades** — game-detail math data, reskins section, for-studios block.
-4. **Trust page + polish** — compliance-verified licensing, provably-fair explainer, interactive
-   flourishes (animated wallet-flow diagram, live-style dashboard mock).
+1. ✅ **Copy & stats pass** (Aug 2026) — CH.03 rework + capability cards, richer ticker, CMS
+   `platform_stats` strip, Book-a-demo CTA, segmented contact chips.
+2. ✅ **`/platform` page** (Aug 2026) — five chapters from CMS `platform_page`, roadmap badges,
+   nav/footer links, admin editor.
+3. ✅ **Studio upgrades** (Aug 2026) — `games.rtp/volatility/layout` columns (auto-extracted from
+   scraped features) + spec strip on game pages + admin fields; "Made to order" section on /games
+   from CMS `studio_offer`.
+4. **Trust page + polish** — partially done (Aug 2026): `/fairness` explainer page (copy in JSX,
+   not CMS) and the animated wallet-flow on /platform (`components/WalletFlow.tsx`, includes a
+   recovery-drill cycle). **Remaining: trust & compliance page — BLOCKED on licensing answer**
+   (UKGC per old site vs MGA per codebase; confirm with compliance first). Optional: live-style
+   dashboard mock.
