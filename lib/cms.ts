@@ -21,6 +21,19 @@ export type NewsArticle = {
 
 export type NewsListItem = Omit<NewsArticle, "content_html">;
 
+export const NEWS_PER_PAGE = 12;
+
+export async function listNewsPage(page: number): Promise<{ items: NewsListItem[]; pages: number }> {
+    const from = (page - 1) * NEWS_PER_PAGE;
+    const { data, count, error } = await supabase
+        .from("news")
+        .select("slug, title, excerpt, cover_image, published_at", { count: "exact" })
+        .order("published_at", { ascending: false })
+        .range(from, from + NEWS_PER_PAGE - 1);
+    if (error) throw error;
+    return { items: data, pages: Math.max(1, Math.ceil((count ?? 0) / NEWS_PER_PAGE)) };
+}
+
 export async function listNews(limit?: number): Promise<NewsListItem[]> {
     let query = supabase
         .from("news")
