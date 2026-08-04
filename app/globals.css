@@ -753,6 +753,151 @@ section[data-chamber]:not(.hero) {
     }
 }
 
+.cap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin-top: clamp(28px, 4vw, 44px);
+}
+
+.cap-card {
+    border: 1px solid var(--bone-2);
+    background: #fffdf6;
+    border-radius: var(--radius);
+    padding: 22px 20px;
+}
+
+.cap-card h3 {
+    font-family: var(--font-d);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 19px;
+    line-height: 1.05;
+    margin-bottom: 10px;
+}
+
+.cap-card h3::before {
+    content: "▸ ";
+    color: #b0561a;
+}
+
+.cap-card p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+}
+
+.cap-more {
+    margin-top: 26px;
+}
+
+/* ---- platform page ------------------------------------------------------- */
+
+.plat-hero h1 {
+    font-size: clamp(52px, 8vw, 110px);
+    margin-bottom: 6px;
+}
+
+.plat-hero h1 em,
+.plat-cta h2 em {
+    font-style: normal;
+    color: var(--amber);
+}
+
+.plat-hero .stat-row {
+    border-top-color: rgba(244, 240, 227, 0.14);
+}
+
+.plat-hero .stat b em {
+    color: var(--amber);
+}
+
+.plat-hero .stat span {
+    color: var(--smoke);
+}
+
+.feat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.feat-card {
+    background: var(--velvet);
+    border: 1px solid rgba(87, 40, 90, 0.6);
+    border-radius: var(--radius);
+    padding: 24px 22px;
+}
+
+.feat-card h3 {
+    font-family: var(--font-d);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 20px;
+    line-height: 1.05;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.feat-card h3::before {
+    content: "▸ ";
+    color: var(--amber);
+}
+
+.feat-card p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--smoke);
+}
+
+.on-bone .feat-card {
+    background: #fffdf6;
+    border-color: var(--bone-2);
+}
+
+.on-bone .feat-card h3::before {
+    color: #b0561a;
+}
+
+.on-bone .feat-card p {
+    color: var(--ink-soft);
+}
+
+.badge-roadmap {
+    font-family: var(--font-m);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid var(--amber);
+    border-radius: 999px;
+    padding: 3px 10px;
+    color: var(--amber);
+    white-space: nowrap;
+}
+
+.on-bone .badge-roadmap {
+    border-color: #b0561a;
+    color: #b0561a;
+}
+
+.plat-cta .lede {
+    color: var(--smoke);
+    max-width: 560px;
+}
+
+.plat-cta .eyebrow + h2 {
+    font-size: clamp(52px, 8vw, 104px);
+    margin: 18px 0 22px;
+}
+
+.plat-cta .hero-ctas {
+    margin-top: 30px;
+}
+
 .stat-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1249,6 +1394,34 @@ section[data-chamber]:not(.hero) {
     color: var(--smoke);
     max-width: 440px;
     margin-bottom: 34px;
+}
+
+.contact-segments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: -10px 0 34px;
+}
+
+.segment-chip {
+    font-family: var(--font-m);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 167, 85, 0.45);
+    border-radius: 999px;
+    padding: 9px 16px;
+    color: var(--bone);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.segment-chip .arrow {
+    color: var(--amber);
+}
+
+.segment-chip:hover {
+    border-color: var(--amber);
+    background: rgba(255, 167, 85, 0.08);
 }
 
 .contact-facts {
@@ -2004,6 +2177,35 @@ section[data-chamber]:not(.hero) {
 
 .admin-link-row.three {
     grid-template-columns: 1fr 1fr 1fr auto;
+}
+
+.admin-link-row.plat {
+    grid-template-columns: 220px 1fr auto auto;
+}
+
+.admin-chapter {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 0;
+    border-top: 1px solid var(--bone-2);
+}
+
+.admin-chapter-num {
+    font-family: var(--font-m);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    align-self: center;
+}
+
+.admin-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    white-space: nowrap;
 }
 
 @media (max-width: 760px) {

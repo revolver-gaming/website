@@ -2,20 +2,41 @@ import Link from "next/link";
 import Cylinder, { HeroBackdrop } from "@/components/Cylinder";
 import GameCard from "@/components/GameCard";
 import {
-    getContact, getSocials, listGames, listNews,
+    getContact, getPlatformStats, getSocials, listGames, listNews,
     listOperators, listPartnerStudios, newsDate,
 } from "@/lib/cms";
 
 const tickerItems = [
-    "31 original titles", "100% HTML5", "Real money · Social · Sweepstakes",
+    "31 original titles", "300+ aggregated games", "16 operator integrations",
+    "185+ currencies", "100% HTML5", "Real money · Social · Sweepstakes",
     "UKGC licensed", "Studio + Aggregator", "London, W1",
+];
+
+const capabilities = [
+    {
+        title: "Promotions engine",
+        blurb: "Free spins, flexible free spins and four-tier progressive jackpots — served in your platform's own bonus API dialect.",
+    },
+    {
+        title: "Back office & BI",
+        blurb: "Tenant-scoped dashboards, transaction search with one-click Excel export, round replay and a live broken-rounds register.",
+    },
+    {
+        title: "Reliability & fairness",
+        blurb: "Self-healing rounds, RNG re-tested against the NIST suite every 12 hours, and synthetics playing our own games in production 24/7.",
+    },
+    {
+        title: "Global reach",
+        blurb: "185+ currencies across fiat, crypto and social coins, games in 18 languages, and a dedicated sweepstakes stack.",
+    },
 ];
 
 export const revalidate = 300;
 
 export default async function Home() {
-    const [news, games, partnerStudios, operators, contact, socials] = await Promise.all([
-        listNews(6), listGames(), listPartnerStudios(), listOperators(), getContact(), getSocials(),
+    const [news, games, partnerStudios, operators, contact, socials, stats] = await Promise.all([
+        listNews(6), listGames(), listPartnerStudios(), listOperators(),
+        getContact(), getSocials(), getPlatformStats(),
     ]);
     const featuredGames = games.filter((g) => g.featured);
     return (
@@ -105,8 +126,9 @@ export default async function Home() {
                             <ul>
                                 <li>Player auth &amp; game launch</li>
                                 <li>Seamless wallet routing</li>
+                                <li>Free spins &amp; jackpots</li>
                                 <li>Automatic rollback &amp; recovery</li>
-                                <li>Reporting &amp; back office</li>
+                                <li>Reporting, BI &amp; back office</li>
                             </ul>
                         </div>
                         <div className="flow-arrow" aria-hidden>→</div>
@@ -114,18 +136,34 @@ export default async function Home() {
                             <h3>Operators</h3>
                             <span className="role">Casinos &amp; platforms</span>
                             <ul>
-                                <li>16+ live integrations</li>
+                                <li>One integration, 300+ games</li>
                                 <li>Real money &amp; sweepstakes</li>
-                                <li>Free spins &amp; promotions</li>
+                                <li>Promotions in your API dialect</li>
                             </ul>
                         </div>
                     </div>
 
+                    <div className="cap-grid">
+                        {capabilities.map((c) => (
+                            <div className="cap-card" key={c.title}>
+                                <h3>{c.title}</h3>
+                                <p>{c.blurb}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <p className="cap-more">
+                        <Link href="/platform" className="btn btn-ghost">Explore the full platform →</Link>
+                    </p>
+
                     <div className="stat-row">
                         <div className="stat"><b>{games.length}<em>+</em></b><span>Original titles</span></div>
-                        <div className="stat"><b>16<em>+</em></b><span>Operator integrations</span></div>
-                        <div className="stat"><b>100<em>%</em></b><span>HTML5, cross-platform</span></div>
-                        <div className="stat"><b>UKGC</b><span>Licensed &amp; regulated</span></div>
+                        {stats.map((s) => (
+                            <div className="stat" key={s.label}>
+                                <b>{s.value}{s.suffix && <em>{s.suffix}</em>}</b>
+                                <span>{s.label}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -197,6 +235,18 @@ export default async function Home() {
                             Operators, aggregators and studios — tell us what you're loading up,
                             and a member of the team will get back to you fast.
                         </p>
+                        <div className="contact-segments">
+                            {[
+                                ["I run a casino", "Operator enquiry — book a demo"],
+                                ["I'm an aggregator", "Aggregator enquiry"],
+                                ["I build games", "Studio partnership enquiry"],
+                            ].map(([label, subject]) => (
+                                <a key={label} className="segment-chip"
+                                    href={`mailto:${contact.email}?subject=${encodeURIComponent(subject)}`}>
+                                    {label} <span className="arrow">→</span>
+                                </a>
+                            ))}
+                        </div>
                         <div className="contact-facts">
                             <div className="fact">
                                 <b>Email</b>

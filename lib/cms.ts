@@ -100,9 +100,22 @@ async function content<T>(key: string): Promise<T> {
     return data.value as T;
 }
 
+export type PlatformStat = { value: string; suffix: string; label: string };
+
+export type PlatformFeature = { title: string; text: string; roadmap?: boolean };
+
+export type PlatformChapter = {
+    kicker: string;
+    title: string;
+    intro: string;
+    features: PlatformFeature[];
+};
+
 export const getContact = () => content<Contact>("contact");
 export const getSocials = () => content<LinkItem[]>("socials");
 export const getFooterLinks = () => content<LinkItem[]>("footer_links");
+export const getPlatformStats = () => content<PlatformStat[]>("platform_stats");
+export const getPlatformPage = () => content<PlatformChapter[]>("platform_page");
 
 export async function listPartnerStudios(): Promise<PartnerStudio[]> {
     const { data, error } = await supabase
