@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { sb, errMsg } from "../lib";
-import type { Contact, LinkItem, PlatformChapter, PlatformStat } from "@/lib/cms";
+import type { Contact, LinkItem, PlatformChapter, PlatformStat, StudioOffer } from "@/lib/cms";
 
 type Studio = { id?: string; name: string; known_for: string; genre: string; sort_order: number };
 
@@ -12,6 +12,7 @@ export default function AdminSettings() {
     const [footerLinks, setFooterLinks] = useState<LinkItem[] | null>(null);
     const [platformStats, setPlatformStats] = useState<PlatformStat[] | null>(null);
     const [platformPage, setPlatformPage] = useState<PlatformChapter[] | null>(null);
+    const [studioOffer, setStudioOffer] = useState<StudioOffer | null>(null);
     const [studios, setStudios] = useState<Studio[] | null>(null);
     const [operators, setOperators] = useState<string>("");
     const [status, setStatus] = useState("");
@@ -24,6 +25,7 @@ export default function AdminSettings() {
                 if (row.key === "footer_links") setFooterLinks(row.value);
                 if (row.key === "platform_stats") setPlatformStats(row.value);
                 if (row.key === "platform_page") setPlatformPage(row.value);
+                if (row.key === "studio_offer") setStudioOffer(row.value);
             }
         });
         sb.from("partner_studios").select("*").order("sort_order").then(({ data }) => setStudios(data ?? []));
@@ -187,6 +189,42 @@ export default function AdminSettings() {
                             ...ch, features: ch.features.filter((f) => f.title && f.text),
                         })))}>
                         Save platform page
+                    </button>
+                </div>
+            )}
+
+            {studioOffer && (
+                <div className="admin-panel">
+                    <h2>Made to order (games page)</h2>
+                    <div className="admin-link-row">
+                        <input placeholder="Kicker" value={studioOffer.kicker}
+                            onChange={(e) => setStudioOffer({ ...studioOffer, kicker: e.target.value })} />
+                        <input placeholder="Title" value={studioOffer.title}
+                            onChange={(e) => setStudioOffer({ ...studioOffer, title: e.target.value })} />
+                        <span />
+                    </div>
+                    <textarea rows={2} placeholder="Intro" value={studioOffer.intro}
+                        onChange={(e) => setStudioOffer({ ...studioOffer, intro: e.target.value })} />
+                    {studioOffer.cards.map((c, i) => (
+                        <div className="admin-link-row" key={i}>
+                            <input placeholder="Card title" value={c.title}
+                                onChange={(e) => setStudioOffer({ ...studioOffer, cards: studioOffer.cards.map((x, j) => j === i ? { ...x, title: e.target.value } : x) })} />
+                            <input placeholder="Card text" value={c.text}
+                                onChange={(e) => setStudioOffer({ ...studioOffer, cards: studioOffer.cards.map((x, j) => j === i ? { ...x, text: e.target.value } : x) })} />
+                            <button className="danger" onClick={() => setStudioOffer({ ...studioOffer, cards: studioOffer.cards.filter((_, j) => j !== i) })}>✕</button>
+                        </div>
+                    ))}
+                    <button onClick={() => setStudioOffer({ ...studioOffer, cards: [...studioOffer.cards, { title: "", text: "" }] })}>+ Add card</button>
+                    <div className="admin-link-row">
+                        <input placeholder="Studio banner title" value={studioOffer.studio_note.title}
+                            onChange={(e) => setStudioOffer({ ...studioOffer, studio_note: { ...studioOffer.studio_note, title: e.target.value } })} />
+                        <input placeholder="Studio banner text" value={studioOffer.studio_note.text}
+                            onChange={(e) => setStudioOffer({ ...studioOffer, studio_note: { ...studioOffer.studio_note, text: e.target.value } })} />
+                        <span />
+                    </div>
+                    <button className="btn btn-fire"
+                        onClick={() => saveContent("studio_offer", { ...studioOffer, cards: studioOffer.cards.filter((c) => c.title && c.text) })}>
+                        Save made to order
                     </button>
                 </div>
             )}

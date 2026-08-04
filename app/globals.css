@@ -791,6 +791,53 @@ section[data-chamber]:not(.hero) {
     margin-top: 26px;
 }
 
+.game-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 36px;
+    margin: 22px 0 6px;
+}
+
+.game-specs dt {
+    font-family: var(--font-m);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 4px;
+}
+
+.game-specs dd {
+    font-size: 15px;
+    color: var(--bone);
+}
+
+.studio-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: clamp(28px, 4vw, 44px);
+    background: var(--velvet);
+    border-radius: var(--radius);
+    padding: clamp(24px, 3vw, 36px);
+}
+
+.studio-note h3 {
+    font-family: var(--font-d);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 24px;
+    color: var(--bone);
+    margin-bottom: 8px;
+}
+
+.studio-note p {
+    color: var(--smoke);
+    max-width: 560px;
+}
+
 /* ---- platform page ------------------------------------------------------- */
 
 .plat-hero h1 {

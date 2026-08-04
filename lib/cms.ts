@@ -59,6 +59,9 @@ export type GameDetail = Game & {
     screenshots: string[];
     product_sheet: string | null;
     video_url: string | null;
+    rtp: string | null;
+    volatility: string | null;
+    layout: string | null;
 };
 
 const GAME_FIELDS = "slug, title, blurb, image:card_image, year, tags, featured, demo_url";
@@ -75,7 +78,7 @@ export async function listGames(): Promise<Game[]> {
 export async function getGame(slug: string): Promise<GameDetail | null> {
     const { data, error } = await supabase
         .from("games")
-        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url`)
+        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url, rtp, volatility, layout`)
         .eq("slug", slug)
         .maybeSingle();
     if (error) throw error;
@@ -116,6 +119,16 @@ export const getSocials = () => content<LinkItem[]>("socials");
 export const getFooterLinks = () => content<LinkItem[]>("footer_links");
 export const getPlatformStats = () => content<PlatformStat[]>("platform_stats");
 export const getPlatformPage = () => content<PlatformChapter[]>("platform_page");
+
+export type StudioOffer = {
+    kicker: string;
+    title: string;
+    intro: string;
+    cards: { title: string; text: string }[];
+    studio_note: { title: string; text: string };
+};
+
+export const getStudioOffer = () => content<StudioOffer>("studio_offer");
 
 export async function listPartnerStudios(): Promise<PartnerStudio[]> {
     const { data, error } = await supabase

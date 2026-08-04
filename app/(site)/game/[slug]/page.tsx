@@ -40,6 +40,13 @@ export default async function GamePage({ params }: Props) {
                         <p className="eyebrow">{[game.year, ...game.tags].join(" · ")}</p>
                         <h1 className="display">{game.title}</h1>
                         <p className="game-blurb">{game.blurb}</p>
+                        {(game.layout || game.volatility || game.rtp) && (
+                            <dl className="game-specs">
+                                {game.layout && <div><dt>Layout</dt><dd>{game.layout}</dd></div>}
+                                {game.volatility && <div><dt>Volatility</dt><dd>{game.volatility}</dd></div>}
+                                {game.rtp && <div><dt>RTP</dt><dd>{game.rtp}</dd></div>}
+                            </dl>
+                        )}
                         <div className="game-ctas">
                             {game.demo_url && <DemoLauncher url={game.demo_url} title={game.title} />}
                             {game.product_sheet && (

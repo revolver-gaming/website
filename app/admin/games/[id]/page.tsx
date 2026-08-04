@@ -22,12 +22,16 @@ type Row = {
     demo_url: string | null;
     video_url: string | null;
     published: boolean;
+    rtp: string | null;
+    volatility: string | null;
+    layout: string | null;
 };
 
 const blank = (): Row => ({
     slug: "", title: "", blurb: "", card_image: "", year: new Date().getFullYear(),
     tags: [], featured: false, sort_order: -1, description_html: "", features: [],
     screenshots: [], product_sheet: null, demo_url: null, video_url: null, published: true,
+    rtp: null, volatility: null, layout: null,
 });
 
 export default function EditGame() {
@@ -124,7 +128,8 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                 </label>
                 <label>
                     Tags — comma-separated, shown on the card
-                    <input value={row.tags.join(", ")} onChange={(e) => set({ tags: e.target.value.split(",").map((t) => t.trim()).filter(Boolean) })} />
+                    {/* don't split numeric thousands separators, e.g. "2,000x Jackpot" */}
+                    <input value={row.tags.join(", ")} onChange={(e) => set({ tags: e.target.value.split(/,(?!\d{3})/).map((t) => t.trim()).filter(Boolean) })} />
                 </label>
                 <label className="check">
                     <input type="checkbox" checked={row.featured} onChange={(e) => set({ featured: e.target.checked })} />
@@ -133,6 +138,18 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                 <label className="check">
                     <input type="checkbox" checked={row.published} onChange={(e) => set({ published: e.target.checked })} />
                     Published (visible on the site)
+                </label>
+                <label>
+                    Layout — e.g. 5 Reels, 3 Rows, 20 Lines
+                    <input value={row.layout ?? ""} onChange={(e) => set({ layout: e.target.value || null })} />
+                </label>
+                <label>
+                    Volatility — e.g. Medium-High
+                    <input value={row.volatility ?? ""} onChange={(e) => set({ volatility: e.target.value || null })} />
+                </label>
+                <label className="wide">
+                    RTP variants — e.g. 90% / 92% / 94% / 96%
+                    <input value={row.rtp ?? ""} onChange={(e) => set({ rtp: e.target.value || null })} />
                 </label>
                 <label className="wide">
                     Blurb — card & page intro text

@@ -16,7 +16,7 @@ export default function GamesExplorer({ games }: { games: Game[] }) {
     );
 
     return (
-        <main>
+        <>
             <div className="shell page-hero">
                 <p className="eyebrow">The full arsenal</p>
                 <h1 className="display">
@@ -53,6 +53,6 @@ export default function GamesExplorer({ games }: { games: Game[] }) {
                     </p>
                 )}
             </section>
-        </main>
+        </>
     );
 }
