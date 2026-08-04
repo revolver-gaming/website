@@ -636,69 +636,6 @@ section[data-chamber]:not(.hero) {
     overflow: hidden;
 }
 
-/* provider (third-party) game cards */
-.provider-card {
-    display: block;
-    width: 100%;
-    padding: 0;
-    border-width: 1px;
-    text-align: left;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-}
-
-.provider-flag {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    z-index: 2;
-    font-family: var(--font-m);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--bone);
-    background: rgba(42, 18, 48, 0.82);
-    border: 1px solid rgba(201, 178, 198, 0.35);
-    padding: 5px 10px;
-    border-radius: 999px;
-}
-
-.provider-card .art {
-    position: relative;
-}
-
-.provider-card .play-hint {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-m);
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--bone);
-    background: rgba(42, 18, 48, 0.55);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.provider-card:hover .play-hint {
-    opacity: 1;
-}
-
-.grid-break {
-    margin-block: clamp(40px, 5vw, 56px) 24px;
-    padding-top: clamp(28px, 4vw, 40px);
-    border-top: 1px solid rgba(87, 40, 90, 0.4);
-}
-
-.game-grid + .game-grid {
-    margin-top: 24px;
-}
-
 .new-flag {
     position: absolute;
     top: 14px;
@@ -1539,31 +1476,7 @@ section[data-chamber]:not(.hero) {
     margin: clamp(28px, 4vw, 44px) 0 30px;
 }
 
-.filter-bar .chip {
-    font-family: var(--font-m);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 10px 18px;
-    border-radius: 999px;
-    border: 1px solid var(--velvet-3);
-    color: var(--smoke);
-    transition: all 0.25s;
-}
-
-.filter-bar .chip:hover {
-    border-color: var(--amber);
-    color: var(--amber);
-}
-
-.filter-bar .chip.on {
-    background: var(--amber);
-    border-color: var(--amber);
-    color: #2a1230;
-}
-
 .filter-bar .search {
-    margin-left: auto;
     font: 14px var(--font-b);
     color: var(--bone);
     background: var(--velvet);
@@ -1580,18 +1493,8 @@ section[data-chamber]:not(.hero) {
 
 @media (max-width: 700px) {
     .filter-bar .search {
-        margin-left: 0;
         width: 100%;
     }
-}
-
-.filter-bar.sub {
-    margin: -16px 0 26px;
-}
-
-.filter-bar.sub .chip {
-    font-size: 11px;
-    padding: 8px 14px;
 }
 
 .count-line {
@@ -1606,63 +1509,6 @@ section[data-chamber]:not(.hero) {
 .count-line b {
     color: var(--amber);
     font-weight: 500;
-}
-
-.count-line a {
-    color: var(--amber);
-}
-
-.count-line a:hover {
-    text-decoration: underline;
-}
-
-.partner-tile {
-    border: 1px solid rgba(87, 40, 90, 0.55);
-    border-radius: var(--radius);
-    background:
-        radial-gradient(circle at 80% 0%, rgba(255, 167, 85, 0.14), transparent 55%),
-        var(--velvet);
-    padding: 26px 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 28px;
-    transition: transform 0.35s var(--detent), border-color 0.3s;
-}
-
-.partner-tile .soon {
-    margin-top: 12px;
-    font-family: var(--font-m);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--smoke);
-    opacity: 0.65;
-}
-
-.partner-tile .via {
-    font-family: var(--font-m);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--amber);
-}
-
-.partner-tile h3 {
-    font-family: var(--font-d);
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 34px;
-    line-height: 0.95;
-}
-
-.partner-tile .sub {
-    font-family: var(--font-m);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--smoke);
-    margin-top: 8px;
 }
 
 .empty-note {

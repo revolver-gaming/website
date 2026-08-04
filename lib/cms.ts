@@ -82,25 +82,6 @@ export async function getGame(slug: string): Promise<GameDetail | null> {
     return data as unknown as GameDetail | null;
 }
 
-export type ProviderGame = {
-    id: string;
-    provider: string;
-    slug: string;
-    title: string;
-    image: string;
-    demo_url: string | null;
-    tags: string[];
-};
-
-export async function listProviderGames(): Promise<ProviderGame[]> {
-    const { data, error } = await supabase
-        .from("provider_games")
-        .select("id, provider, slug, title, image:card_image, demo_url, tags")
-        .order("sort_order");
-    if (error) throw error;
-    return data as unknown as ProviderGame[];
-}
-
 export type Contact = {
     email: string;
     phone: string;
