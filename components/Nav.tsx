@@ -9,8 +9,8 @@ export default function Nav() {
                 </Link>
                 <ul className="nav-links">
                     <li className="nav-hide"><Link href="/games">Games</Link></li>
-                    <li className="nav-hide"><Link href="/rgs">RGS</Link></li>
                     <li className="nav-hide"><Link href="/gap">GAP</Link></li>
+                    <li className="nav-hide"><Link href="/rgs">RGS</Link></li>
                     <li className="nav-hide"><Link href="/#partners">Partners</Link></li>
                     <li className="nav-hide"><Link href="/news">News</Link></li>
                     <li><Link href="/#contact" className="btn btn-fire">Book a demo</Link></li>

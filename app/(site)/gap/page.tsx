@@ -54,7 +54,7 @@ export default async function Gap() {
                             times. Here&apos;s what day one looks like.
                         </p>
                     </div>
-                    <div className="fair-steps">
+                    <div className="timeline">
                         {[
                             {
                                 time: "09:00",
@@ -77,8 +77,9 @@ export default async function Gap() {
                                 text: "Our games in your lobby the same day — full portfolio, promotions and reporting included.",
                             },
                         ].map((s) => (
-                            <div className="feat-card fair-step" key={s.time}>
-                                <b>{s.time}</b>
+                            <div className="tl-step" key={s.time}>
+                                <div className="tl-dot" />
+                                <div className="tl-time">{s.time}</div>
                                 <h3>{s.title}</h3>
                                 <p>{s.text}</p>
                             </div>
@@ -113,15 +114,17 @@ export default async function Gap() {
 
             <section className="plat-cta" data-chamber>
                 <div className="shell">
-                    <p className="eyebrow">Last chamber</p>
-                    <h2 className="display">See it <em>spin.</em></h2>
-                    <p className="lede">
-                        A demo takes minutes to set up — live games, live back office,
-                        your currencies.
-                    </p>
-                    <div className="hero-ctas">
-                        <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
-                        <Link href="/games" className="btn btn-ghost">Browse the games</Link>
+                    <div className="cta-card">
+                        <p className="eyebrow">Last chamber</p>
+                        <h2 className="display">See it <em>spin.</em></h2>
+                        <p className="lede">
+                            A demo takes minutes to set up — live games, live back office,
+                            your currencies.
+                        </p>
+                        <div className="hero-ctas">
+                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
+                            <Link href="/games" className="btn btn-ghost">Browse the games</Link>
+                        </div>
                     </div>
                 </div>
             </section>

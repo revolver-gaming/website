@@ -89,14 +89,16 @@ export default function Fairness() {
 
             <section className="plat-cta" data-chamber>
                 <div className="shell">
-                    <p className="eyebrow">Last chamber</p>
-                    <h2 className="display">Proof, <em>live.</em></h2>
-                    <p className="lede">
-                        Ask for a demo and verify a round yourself — seeds, hash and all.
-                    </p>
-                    <div className="hero-ctas">
-                        <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
-                        <Link href="/rgs" className="btn btn-ghost">Back to the RGS</Link>
+                    <div className="cta-card">
+                        <p className="eyebrow">Last chamber</p>
+                        <h2 className="display">Proof, <em>live.</em></h2>
+                        <p className="lede">
+                            Ask for a demo and verify a round yourself — seeds, hash and all.
+                        </p>
+                        <div className="hero-ctas">
+                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
+                            <Link href="/rgs" className="btn btn-ghost">Back to the RGS</Link>
+                        </div>
                     </div>
                 </div>
             </section>

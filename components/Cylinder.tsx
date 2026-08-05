@@ -6,6 +6,7 @@ import { DemoOverlay } from "./DemoLauncher";
 import type { Game } from "@/lib/cms";
 
 const STEP = 60; // six chambers
+const BOLT_ANGLES = [30, 90, 150, 210, 270, 330]; // between the chambers
 
 export default function Cylinder({ games }: { games: Game[] }) {
     const [active, setActive] = useState(0);
@@ -43,11 +44,19 @@ export default function Cylinder({ games }: { games: Game[] }) {
             onPointerLeave={() => (paused.current = false)}
         >
             <div className="cylinder">
-                <div className="cylinder-pin" />
+                <div className="cylinder-pointer" />
                 <div
                     className="cylinder-ring"
                     style={{ transform: `rotate(${-turns * STEP}deg)` }}
                 >
+                    <div className="cylinder-face" />
+                    {BOLT_ANGLES.map((a) => (
+                        <div
+                            key={a}
+                            className="cylinder-bolt"
+                            style={{ "--a": `${a}deg` } as React.CSSProperties}
+                        />
+                    ))}
                     {games.slice(0, 6).map((g, i) => (
                         <div
                             key={g.slug}
@@ -56,7 +65,7 @@ export default function Cylinder({ games }: { games: Game[] }) {
                         >
                             <button
                                 className={`slot${i === active ? " armed" : ""}`}
-                                style={{ transform: `rotate(${(turns * STEP) - i * STEP}deg)` }}
+                                style={{ transform: `rotate(${(turns * STEP) - i * STEP}deg) scale(${i === active ? 1.08 : 1})` }}
                                 onClick={() => fire(i)}
                                 aria-label={`Show ${g.title}`}
                                 aria-pressed={i === active}
@@ -89,25 +98,6 @@ export default function Cylinder({ games }: { games: Game[] }) {
             {demo?.demo_url && (
                 <DemoOverlay url={demo.demo_url} title={demo.title} close={() => setDemo(null)} />
             )}
-        </div>
-    );
-}
-
-export function HeroBackdrop({ games }: { games: Game[] }) {
-    // ambient blurred art behind the hero, synced loosely to the cylinder pace
-    const [i, setI] = useState(0);
-
-    useEffect(() => {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        const id = setInterval(() => setI((v) => (v + 1) % 6), 4200);
-        return () => clearInterval(id);
-    }, []);
-
-    return (
-        <div className="hero-bg" aria-hidden>
-            {games.slice(0, 6).map((g, k) => (
-                <img key={g.slug} src={g.image} alt="" className={k === i ? "live" : ""} />
-            ))}
         </div>
     );
 }

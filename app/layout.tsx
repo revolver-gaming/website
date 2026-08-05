@@ -10,7 +10,7 @@ const display = Big_Shoulders({
 
 const body = Instrument_Sans({
     subsets: ["latin"],
-    weight: ["400", "500", "600"],
+    weight: ["400", "500", "600", "700"],
     variable: "--font-body",
 });
 
@@ -22,9 +22,9 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://revolvergaming.com"),
-    title: "Revolver Gaming — Lock, Slot & Barrel",
+    title: "Revolver Gaming — One integration. 300+ games.",
     description:
-        "London-based slot studio and game aggregation platform. Original HTML5 slots, third-party studios and a growing network of operator clients.",
+        "London-based slot studio and game aggregation platform. Original HTML5 slots, partner studios and a UKGC-licensed engine — live in your lobby the same day.",
     icons: { icon: "/brand/favicon.png" },
 };
 

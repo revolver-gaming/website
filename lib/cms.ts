@@ -206,3 +206,8 @@ export async function getJob(slug: string): Promise<Job | null> {
 
 export const newsDate = (iso: string) =>
     new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+export const newsDateShort = (iso: string) =>
+    new Date(iso)
+        .toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+        .toUpperCase();
