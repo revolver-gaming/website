@@ -132,6 +132,8 @@ export const getSocials = () => content<LinkItem[]>("socials");
 export const getFooterLinks = () => content<LinkItem[]>("footer_links");
 export const getPlatformStats = () => content<PlatformStat[]>("platform_stats");
 export const getPlatformPage = () => content<PlatformChapter[]>("platform_page");
+export const getRgsStats = () => content<PlatformStat[]>("rgs_stats");
+export const getRgsPage = () => content<PlatformChapter[]>("rgs_page");
 
 export type StudioOffer = {
     kicker: string;

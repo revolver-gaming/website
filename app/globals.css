@@ -755,7 +755,7 @@ section[data-chamber]:not(.hero) {
 
 .cap-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 18px;
     margin-top: clamp(28px, 4vw, 44px);
 }
@@ -1051,6 +1051,38 @@ section[data-chamber]:not(.hero) {
         font-size: 8.5px;
         letter-spacing: 0.08em;
     }
+}
+
+/* ---- rgs page ------------------------------------------------------------- */
+
+.trust-band {
+    margin-top: clamp(40px, 6vw, 64px);
+    border: 1px solid rgba(255, 167, 85, 0.45);
+    border-radius: var(--radius);
+    background: linear-gradient(120deg, rgba(255, 167, 85, 0.14), rgba(255, 167, 85, 0.03));
+    padding: 26px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 36px;
+    flex-wrap: wrap;
+}
+
+.trust-band .mark {
+    font-family: var(--font-d);
+    font-weight: 900;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1;
+    color: var(--amber);
+    letter-spacing: 0.02em;
+}
+
+.trust-band p {
+    flex: 1 1 380px;
+    max-width: 640px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--smoke);
 }
 
 /* ---- fairness page -------------------------------------------------------- */

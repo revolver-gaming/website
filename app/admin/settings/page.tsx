@@ -12,6 +12,8 @@ export default function AdminSettings() {
     const [footerLinks, setFooterLinks] = useState<LinkItem[] | null>(null);
     const [platformStats, setPlatformStats] = useState<PlatformStat[] | null>(null);
     const [platformPage, setPlatformPage] = useState<PlatformChapter[] | null>(null);
+    const [rgsStats, setRgsStats] = useState<PlatformStat[] | null>(null);
+    const [rgsPage, setRgsPage] = useState<PlatformChapter[] | null>(null);
     const [studioOffer, setStudioOffer] = useState<StudioOffer | null>(null);
     const [studios, setStudios] = useState<Studio[] | null>(null);
     const [operators, setOperators] = useState<string>("");
@@ -25,6 +27,8 @@ export default function AdminSettings() {
                 if (row.key === "footer_links") setFooterLinks(row.value);
                 if (row.key === "platform_stats") setPlatformStats(row.value);
                 if (row.key === "platform_page") setPlatformPage(row.value);
+                if (row.key === "rgs_stats") setRgsStats(row.value);
+                if (row.key === "rgs_page") setRgsPage(row.value);
                 if (row.key === "studio_offer") setStudioOffer(row.value);
             }
         });
@@ -75,6 +79,86 @@ export default function AdminSettings() {
         </>
     );
 
+    const statsPanel = (
+        title: string, hint: string, key: string,
+        stats: PlatformStat[] | null, set: (v: PlatformStat[]) => void,
+    ) => stats && (
+        <div className="admin-panel">
+            <h2>{title}</h2>
+            <p className="admin-hint">{hint}</p>
+            {stats.map((s, i) => (
+                <div className="admin-link-row three" key={i}>
+                    <input placeholder="Value" value={s.value}
+                        onChange={(e) => set(stats.map((x, j) => j === i ? { ...x, value: e.target.value } : x))} />
+                    <input placeholder="Suffix" value={s.suffix}
+                        onChange={(e) => set(stats.map((x, j) => j === i ? { ...x, suffix: e.target.value } : x))} />
+                    <input placeholder="Label" value={s.label}
+                        onChange={(e) => set(stats.map((x, j) => j === i ? { ...x, label: e.target.value } : x))} />
+                    <button className="danger" onClick={() => set(stats.filter((_, j) => j !== i))}>✕</button>
+                </div>
+            ))}
+            <button onClick={() => set([...stats, { value: "", suffix: "", label: "" }])}>+ Add stat</button>
+            <button className="btn btn-fire" onClick={() => saveContent(key, stats.filter((s) => s.value && s.label))}>Save stats</button>
+        </div>
+    );
+
+    const chaptersPanel = (
+        title: string, hint: string, key: string,
+        chapters: PlatformChapter[] | null, set: (v: PlatformChapter[]) => void,
+    ) => chapters && (
+        <div className="admin-panel">
+            <h2>{title}</h2>
+            <p className="admin-hint">{hint}</p>
+            {chapters.map((ch, ci) => {
+                const setChapter = (patch: Partial<PlatformChapter>) =>
+                    set(chapters.map((x, j) => j === ci ? { ...x, ...patch } : x));
+                return (
+                    <div className="admin-chapter" key={ci}>
+                        <div className="admin-link-row">
+                            <input placeholder="Kicker" value={ch.kicker}
+                                onChange={(e) => setChapter({ kicker: e.target.value })} />
+                            <input placeholder="Title" value={ch.title}
+                                onChange={(e) => setChapter({ title: e.target.value })} />
+                            <span className="admin-chapter-num">CH.{String(ci + 1).padStart(2, "0")}</span>
+                        </div>
+                        <textarea rows={2} placeholder="Intro" value={ch.intro}
+                            onChange={(e) => setChapter({ intro: e.target.value })} />
+                        {ch.features.map((f, fi) => {
+                            const setFeature = (patch: Partial<PlatformChapter["features"][number]>) =>
+                                setChapter({ features: ch.features.map((x, j) => j === fi ? { ...x, ...patch } : x) });
+                            return (
+                                <div className="admin-link-row plat" key={fi}>
+                                    <input placeholder="Feature title" value={f.title}
+                                        onChange={(e) => setFeature({ title: e.target.value })} />
+                                    <input placeholder="Feature text" value={f.text}
+                                        onChange={(e) => setFeature({ text: e.target.value })} />
+                                    <input placeholder="Link (optional)" value={f.href ?? ""}
+                                        onChange={(e) => setFeature({ href: e.target.value || undefined })} />
+                                    <label className="admin-check">
+                                        <input type="checkbox" checked={!!f.roadmap}
+                                            onChange={(e) => setFeature({ roadmap: e.target.checked || undefined })} />
+                                        roadmap
+                                    </label>
+                                    <button className="danger"
+                                        onClick={() => setChapter({ features: ch.features.filter((_, j) => j !== fi) })}>✕</button>
+                                </div>
+                            );
+                        })}
+                        <button onClick={() => setChapter({ features: [...ch.features, { title: "", text: "" }] })}>
+                            + Add feature
+                        </button>
+                    </div>
+                );
+            })}
+            <button className="btn btn-fire"
+                onClick={() => saveContent(key, chapters.map((ch) => ({
+                    ...ch, features: ch.features.filter((f) => f.title && f.text),
+                })))}>
+                Save {title.toLowerCase()}
+            </button>
+        </div>
+    );
+
     return (
         <section>
             <div className="admin-head">
@@ -119,81 +203,10 @@ export default function AdminSettings() {
                 </div>
             )}
 
-            {platformStats && (
-                <div className="admin-panel">
-                    <h2>Platform stats</h2>
-                    <p className="admin-hint">Homepage stat strip (CH.03). Suffix renders highlighted, e.g. “16” + “+”.</p>
-                    {platformStats.map((s, i) => (
-                        <div className="admin-link-row three" key={i}>
-                            <input placeholder="Value" value={s.value}
-                                onChange={(e) => setPlatformStats(platformStats.map((x, j) => j === i ? { ...x, value: e.target.value } : x))} />
-                            <input placeholder="Suffix" value={s.suffix}
-                                onChange={(e) => setPlatformStats(platformStats.map((x, j) => j === i ? { ...x, suffix: e.target.value } : x))} />
-                            <input placeholder="Label" value={s.label}
-                                onChange={(e) => setPlatformStats(platformStats.map((x, j) => j === i ? { ...x, label: e.target.value } : x))} />
-                            <button className="danger" onClick={() => setPlatformStats(platformStats.filter((_, j) => j !== i))}>✕</button>
-                        </div>
-                    ))}
-                    <button onClick={() => setPlatformStats([...platformStats, { value: "", suffix: "", label: "" }])}>+ Add stat</button>
-                    <button className="btn btn-fire" onClick={() => saveContent("platform_stats", platformStats.filter((s) => s.value && s.label))}>Save stats</button>
-                </div>
-            )}
-
-            {platformPage && (
-                <div className="admin-panel">
-                    <h2>Platform page</h2>
-                    <p className="admin-hint">
-                        Chapters on /platform. “In the chamber” marks a feature as roadmap (coming soon).
-                    </p>
-                    {platformPage.map((ch, ci) => {
-                        const setChapter = (patch: Partial<PlatformChapter>) =>
-                            setPlatformPage(platformPage.map((x, j) => j === ci ? { ...x, ...patch } : x));
-                        return (
-                            <div className="admin-chapter" key={ci}>
-                                <div className="admin-link-row">
-                                    <input placeholder="Kicker" value={ch.kicker}
-                                        onChange={(e) => setChapter({ kicker: e.target.value })} />
-                                    <input placeholder="Title" value={ch.title}
-                                        onChange={(e) => setChapter({ title: e.target.value })} />
-                                    <span className="admin-chapter-num">CH.{String(ci + 1).padStart(2, "0")}</span>
-                                </div>
-                                <textarea rows={2} placeholder="Intro" value={ch.intro}
-                                    onChange={(e) => setChapter({ intro: e.target.value })} />
-                                {ch.features.map((f, fi) => {
-                                    const setFeature = (patch: Partial<PlatformChapter["features"][number]>) =>
-                                        setChapter({ features: ch.features.map((x, j) => j === fi ? { ...x, ...patch } : x) });
-                                    return (
-                                        <div className="admin-link-row plat" key={fi}>
-                                            <input placeholder="Feature title" value={f.title}
-                                                onChange={(e) => setFeature({ title: e.target.value })} />
-                                            <input placeholder="Feature text" value={f.text}
-                                                onChange={(e) => setFeature({ text: e.target.value })} />
-                                            <input placeholder="Link (optional)" value={f.href ?? ""}
-                                                onChange={(e) => setFeature({ href: e.target.value || undefined })} />
-                                            <label className="admin-check">
-                                                <input type="checkbox" checked={!!f.roadmap}
-                                                    onChange={(e) => setFeature({ roadmap: e.target.checked || undefined })} />
-                                                roadmap
-                                            </label>
-                                            <button className="danger"
-                                                onClick={() => setChapter({ features: ch.features.filter((_, j) => j !== fi) })}>✕</button>
-                                        </div>
-                                    );
-                                })}
-                                <button onClick={() => setChapter({ features: [...ch.features, { title: "", text: "" }] })}>
-                                    + Add feature
-                                </button>
-                            </div>
-                        );
-                    })}
-                    <button className="btn btn-fire"
-                        onClick={() => saveContent("platform_page", platformPage.map((ch) => ({
-                            ...ch, features: ch.features.filter((f) => f.title && f.text),
-                        })))}>
-                        Save platform page
-                    </button>
-                </div>
-            )}
+            {statsPanel("GAP stats", "Stat strips on the homepage (CH.02) and /gap hero. Suffix renders highlighted, e.g. “16” + “+”.", "platform_stats", platformStats, setPlatformStats)}
+            {statsPanel("RGS stats", "Stat strip on the /rgs hero.", "rgs_stats", rgsStats, setRgsStats)}
+            {chaptersPanel("GAP page", "Chapters on /gap. “In the chamber” marks a feature as roadmap (coming soon).", "platform_page", platformPage, setPlatformPage)}
+            {chaptersPanel("RGS page", "Chapters on /rgs. “In the chamber” marks a feature as roadmap (coming soon).", "rgs_page", rgsPage, setRgsPage)}
 
             {studioOffer && (
                 <div className="admin-panel">

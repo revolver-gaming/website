@@ -96,7 +96,7 @@ export default function Fairness() {
                     </p>
                     <div className="hero-ctas">
                         <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
-                        <Link href="/platform" className="btn btn-ghost">Back to the platform</Link>
+                        <Link href="/rgs" className="btn btn-ghost">Back to the RGS</Link>
                     </div>
                 </div>
             </section>

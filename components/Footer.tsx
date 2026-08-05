@@ -23,7 +23,8 @@ export default async function Footer() {
                             <h3>Explore</h3>
                             <ul>
                                 <li><Link href="/games">Games</Link></li>
-                                <li><Link href="/platform">Platform</Link></li>
+                                <li><Link href="/rgs">RGS</Link></li>
+                                <li><Link href="/gap">GAP</Link></li>
                                 <li><Link href="/fairness">Fairness</Link></li>
                                 <li><Link href="/#partners">Partners</Link></li>
                                 <li><Link href="/news">News</Link></li>

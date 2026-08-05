@@ -7,12 +7,20 @@ import {
 } from "@/lib/cms";
 
 const tickerItems = [
-    "31 original titles", "300+ aggregated games", "16 operator integrations",
-    "185+ currencies", "100% HTML5", "Real money · Social · Sweepstakes",
-    "UKGC licensed", "Studio + Aggregator", "London, W1",
+    "UKGC licensed", "31 original titles", "300+ aggregated games",
+    "16 operator integrations", "185+ currencies", "100% HTML5",
+    "Real money · Social · Sweepstakes", "Studio + Aggregator", "London, W1",
 ];
 
 const capabilities = [
+    {
+        title: "Licensed & regulation-ready",
+        blurb: "UKGC licensed, with per-license configuration profiles so each jurisdiction's rules are applied as config — not as a custom build.",
+    },
+    {
+        title: "Wide distribution network",
+        blurb: "One integration into a live operator network — 16+ wallet integrations, 22 launch routes, and games in a new operator's lobby the same day.",
+    },
     {
         title: "Promotions engine",
         blurb: "Free spins, flexible free spins and four-tier progressive jackpots — served in your platform's own bonus API dialect.",
@@ -76,36 +84,17 @@ export default async function Home() {
                 </div>
             </div>
 
-            {/* CH.02 — games */}
-            <section data-chamber id="games">
-                <div className="shell">
-                    <div className="section-head">
-                        <p className="eyebrow">CH.02 — The Arsenal</p>
-                        <div className="games-head">
-                            <h2 className="display">Our games</h2>
-                            <Link href="/games" className="btn btn-ghost">All {games.length} titles</Link>
-                        </div>
-                        <p className="lede">
-                            Original HTML5 slots built in-house — concept, maths, art and sound —
-                            available across real money, social and sweepstakes platforms.
-                        </p>
-                    </div>
-                    <div className="game-grid">
-                        {games.slice(0, 8).map((g) => <GameCard key={g.slug} game={g} />)}
-                    </div>
-                </div>
-            </section>
-
-            {/* CH.03 — platform */}
+            {/* CH.02 — platform */}
             <section className="on-bone" data-chamber id="platform">
                 <div className="shell">
                     <div className="section-head">
-                        <p className="eyebrow">CH.03 — The Platform</p>
+                        <p className="eyebrow">CH.02 — The Platform</p>
                         <h2 className="display">One platform,<br />both sides of the deal</h2>
                         <p className="lede">
-                            Revolver is a game studio and an aggregator. Our Game Aggregation
-                            Platform (GAP) connects third-party studios to our operator network
-                            through a single integration — launch, wallet, and recovery included.
+                            Revolver is a UKGC-licensed game studio and an aggregator. Our
+                            RGS engine runs the games; our Game Aggregation Platform (GAP)
+                            connects them — and our partner studios — to a wide operator
+                            network through a single integration.
                         </p>
                     </div>
 
@@ -153,7 +142,8 @@ export default async function Home() {
                     </div>
 
                     <p className="cap-more">
-                        <Link href="/platform" className="btn btn-ghost">Explore the full platform →</Link>
+                        <Link href="/rgs" className="btn btn-ghost">Meet the RGS →</Link>{" "}
+                        <Link href="/gap" className="btn btn-ghost">Explore the GAP →</Link>
                     </p>
 
                     <div className="stat-row">
@@ -164,6 +154,26 @@ export default async function Home() {
                                 <span>{s.label}</span>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CH.03 — games */}
+            <section data-chamber id="games">
+                <div className="shell">
+                    <div className="section-head">
+                        <p className="eyebrow">CH.03 — The Arsenal</p>
+                        <div className="games-head">
+                            <h2 className="display">Our games</h2>
+                            <Link href="/games" className="btn btn-ghost">All {games.length} titles</Link>
+                        </div>
+                        <p className="lede">
+                            Original HTML5 slots built in-house — concept, maths, art and sound —
+                            available across real money, social and sweepstakes platforms.
+                        </p>
+                    </div>
+                    <div className="game-grid">
+                        {games.slice(0, 8).map((g) => <GameCard key={g.slug} game={g} />)}
                     </div>
                 </div>
             </section>
