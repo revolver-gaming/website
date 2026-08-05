@@ -67,8 +67,8 @@ export default async function Rgs() {
                     </div>
                     <div className="flow">
                         <div className="flow-col">
-                            <h3>One build</h3>
                             <span className="role">Per game</span>
+                            <h3>One build</h3>
                             <ul>
                                 <li>Single HTML5 build</li>
                                 <li>Certified maths model</li>
@@ -77,8 +77,8 @@ export default async function Rgs() {
                         </div>
                         <div className="flow-arrow" aria-hidden>→</div>
                         <div className="flow-col flow-hub">
-                            <h3>RGS config engine</h3>
                             <span className="role">Everything casino-side</span>
+                            <h3>RGS config engine</h3>
                             <ul>
                                 <li>Bet ladders, limits &amp; multipliers</li>
                                 <li>Per-license regulation profiles</li>
@@ -89,8 +89,8 @@ export default async function Rgs() {
                         </div>
                         <div className="flow-arrow" aria-hidden>→</div>
                         <div className="flow-col">
-                            <h3>Every market</h3>
                             <span className="role">Live from config</span>
+                            <h3>Every market</h3>
                             <ul>
                                 <li>Regulated real money</li>
                                 <li>Social &amp; sweepstakes</li>
@@ -127,15 +127,17 @@ export default async function Rgs() {
 
             <section className="plat-cta" data-chamber>
                 <div className="shell">
-                    <p className="eyebrow">Last chamber</p>
-                    <h2 className="display">Load it <em>your way.</em></h2>
-                    <p className="lede">
-                        Tell us your license, currencies and bet rules — we&apos;ll show you
-                        the engine running your configuration, live.
-                    </p>
-                    <div className="hero-ctas">
-                        <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
-                        <Link href="/games" className="btn btn-ghost">Browse the games</Link>
+                    <div className="cta-card">
+                        <p className="eyebrow">Last chamber</p>
+                        <h2 className="display">Load it <em>your way.</em></h2>
+                        <p className="lede">
+                            Tell us your license, currencies and bet rules — we&apos;ll show you
+                            the engine running your configuration, live.
+                        </p>
+                        <div className="hero-ctas">
+                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
+                            <Link href="/games" className="btn btn-ghost">Browse the games</Link>
+                        </div>
                     </div>
                 </div>
             </section>
