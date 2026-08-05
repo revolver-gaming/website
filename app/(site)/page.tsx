@@ -43,7 +43,7 @@ export const revalidate = 300;
 
 export default async function Home() {
     const [news, games, partnerStudios, operators, contact, socials, stats] = await Promise.all([
-        listNews(6), listGames(), listPartnerStudios(), listOperators(),
+        listNews(3), listGames(), listPartnerStudios(), listOperators(),
         getContact(), getSocials(), getPlatformStats(),
     ]);
     const featuredGames = games.filter((g) => g.featured);
@@ -222,12 +222,13 @@ export default async function Home() {
                         <p className="eyebrow">CH.05 — Dispatches</p>
                         <h2 className="display">Latest news</h2>
                     </div>
-                    <div className="news-list">
+                    <div className="news-grid">
                         {news.map((n) => (
-                            <Link className="news-row" key={n.slug} href={`/news/${n.slug}`}>
+                            <Link className="news-card" key={n.slug} href={`/news/${n.slug}`}>
+                                {n.cover_image && <img src={n.cover_image} alt="" loading="lazy" />}
                                 <span className="date">{newsDate(n.published_at)}</span>
                                 <h3>{n.title}</h3>
-                                <span className="arrow">→</span>
+                                {n.excerpt && <p>{n.excerpt}</p>}
                             </Link>
                         ))}
                     </div>

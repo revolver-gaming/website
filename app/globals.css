@@ -1355,7 +1355,8 @@ section[data-chamber]:not(.hero) {
     padding-bottom: clamp(72px, 10vw, 120px);
 }
 
-.news-index .date {
+.news-index .date,
+.news-card .date {
     font-family: var(--font-m);
     font-size: 11px;
     letter-spacing: 0.16em;
