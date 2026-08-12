@@ -61,7 +61,6 @@ export function HeroMarquee({ games }: { games: Game[] }) {
                     <img key={g.slug} src={g.image} alt={g.title}
                         className={i === active ? "armed" : undefined} />
                 ))}
-                {shown[active].year >= 2026 && <span className="new-flag">New</span>}
             </div>
             <div className="marquee-strip" aria-label="Featured games">
                 {shown.map((g, i) => (
@@ -108,7 +107,6 @@ export function HeroFan({ games }: { games: Game[] }) {
                             onClick={() => setActive(i)}
                             aria-label={`Show ${g.title}`} aria-pressed={s === 0}>
                             <img src={g.image} alt={g.title} />
-                            {s === 0 && g.year >= 2026 && <span className="new-flag">New</span>}
                         </button>
                     );
                 })}

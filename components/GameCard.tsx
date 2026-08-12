@@ -4,7 +4,6 @@ import type { Game } from "@/lib/cms";
 export default function GameCard({ game }: { game: Game }) {
     return (
         <Link className="game-card" href={`/game/${game.slug}`}>
-            {game.year >= 2026 && <span className="new-flag">New</span>}
             <img className="art" src={game.image} alt={`${game.title} artwork`} loading="lazy" />
             <span className="gc-title">
                 <span>{game.title}</span>

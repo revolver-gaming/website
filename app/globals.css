@@ -1001,21 +1001,6 @@ section[data-chamber]:not(.hero) {
     font-size: 13px;
 }
 
-.new-flag {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    z-index: 2;
-    font-family: var(--font-m);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--chamber);
-    background: var(--amber);
-    padding: 5px 10px;
-    border-radius: 999px;
-}
-
 /* ---- network (CH.04) ------------------------------------------------------ */
 
 .network-split {
