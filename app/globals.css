@@ -536,6 +536,124 @@ section[data-chamber]:not(.hero) {
     font-size: 13px;
 }
 
+/* ---- hero alternatives (?hero=2 marquee / ?hero=3 fan) -------------------- */
+
+.marquee-stage {
+    width: min(500px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    user-select: none;
+}
+
+.marquee-frame {
+    position: relative;
+    aspect-ratio: 680 / 440;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--velvet);
+    box-shadow: 0 0 0 1px var(--velvet-3), 0 30px 70px rgba(0, 0, 0, 0.6);
+}
+
+.marquee-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.55s, transform 1.1s var(--detent);
+}
+
+.marquee-frame img.armed {
+    opacity: 1;
+    transform: none;
+}
+
+.marquee-strip {
+    align-self: center;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px;
+    background: var(--chamber);
+    border-radius: 12px;
+    /* machined cartridge tray */
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.marquee-strip button {
+    width: 62px;
+    aspect-ratio: 680 / 440;
+    border-radius: 7px;
+    overflow: hidden;
+    opacity: 0.5;
+    outline: 1px solid var(--velvet-2);
+    outline-offset: -1px;
+    transition: opacity 0.3s, outline-color 0.3s;
+}
+
+.marquee-strip button:hover {
+    opacity: 0.85;
+}
+
+.marquee-strip button.armed {
+    opacity: 1;
+    outline: 2px solid var(--amber);
+}
+
+.marquee-strip img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fan-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(16px, 2svh, 24px);
+    user-select: none;
+}
+
+.fan {
+    position: relative;
+    width: min(440px, 76vw);
+    aspect-ratio: 680 / 440;
+    margin-block: 30px 44px; /* room for the fanned corners above and below */
+}
+
+.fan-stage .cylinder-readout {
+    position: relative;
+    z-index: 10;
+}
+
+.fan-card {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    transform-origin: 50% 130%; /* fan pivot below, like held cards */
+    box-shadow: 0 0 0 1px var(--velvet-3), 0 24px 50px rgba(0, 0, 0, 0.55);
+    transition: transform 0.85s var(--detent), filter 0.5s;
+}
+
+.fan-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fan-card.armed {
+    box-shadow:
+        0 0 0 2px var(--amber),
+        0 0 44px rgba(255, 167, 85, 0.25),
+        0 24px 50px rgba(0, 0, 0, 0.55);
+}
+
 /* ---- ticker -------------------------------------------------------------- */
 
 .ticker {

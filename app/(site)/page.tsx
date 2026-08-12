@@ -1,6 +1,9 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import Cylinder from "@/components/Cylinder";
 import GameCard from "@/components/GameCard";
+import HeroSwitch from "@/components/HeroSwitch";
+import { HeroFan, HeroMarquee } from "@/components/HeroAlts";
 import {
     getContact, getPlatformStats, listGames, listNews,
     listOperators, listPartnerStudios, newsDateShort,
@@ -74,7 +77,13 @@ export default async function Home() {
                             <span>Since 2010</span>
                         </div>
                     </div>
-                    <Cylinder games={featuredGames} />
+                    <Suspense fallback={<Cylinder games={featuredGames} />}>
+                        <HeroSwitch heroes={[
+                            <Cylinder key="1" games={featuredGames} />,
+                            <HeroMarquee key="2" games={featuredGames} />,
+                            <HeroFan key="3" games={featuredGames} />,
+                        ]} />
+                    </Suspense>
                 </div>
             </section>
 
