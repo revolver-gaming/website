@@ -812,12 +812,11 @@ section[data-chamber]:not(.hero) {
 
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     gap: 28px 24px;
 }
 
 .game-grid-mini {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
 }
 
@@ -836,7 +835,7 @@ section[data-chamber]:not(.hero) {
 
 .game-card .art {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 680 / 440; /* native banner ratio */
     object-fit: cover;
     border-radius: 14px;
     box-shadow: 0 12px 30px rgba(42, 18, 48, 0.2);
@@ -1077,7 +1076,7 @@ section[data-chamber]:not(.hero) {
 
 .news-feat {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     background: var(--velvet);
     border: 1px solid var(--velvet-2);
     border-radius: 20px;
@@ -1093,7 +1092,7 @@ section[data-chamber]:not(.hero) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    min-height: 340px;
+    min-height: 300px;
 }
 
 .news-feat-copy {
@@ -1131,7 +1130,7 @@ section[data-chamber]:not(.hero) {
     font-family: var(--font-d);
     font-weight: 800;
     text-transform: uppercase;
-    font-size: clamp(28px, 3.5vw, 42px);
+    font-size: clamp(24px, 2.5vw, 34px);
     line-height: 0.95;
     color: var(--bone);
 }
@@ -1158,8 +1157,9 @@ section[data-chamber]:not(.hero) {
     }
 
     .news-feat > img {
-        min-height: 220px;
-        max-height: 300px;
+        height: auto;
+        aspect-ratio: 637 / 334; /* native cover ratio */
+        min-height: 0;
     }
 }
 

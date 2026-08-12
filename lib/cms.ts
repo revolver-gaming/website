@@ -100,7 +100,6 @@ export async function getGame(slug: string): Promise<GameDetail | null> {
 
 export type Contact = {
     email: string;
-    phone: string;
     address: string[];
     license: string;
     license_url: string;

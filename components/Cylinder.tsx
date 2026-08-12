@@ -81,7 +81,7 @@ export default function Cylinder({ games }: { games: Game[] }) {
             </div>
 
             <div className="cylinder-readout" aria-live="polite">
-                <span className="count">CH.{String(active + 1).padStart(2, "0")} / 06 — IN THE CHAMBER</span>
+                <span className="count">{String(active + 1).padStart(2, "0")} / 06 — IN THE CHAMBER</span>
                 <h3>{game.title}</h3>
                 <p className="tags">{game.tags.join(" · ")}</p>
                 <div className="actions">

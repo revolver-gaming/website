@@ -171,7 +171,6 @@ export default function AdminSettings() {
                     <h2>Contact details</h2>
                     <div className="admin-form">
                         <label>Email<input value={contact.email} onChange={(e) => setContact({ ...contact, email: e.target.value })} /></label>
-                        <label>Phone<input value={contact.phone} onChange={(e) => setContact({ ...contact, phone: e.target.value })} /></label>
                         <label className="wide">Address — one line per row
                             <textarea rows={3} value={contact.address.join("\n")}
                                 onChange={(e) => setContact({ ...contact, address: e.target.value.split("\n") })} />

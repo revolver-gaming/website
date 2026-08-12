@@ -50,11 +50,10 @@ export default async function Home() {
     const moreStudios = partnerStudios.length - studios.length;
     return (
         <main>
-            {/* CH.01 — hero */}
+            {/* hero */}
             <section className="hero" data-chamber id="top">
                 <div className="shell hero-grid">
                     <div className="hero-copy">
-                        <p className="eyebrow">CH.01 — London, W1</p>
                         <h1 className="display">
                             One integration.<br />
                             <span className="amp">300+ games.</span>
@@ -79,11 +78,11 @@ export default async function Home() {
                 </div>
             </section>
 
-            {/* CH.02 — platform */}
+            {/* platform */}
             <section data-chamber id="platform">
                 <div className="shell">
                     <div className="section-head">
-                        <p className="eyebrow">CH.02 — The Platform</p>
+                        <p className="eyebrow">The Platform</p>
                         <h2 className="display">One platform, both sides of the deal</h2>
                         <p className="lede">
                             A UKGC-licensed studio and an aggregator in one. Our RGS runs the
@@ -146,12 +145,12 @@ export default async function Home() {
                 </div>
             </section>
 
-            {/* CH.03 — games */}
+            {/* games */}
             <section className="on-bone" data-chamber id="games">
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head">
-                            <p className="eyebrow">CH.03 — The Arsenal</p>
+                            <p className="eyebrow">The Arsenal</p>
                             <h2 className="display">Our games</h2>
                             <p className="lede">
                                 Original HTML5 slots built in-house — concept, maths, art
@@ -166,11 +165,11 @@ export default async function Home() {
                 </div>
             </section>
 
-            {/* CH.04 — network */}
+            {/* network */}
             <section data-chamber id="partners">
                 <div className="shell network-split">
                     <div className="section-head">
-                        <p className="eyebrow">CH.04 — The Network</p>
+                        <p className="eyebrow">The Network</p>
                         <h2 className="display">Studios in, operators out</h2>
                         <p className="lede">
                             Building games? Distribute them through GAP with a single
@@ -207,12 +206,12 @@ export default async function Home() {
                 </div>
             </div>
 
-            {/* CH.05 — news */}
+            {/* news */}
             <section data-chamber id="news">
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head">
-                            <p className="eyebrow">CH.05 — Dispatches</p>
+                            <p className="eyebrow">Dispatches</p>
                             <h2 className="display">Latest news</h2>
                         </div>
                         <Link href="/news" className="btn btn-ghost">All news →</Link>
@@ -229,12 +228,12 @@ export default async function Home() {
                 </div>
             </section>
 
-            {/* CH.06 — contact */}
+            {/* contact */}
             <section data-chamber id="contact">
                 <div className="shell">
                     <div className="contact-panel">
                         <div className="contact-copy">
-                            <p className="eyebrow">CH.06 — Last Chamber</p>
+                            <p className="eyebrow">Last Chamber</p>
                             <h2 className="display">Talk business<em>.</em></h2>
                             <p>
                                 Tell us what you&apos;re loading up, and a member of the team
@@ -242,8 +241,6 @@ export default async function Home() {
                             </p>
                             <div className="contact-line">
                                 <a href={`mailto:${contact.email}`}>{contact.email}</a>
-                                {" · "}
-                                <a href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
                                 <br />
                                 {contact.address.join(", ")}
                             </div>

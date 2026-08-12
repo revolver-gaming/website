@@ -105,7 +105,7 @@ export default async function Rgs() {
                 <section data-chamber className={i % 2 === 1 ? "on-bone" : undefined} key={ch.kicker}>
                     <div className="shell">
                         <div className="section-head">
-                            <p className="eyebrow">CH.{String(i + 1).padStart(2, "0")} — {ch.kicker}</p>
+                            <p className="eyebrow">{ch.kicker}</p>
                             <h2 className="display">{ch.title}</h2>
                             <p className="lede">{ch.intro}</p>
                         </div>
