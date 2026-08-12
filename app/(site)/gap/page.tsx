@@ -5,7 +5,7 @@ import { getPlatformPage, getPlatformStats } from "@/lib/cms";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-    title: "GAP — Game Aggregation Platform — Revolver Gaming",
+    title: "Platform — Revolver Gaming",
     description:
         "GAP, the Revolver Game Aggregation Platform: one seamless-wallet integration into a live network of operators and studios, free spins and jackpots in your bonus dialect, tenant-scoped back office and a UKGC-licensed engine at the core.",
 };
@@ -112,7 +112,7 @@ export default async function Gap() {
                 </section>
             ))}
 
-            <section className="plat-cta" data-chamber>
+            <section data-chamber>
                 <div className="shell">
                     <div className="cta-card">
                         <p className="eyebrow">Last chamber</p>

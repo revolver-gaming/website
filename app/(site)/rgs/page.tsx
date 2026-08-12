@@ -125,7 +125,7 @@ export default async function Rgs() {
                 </section>
             ))}
 
-            <section className="plat-cta" data-chamber>
+            <section data-chamber>
                 <div className="shell">
                     <div className="cta-card">
                         <p className="eyebrow">Last chamber</p>
