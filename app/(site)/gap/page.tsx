@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Ticker from "@/components/Ticker";
-import { getPlatformStats, listOperators, listPartnerStudios } from "@/lib/cms";
+import { listOperators, listPartnerStudios } from "@/lib/cms";
 import { GAP_OPERATOR_POINTS, GAP_ROUTES, pillar } from "@/lib/pillars";
 
 export const revalidate = 300;
@@ -12,15 +12,9 @@ export const metadata: Metadata = {
         "The Revolver Game Aggregation Platform: studios bring games in through one integration, operators take the whole catalogue out — Revolver slots and originals plus every partner studio.",
 };
 
-const DAY_ONE = [
-    { time: "09:00", title: "Kickoff", text: "A call, credentials and the integration spec. Prefer your own API? We work in reverse and implement yours." },
-    { time: "09:47", title: "Adapter built", text: "AI-accelerated tooling maps your wallet to ours in minutes, including the integrations that usually take weeks." },
-    { time: "14:00", title: "Tested & certified", text: "Sandbox rounds against a live test operator: bets, wins, rollbacks and the ugly edge cases, signed off together." },
-    { time: "18:00", title: "You're live", text: "Games in your lobby the same day, with promotions and reporting included." },
-];
-
+/* Copy is Ryan's (wireframe v7). Nothing here that isn't in his text. */
 export default async function Gap() {
-    const [stats, operators, studios] = await Promise.all([getPlatformStats(), listOperators(), listPartnerStudios()]);
+    const [operators, studios] = await Promise.all([listOperators(), listPartnerStudios()]);
     const p = pillar("gap");
     return (
         <main>
@@ -29,28 +23,20 @@ export default async function Gap() {
                 <div className="shell">
                     <div className="section-head">
                         <p className="eyebrow">{p.kicker}</p>
-                        <h1 className="display">{p.title[0]}<br /><em>{p.title[1]}</em></h1>
+                        <h1 className="display">The Game Aggregation<br /><em>Platform.</em></h1>
                         <p className="lede">
                             One platform, two sides. Studios bring their games in. Operators
                             take the whole catalogue out through a single integration.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
-                            <Link href="/rgs" className="btn btn-ghost">Meet the engine</Link>
+                            <Link href="/#contact" className="btn btn-fire">Talk to the team</Link>
+                            <Link href="/rgs" className="btn btn-ghost">License the RGS</Link>
                         </div>
-                    </div>
-                    <div className="stat-row">
-                        {stats.slice(0, 4).map((s) => (
-                            <div className="stat" key={s.label}>
-                                <b>{s.value}{s.suffix && <em>{s.suffix}</em>}</b>
-                                <span>{s.label}</span>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </section>
 
-            <Ticker items={operators} label="Live across the operator and aggregator network" />
+            <Ticker items={operators} label="Connected across the operator and aggregator network" />
 
             <section data-chamber className="rings-bg">
                 <div className="shell">
@@ -58,7 +44,6 @@ export default async function Gap() {
                         <div className="flow-col">
                             <span className="role">Games in</span>
                             <h3>Studios</h3>
-                            <p>Bring your own RGS, or build on ours. Either way, one integration.</p>
                         </div>
                         <div className="flow-arrow" aria-hidden>→</div>
                         <div className="flow-col flow-hub">
@@ -66,13 +51,11 @@ export default async function Gap() {
                                 <h3>Revolver Platform</h3>
                                 <span className="role">One integration</span>
                             </div>
-                            <p>Wallet, launch, promotions and reporting, cleared through a UKGC-licensed core.</p>
                         </div>
                         <div className="flow-arrow" aria-hidden>→</div>
                         <div className="flow-col">
                             <span className="role">Games out</span>
                             <h3>Operators</h3>
-                            <p>Real money, social and sweepstakes lobbies, live day one.</p>
                         </div>
                     </div>
                 </div>
@@ -82,7 +65,7 @@ export default async function Gap() {
                 <div className="shell">
                     <div className="section-head" data-reveal>
                         <p className="eyebrow">For studios</p>
-                        <h2 className="display">Get your <em>games out</em></h2>
+                        <h2 className="display">Get your <em>games out.</em></h2>
                         <p className="lede">Onboard to the platform and reach our operator network, whichever way your tech is set up.</p>
                     </div>
                     <div className="opt-grid">
@@ -101,7 +84,7 @@ export default async function Gap() {
                 <div className="shell">
                     <div className="section-head" data-reveal>
                         <p className="eyebrow">For operators</p>
-                        <h2 className="display">Get every <em>game in</em></h2>
+                        <h2 className="display">Get every <em>game in.</em></h2>
                         <p className="lede">
                             One integration to the platform and your lobby fills with Revolver&apos;s
                             own slots and originals plus every partner studio on the platform.
@@ -118,41 +101,17 @@ export default async function Gap() {
                 </div>
             </section>
 
-            <section className="on-bone" data-chamber>
-                <div className="shell">
-                    <div className="section-head" data-reveal>
-                        <p className="eyebrow">Integration, timed</p>
-                        <h2 className="display">In your lobby, <em>same day</em></h2>
-                        <p className="lede">
-                            Integration is where most platforms lose months, so we made it our
-                            fastest move. Here&apos;s what day one looks like.
-                        </p>
-                    </div>
-                    <div className="timeline" data-reveal>
-                        {DAY_ONE.map((s) => (
-                            <div className="tl-step" key={s.time}>
-                                <div className="tl-dot" />
-                                <div className="tl-time">{s.time}</div>
-                                <h3>{s.title}</h3>
-                                <p>{s.text}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
             <section data-chamber>
                 <div className="shell">
                     <div className="cta-card" data-reveal>
                         <p className="eyebrow">Last chamber</p>
-                        <h2 className="display">See it <em>spin.</em></h2>
+                        <h2 className="display">Loaded and <em>ready?</em></h2>
                         <p className="lede">
-                            A demo takes minutes to set up: live games, live back office,
-                            your currencies.
+                            Tell us what you&apos;re building and we&apos;ll show you how fast it can be live.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
-                            <Link href="/games" className="btn btn-ghost">Browse the games</Link>
+                            <Link href="/#contact" className="btn btn-fire">Talk to the team</Link>
+                            <Link href="/games" className="btn btn-ghost">See the slots</Link>
                         </div>
                     </div>
                 </div>
