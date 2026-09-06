@@ -42,10 +42,27 @@ Supabase tables: `news`, `games`, `jobs`, `pages`, `partner_studios`, `operators
 - `next.config.ts` holds permanent redirects for old paths (`/media/pdf/*` → Supabase storage, `/about-us` → `/`, `/news-archived` → `/news`). Add new redirects there when retiring old URLs.
 - `app/(site)/[slug]/page.tsx` is the catch-all for CMS "pages" (terms, privacy, etc.) — check it before adding a new static route that could collide.
 
+## Site structure (pillars)
+
+Ryan's brief (Sept 2026): the site is organised around product **pillars**, each with its own page, and must stay visual rather than text-heavy — game imagery, motion and backgrounds, only details an operator or studio would care about (no deep tech). The wireframe he supplied is the source of truth for section order and content shape.
+
+| Pillar | Route | What it sells |
+|--------|-------|---------------|
+| Slots | `/games` (`/slots` redirects here) | Our original slots, licensable and brandable |
+| Originals | `/originals` | Brandable casual originals (crash, dice, mines, plinko…), provably fair + RNG |
+| RGS | `/rgs` | RGS licensing: **Independent** (run it yourself) or **Managed service** |
+| GAP | `/gap` | Aggregation: studios in (RGS↔RGS, or Game→RGS where we host), operators out with one integration |
+| Exclusives | `/exclusives` | Custom-built / branded games on our tech |
+| News, Contact | `/news`, `/contact` | Footer carries Careers, Terms, Privacy, Fairness, socials |
+
+Pillar copy (titles, ledes, option cards, originals list, value props) lives in `lib/pillars.ts` and is shared by the nav, hero slides and pillar pages. **Homepage section copy is Ryan's, taken verbatim from the wireframe** — don't rewrite it; new sections need his words, not invented ones. Games, news, operators, partner studios, stats and contact stay CMS-driven. Homepage order follows the wireframe: hero (rotating pillar slides + banner deck) → operator ticker → value props ("Tech that fires on every cylinder") → about → slots (with New/Flagship/Branded/Seasonal filters) → originals → RGS (two options, engine room, operator roster) → GAP (flow, for studios, for operators, studio roster) → exclusives banner → news → contact.
+
+Visual system helpers in `globals.css`: `.art-bg` (blurred game art behind a section, via `--art`), `.art-peek`, `.dots-bg`, `.rings-bg`, `[data-reveal]` (scroll-in via `components/Reveal.tsx`). Don't claim licences we don't hold (the wireframe's "MGA" was dropped) and never publish invented testimonials.
+
 ## Design language
 
 Palette and voice come from the old site: velvet aubergine `#301630`, muzzle-flash amber `#ffa755`, bone cream `#f4f0e3`. Fonts via `next/font`: Big Shoulders (display), Instrument Sans (body), IBM Plex Mono (labels/eyebrows).
 
-The signature element is the **cylinder** (`components/Cylinder.tsx`): a revolver-chamber carousel in the hero holding the six featured games. The revolver metaphor structures the whole homepage — six sections labeled CH.01–CH.06, copy like "Explore the arsenal", "Every chamber loaded". New sections should extend this metaphor and tone, not fight it.
+The hero visual is the **deck** (`components/HeroDeck.tsx`): the featured games' banners at their native 680×440 ratio, stacked and auto-advancing. (The earlier revolver-cylinder carousel was dropped: cropping the banner art into circular chambers didn't suit the thumbnails, and Ryan didn't like it.) The revolver metaphor runs through the copy — "Our arsenal", "Four chambers, one platform", "Last chamber" for CTAs. New sections should extend this metaphor and tone, not fight it.
 
 Brand assets (logos, emblem) are in `public/brand/`; game art is served from Supabase storage.

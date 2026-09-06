@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
             { source: "/news-archived", destination: "/news", permanent: true },
             // the platform page was renamed when it split into /gap and /rgs
             { source: "/platform", destination: "/gap", permanent: true },
+            // the Slots pillar lives at /games (its route since the redesign)
+            { source: "/slots", destination: "/games", permanent: true },
         ];
     },
 };

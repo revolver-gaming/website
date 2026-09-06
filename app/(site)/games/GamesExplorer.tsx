@@ -30,7 +30,7 @@ export default function GamesExplorer({ games }: { games: Game[] }) {
     return (
         <>
             <div className="shell page-hero">
-                <p className="eyebrow">The Arsenal — {games.length} original titles</p>
+                <p className="eyebrow">Slots · our core — {games.length} original titles</p>
                 <h1 className="display">Slots people <em>remember.</em></h1>
                 <p className="lede">
                     Every title built in-house — concept, maths, art and sound — in HTML5,

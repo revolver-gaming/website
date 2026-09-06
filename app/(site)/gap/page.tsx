@@ -1,82 +1,135 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getPlatformPage, getPlatformStats } from "@/lib/cms";
+import Ticker from "@/components/Ticker";
+import { getPlatformStats, listOperators, listPartnerStudios } from "@/lib/cms";
+import { GAP_OPERATOR_POINTS, GAP_ROUTES, pillar } from "@/lib/pillars";
 
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-    title: "Platform — Revolver Gaming",
+    title: "GAP — Game Aggregation Platform — Revolver Gaming",
     description:
-        "GAP, the Revolver Game Aggregation Platform: one seamless-wallet integration into a live network of operators and studios, free spins and jackpots in your bonus dialect, tenant-scoped back office and a UKGC-licensed engine at the core.",
+        "The Revolver Game Aggregation Platform: studios bring games in through one integration, operators take the whole catalogue out — Revolver slots and originals plus every partner studio.",
 };
 
+const DAY_ONE = [
+    { time: "09:00", title: "Kickoff", text: "A call, credentials and the integration spec. Prefer your own API? We work in reverse and implement yours." },
+    { time: "09:47", title: "Adapter built", text: "AI-accelerated tooling maps your wallet to ours in minutes, including the integrations that usually take weeks." },
+    { time: "14:00", title: "Tested & certified", text: "Sandbox rounds against a live test operator: bets, wins, rollbacks and the ugly edge cases, signed off together." },
+    { time: "18:00", title: "You're live", text: "Games in your lobby the same day, with promotions and reporting included." },
+];
+
 export default async function Gap() {
-    const [chapters, stats] = await Promise.all([getPlatformPage(), getPlatformStats()]);
+    const [stats, operators, studios] = await Promise.all([getPlatformStats(), listOperators(), listPartnerStudios()]);
+    const p = pillar("gap");
     return (
         <main>
             <section className="plat-hero" data-chamber>
+                <div className="grid-mask" aria-hidden />
                 <div className="shell">
                     <div className="section-head">
-                        <p className="eyebrow">GAP — Game Aggregation Platform</p>
-                        <h1 className="display">Every chamber<br /><em>loaded.</em></h1>
+                        <p className="eyebrow">{p.kicker}</p>
+                        <h1 className="display">{p.title[0]}<br /><em>{p.title[1]}</em></h1>
                         <p className="lede">
-                            One integration opens a live distribution network — our originals,
-                            a growing multi-studio portfolio, and an operator roster that keeps
-                            expanding. All on a UKGC-licensed engine, with integration measured
-                            in hours, not months.
+                            One platform, two sides. Studios bring their games in. Operators
+                            take the whole catalogue out through a single integration.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
+                            <Link href="/contact" className="btn btn-fire">Book a demo</Link>
                             <Link href="/rgs" className="btn btn-ghost">Meet the engine</Link>
                         </div>
                     </div>
                     <div className="stat-row">
-                        {stats.map((s) => (
+                        {stats.slice(0, 4).map((s) => (
                             <div className="stat" key={s.label}>
                                 <b>{s.value}{s.suffix && <em>{s.suffix}</em>}</b>
                                 <span>{s.label}</span>
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
 
+            <Ticker items={operators} label="Live across the operator and aggregator network" />
+
+            <section data-chamber className="rings-bg">
+                <div className="shell">
+                    <div className="flow" data-reveal>
+                        <div className="flow-col">
+                            <span className="role">Games in</span>
+                            <h3>Studios</h3>
+                            <p>Bring your own RGS, or build on ours. Either way, one integration.</p>
+                        </div>
+                        <div className="flow-arrow" aria-hidden>→</div>
+                        <div className="flow-col flow-hub">
+                            <div className="flow-hub-head">
+                                <h3>Revolver GAP</h3>
+                                <span className="role">One integration</span>
+                            </div>
+                            <p>Wallet, launch, promotions and reporting, cleared through a UKGC-licensed core.</p>
+                        </div>
+                        <div className="flow-arrow" aria-hidden>→</div>
+                        <div className="flow-col">
+                            <span className="role">Games out</span>
+                            <h3>Operators</h3>
+                            <p>Real money, social and sweepstakes lobbies, live day one.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <section className="on-bone" data-chamber>
                 <div className="shell">
-                    <div className="section-head">
-                        <p className="eyebrow">Integration, timed</p>
-                        <h2 className="display">In your lobby, same day</h2>
+                    <div className="section-head" data-reveal>
+                        <p className="eyebrow">For studios</p>
+                        <h2 className="display">Get your <em>games out</em></h2>
+                        <p className="lede">Onboard to the GAP and reach our operator network, whichever way your tech is set up.</p>
+                    </div>
+                    <div className="opt-grid">
+                        {GAP_ROUTES.map((r, i) => (
+                            <div className="opt-card" key={r.tag} data-reveal style={{ transitionDelay: `${i * 100}ms` }}>
+                                <span className="tag">{r.tag}</span>
+                                <h3>{r.title}</h3>
+                                <p>{r.text}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section data-chamber>
+                <div className="shell">
+                    <div className="section-head" data-reveal>
+                        <p className="eyebrow">For operators</p>
+                        <h2 className="display">Get every <em>game in</em></h2>
                         <p className="lede">
-                            Integration is where most platforms lose months — so we made it
-                            our fastest move. One standard contract, adapters built with
-                            AI-accelerated tooling, and a team that has done it dozens of
-                            times. Here&apos;s what day one looks like.
+                            One integration to the GAP and your lobby fills with Revolver&apos;s
+                            own slots and originals plus every partner studio on the platform.
                         </p>
                     </div>
-                    <div className="timeline">
-                        {[
-                            {
-                                time: "09:00",
-                                title: "Kickoff",
-                                text: "A call, credentials and our seamless-wallet spec. Prefer your own API? We work in reverse too — our adapter implements your spec instead.",
-                            },
-                            {
-                                time: "09:47",
-                                title: "Adapter built",
-                                text: "AI-accelerated tooling maps your wallet API to ours in minutes — including the complex integrations that traditionally take weeks.",
-                            },
-                            {
-                                time: "14:00",
-                                title: "Tested & certified",
-                                text: "Sandbox rounds against a live test operator: bets, wins, rollbacks and the ugly edge cases — signed off together.",
-                            },
-                            {
-                                time: "18:00",
-                                title: "You're live",
-                                text: "Our games in your lobby the same day — full portfolio, promotions and reporting included.",
-                            },
-                        ].map((s) => (
+                    <ul className="checks" data-reveal>
+                        {GAP_OPERATOR_POINTS.map((pt) => <li key={pt}>{pt}</li>)}
+                    </ul>
+                    <div className="roster roster-studios" data-reveal>
+                        <div><b>Revolver</b><span>Slots &amp; originals</span></div>
+                        {studios.map((s) => <div key={s.name}><b>{s.name}</b><span>{s.knownFor} · {s.genre}</span></div>)}
+                        <div className="more"><b>+ More</b><span>Added continuously</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="on-bone" data-chamber>
+                <div className="shell">
+                    <div className="section-head" data-reveal>
+                        <p className="eyebrow">Integration, timed</p>
+                        <h2 className="display">In your lobby, <em>same day</em></h2>
+                        <p className="lede">
+                            Integration is where most platforms lose months, so we made it our
+                            fastest move. Here&apos;s what day one looks like.
+                        </p>
+                    </div>
+                    <div className="timeline" data-reveal>
+                        {DAY_ONE.map((s) => (
                             <div className="tl-step" key={s.time}>
                                 <div className="tl-dot" />
                                 <div className="tl-time">{s.time}</div>
@@ -88,41 +141,17 @@ export default async function Gap() {
                 </div>
             </section>
 
-            {chapters.map((ch, i) => (
-                <section data-chamber className={i % 2 === 1 ? "on-bone" : undefined} key={ch.kicker}>
-                    <div className="shell">
-                        <div className="section-head">
-                            <p className="eyebrow">{ch.kicker}</p>
-                            <h2 className="display">{ch.title}</h2>
-                            <p className="lede">{ch.intro}</p>
-                        </div>
-                        <div className="feat-grid">
-                            {ch.features.map((f) => (
-                                <div className="feat-card" key={f.title}>
-                                    <h3>
-                                        {f.title}
-                                        {f.roadmap && <span className="badge-roadmap">In the chamber</span>}
-                                    </h3>
-                                    <p>{f.text}</p>
-                                    {f.href && <Link className="feat-more" href={f.href}>Learn more →</Link>}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            ))}
-
             <section data-chamber>
                 <div className="shell">
-                    <div className="cta-card">
+                    <div className="cta-card" data-reveal>
                         <p className="eyebrow">Last chamber</p>
                         <h2 className="display">See it <em>spin.</em></h2>
                         <p className="lede">
-                            A demo takes minutes to set up — live games, live back office,
+                            A demo takes minutes to set up: live games, live back office,
                             your currencies.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
+                            <Link href="/contact" className="btn btn-fire">Book a demo</Link>
                             <Link href="/games" className="btn btn-ghost">Browse the games</Link>
                         </div>
                     </div>
