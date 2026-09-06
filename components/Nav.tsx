@@ -29,7 +29,7 @@ export default function Nav() {
                     ))}
                 </ul>
                 <div className="nav-right">
-                    <Link href="/contact" className="btn btn-fire" onClick={() => setOpen(false)}>Contact</Link>
+                    <Link href="/#contact" className="btn btn-fire" onClick={() => setOpen(false)}>Contact</Link>
                     <button
                         className="nav-burger"
                         aria-label={open ? "Close menu" : "Open menu"}

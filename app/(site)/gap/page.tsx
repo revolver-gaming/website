@@ -7,7 +7,7 @@ import { GAP_OPERATOR_POINTS, GAP_ROUTES, pillar } from "@/lib/pillars";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-    title: "GAP — Game Aggregation Platform — Revolver Gaming",
+    title: "Platform — Game Aggregation — Revolver Gaming",
     description:
         "The Revolver Game Aggregation Platform: studios bring games in through one integration, operators take the whole catalogue out — Revolver slots and originals plus every partner studio.",
 };
@@ -35,7 +35,7 @@ export default async function Gap() {
                             take the whole catalogue out through a single integration.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/contact" className="btn btn-fire">Book a demo</Link>
+                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
                             <Link href="/rgs" className="btn btn-ghost">Meet the engine</Link>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ export default async function Gap() {
                         <div className="flow-arrow" aria-hidden>→</div>
                         <div className="flow-col flow-hub">
                             <div className="flow-hub-head">
-                                <h3>Revolver GAP</h3>
+                                <h3>Revolver Platform</h3>
                                 <span className="role">One integration</span>
                             </div>
                             <p>Wallet, launch, promotions and reporting, cleared through a UKGC-licensed core.</p>
@@ -83,7 +83,7 @@ export default async function Gap() {
                     <div className="section-head" data-reveal>
                         <p className="eyebrow">For studios</p>
                         <h2 className="display">Get your <em>games out</em></h2>
-                        <p className="lede">Onboard to the GAP and reach our operator network, whichever way your tech is set up.</p>
+                        <p className="lede">Onboard to the platform and reach our operator network, whichever way your tech is set up.</p>
                     </div>
                     <div className="opt-grid">
                         {GAP_ROUTES.map((r, i) => (
@@ -103,7 +103,7 @@ export default async function Gap() {
                         <p className="eyebrow">For operators</p>
                         <h2 className="display">Get every <em>game in</em></h2>
                         <p className="lede">
-                            One integration to the GAP and your lobby fills with Revolver&apos;s
+                            One integration to the platform and your lobby fills with Revolver&apos;s
                             own slots and originals plus every partner studio on the platform.
                         </p>
                     </div>
@@ -151,7 +151,7 @@ export default async function Gap() {
                             your currencies.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/contact" className="btn btn-fire">Book a demo</Link>
+                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
                             <Link href="/games" className="btn btn-ghost">Browse the games</Link>
                         </div>
                     </div>

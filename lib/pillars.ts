@@ -42,11 +42,11 @@ export const PILLARS: Pillar[] = [
     {
         key: "gap",
         href: "/gap",
-        label: "GAP",
-        kicker: "GAP · aggregation",
+        label: "Platform",
+        kicker: "Platform · aggregation",
         title: ["One integration.", "Whole network."],
         lede: "The Game Aggregation Platform connects studios to our operator network, whether you bring your own RGS or build on ours.",
-        cta: "Join the GAP",
+        cta: "Join the platform",
     },
     {
         key: "exclusives",
@@ -107,7 +107,7 @@ export const GAP_ROUTES = [
     {
         tag: "RGS ↔ RGS",
         title: "You already have an RGS",
-        text: "Integrate your existing RGS to the GAP once, and we supply your games straight to our operator network. Keep your own server, gain our distribution.",
+        text: "Integrate your existing RGS to the platform once, and we supply your games straight to our operator network. Keep your own server, gain our distribution.",
     },
     {
         tag: "Game → RGS",
@@ -127,5 +127,5 @@ export const BESPOKE_STEPS = [
     { title: "Brief", text: "Your brand, your audience, your market. We agree the theme, the mechanic and the maths targets." },
     { title: "Design & maths", text: "Concept art, sound and a certified maths model built in-house in London." },
     { title: "Build & certify", text: "HTML5 build on the licensed RGS, tested and certified for your jurisdictions." },
-    { title: "Live, exclusively", text: "Launched to your lobby through GAP — and to nobody else's unless you say so." },
+    { title: "Live, exclusively", text: "Launched to your lobby through the platform — and to nobody else's unless you say so." },
 ];

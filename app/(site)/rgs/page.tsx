@@ -27,7 +27,7 @@ export default async function Rgs() {
                             distribution network. Two ways to run it.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/contact" className="btn btn-fire">Talk licensing</Link>
+                            <Link href="/#contact" className="btn btn-fire">Talk licensing</Link>
                             <Link href="/gap" className="btn btn-ghost">See the distribution</Link>
                         </div>
                     </div>
@@ -114,8 +114,8 @@ export default async function Rgs() {
                             We&apos;ll show you the engine live, with your games on it.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/contact" className="btn btn-fire">Talk licensing</Link>
-                            <Link href="/gap" className="btn btn-ghost">Explore the GAP</Link>
+                            <Link href="/#contact" className="btn btn-fire">Talk licensing</Link>
+                            <Link href="/gap" className="btn btn-ghost">Explore the platform</Link>
                         </div>
                     </div>
                 </div>

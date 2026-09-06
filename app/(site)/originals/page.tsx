@@ -18,7 +18,7 @@ const PROMISES = [
 const STEPS = [
     { title: "Pick the lobby", text: "Choose the titles you want live on day one. Crash, dice, mines, plinko — the whole set or a curated few." },
     { title: "We brand it", text: "Assets, palette and naming applied across every game, so the lobby reads as yours." },
-    { title: "Plug in once", text: "Delivered through the same GAP integration as our slots. Already integrated? Nothing new to build." },
+    { title: "Plug in once", text: "Delivered through the same platform integration as our slots. Already integrated? Nothing new to build." },
     { title: "Keep it fresh", text: "New originals are added to your lobby as they ship, at no extra integration cost." },
 ];
 
@@ -37,7 +37,7 @@ export default function Originals() {
                             and classic table mechanics, all on the licensed Revolver RGS.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/contact" className="btn btn-fire">Brand your lobby</Link>
+                            <Link href="/#contact" className="btn btn-fire">Brand your lobby</Link>
                             <Link href="/fairness" className="btn btn-ghost">How provably fair works</Link>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ export default function Originals() {
                             lobby running in your colours.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/contact" className="btn btn-fire">Talk to the team</Link>
+                            <Link href="/#contact" className="btn btn-fire">Talk to the team</Link>
                             <Link href="/games" className="btn btn-ghost">See the slots too</Link>
                         </div>
                     </div>

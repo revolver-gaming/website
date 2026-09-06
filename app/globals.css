@@ -1160,14 +1160,12 @@ a.pager-step:hover {
 /* ---- contact (CH.06) ------------------------------------------------------ */
 
 .contact-panel {
-    background: var(--velvet);
-    border: 1px solid rgba(255, 167, 85, 0.2);
-    border-radius: 24px;
-    padding: clamp(32px, 5vw, 64px);
+    border-top: 1px solid var(--velvet-2);
+    padding-top: clamp(40px, 6vw, 64px);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(32px, 5vw, 64px);
-    align-items: center;
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
 }
 
 .contact-copy {
@@ -1195,14 +1193,19 @@ a.pager-step:hover {
     margin-top: 8px;
 }
 
-.contact-line a:hover {
+.contact-line a {
     color: var(--amber);
+    font-weight: 600;
+}
+
+.contact-line a:hover {
+    color: var(--amber-hot);
 }
 
 .contact-pills {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    border-top: 1px solid var(--velvet-2);
 }
 
 .contact-pill {
@@ -1210,28 +1213,31 @@ a.pager-step:hover {
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    border: 1px solid var(--velvet-3);
-    border-radius: 999px;
-    padding: 20px 30px;
-    font-weight: 700;
-    font-size: 18px;
-    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    border-bottom: 1px solid var(--velvet-2);
+    padding: 24px 4px;
+    font-family: var(--font-d);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 26px;
+    line-height: 1;
+    transition: color 0.2s, padding-left 0.25s var(--detent);
+}
+
+.contact-pill span:last-child {
+    color: var(--amber);
+    font-family: var(--font-b);
+    font-weight: 400;
+    font-size: 22px;
+    transition: transform 0.25s var(--detent);
 }
 
 .contact-pill:hover {
-    border-color: var(--amber);
     color: var(--amber);
+    padding-left: 12px;
 }
 
-.contact-pill.fire {
-    background: var(--amber);
-    border-color: transparent;
-    color: var(--chamber);
-}
-
-.contact-pill.fire:hover {
-    background: var(--amber-soft);
-    color: var(--chamber);
+.contact-pill:hover span:last-child {
+    transform: translateX(6px);
 }
 
 @media (max-width: 860px) {
@@ -1240,8 +1246,8 @@ a.pager-step:hover {
     }
 
     .contact-pill {
-        padding: 16px 24px;
-        font-size: 16px;
+        font-size: 22px;
+        padding: 18px 2px;
     }
 }
 
@@ -2904,13 +2910,6 @@ section[data-chamber].tight {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: transform 0.35s var(--detent), border-color 0.3s, box-shadow 0.3s;
-}
-
-.vprop:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 167, 85, 0.5);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
 }
 
 .vprop h3 {
@@ -2987,9 +2986,6 @@ section[data-chamber].tight {
 .fan img:nth-child(2) { transform: rotate(-5deg) translate(4px, 10px); }
 .fan img:nth-child(3) { transform: rotate(7deg) translate(16px, -6px); }
 
-.vprop:hover .fan img:nth-child(1) { transform: rotate(-22deg) translate(-18px, 30px); }
-.vprop:hover .fan img:nth-child(2) { transform: rotate(-6deg) translate(0, 4px); }
-.vprop:hover .fan img:nth-child(3) { transform: rotate(12deg) translate(30px, -18px); }
 
 /* originals: floating chips */
 .chips-art {
@@ -3220,11 +3216,6 @@ section[data-chamber].tight {
     transition: border-color 0.3s, background 0.3s;
 }
 
-.otile:hover {
-    border-color: var(--amber);
-    background: var(--velvet-2);
-}
-
 .otile svg {
     position: relative;
     width: 34px;
@@ -3296,11 +3287,6 @@ section[data-chamber].tight {
     flex-direction: column;
     gap: 12px;
     transition: transform 0.3s var(--detent), border-color 0.3s;
-}
-
-.opt-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 167, 85, 0.5);
 }
 
 .opt-card .tag {
@@ -3447,11 +3433,6 @@ section[data-chamber].tight {
     transition: border-color 0.3s, background 0.3s;
 }
 
-.roster > div:hover {
-    border-color: var(--amber);
-    background: var(--velvet-2);
-}
-
 .roster b {
     display: block;
     font-family: var(--font-d);
@@ -3484,10 +3465,6 @@ section[data-chamber].tight {
     border-color: var(--bone-2);
 }
 
-.on-bone .roster > div:hover {
-    border-color: var(--rust);
-}
-
 .on-bone .roster span,
 .on-bone .roster .more b {
     color: var(--rust);
@@ -3500,10 +3477,6 @@ section[data-chamber].tight {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-}
-
-.steps-3 {
-    grid-template-columns: repeat(3, 1fr);
 }
 
 .step {

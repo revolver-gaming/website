@@ -31,7 +31,7 @@ export default async function Exclusives() {
                             it on the same certified engine as everything we ship.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/contact" className="btn btn-fire">{p.cta}</Link>
+                            <Link href="/#contact" className="btn btn-fire">{p.cta}</Link>
                             <Link href="/games" className="btn btn-ghost">See the catalogue</Link>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ export default async function Exclusives() {
                             want. We&apos;ll come back with a concept and a timeline.
                         </p>
                         <div className="hero-ctas">
-                            <Link href="/contact" className="btn btn-fire">{p.cta}</Link>
+                            <Link href="/#contact" className="btn btn-fire">{p.cta}</Link>
                         </div>
                     </div>
                 </div>

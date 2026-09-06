@@ -16,7 +16,7 @@ export default async function Footer() {
                         </Link>
                         <p>
                             The studio that became the platform. Licensable slots, brandable
-                            originals, RGS licensing and the GAP aggregation network. London,
+                            originals, RGS licensing and the aggregation platform. London,
                             since 2010.
                         </p>
                         <span className="rg-badge">18+ · Responsible gambling</span>
@@ -28,7 +28,7 @@ export default async function Footer() {
                     <nav className="footer-col" aria-label="Company">
                         <h4>Company</h4>
                         <Link href="/news">News</Link>
-                        <Link href="/contact">Contact</Link>
+                        <Link href="/#contact">Contact</Link>
                         <Link href="/fairness">Fairness</Link>
                         {links.filter((l) => l.label === "Careers").map((l) => (
                             <a key={l.label} href={l.url}>{l.label}</a>

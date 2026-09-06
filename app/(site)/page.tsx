@@ -67,7 +67,7 @@ export default async function Home() {
                         </p>
                         <p className="lede">
                             Today it sits inside a full stack: brandable casual originals, a
-                            licensable RGS with distribution, and the GAP aggregation network.
+                            licensable RGS with distribution, and the aggregation platform.
                             Founder-led, close to the detail, no legacy weight.
                         </p>
                         <div className="hero-ctas">
@@ -77,7 +77,7 @@ export default async function Home() {
                     <div className="mini-stats" data-reveal>
                         <div><b>UKGC</b><span>Licensed &amp; regulated</span></div>
                         <div><b>{games.length}</b><span>Original slots</span></div>
-                        <div><b>2</b><span>GAP integration routes</span></div>
+                        <div><b>2</b><span>Platform integration routes</span></div>
                         <div><b>{operators.length}+</b><span>Operator integrations</span></div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@ export default async function Home() {
                     <div className="tag-bar" data-reveal>
                         {["Licensable", "Brandable", "Proven performers", "UKGC licensed"].map((t) => <span key={t}>{t}</span>)}
                     </div>
-                    <HomeSlots games={games.slice(0, 8)} />
+                    <HomeSlots games={games.slice(0, 6)} />
                 </div>
             </section>
 
@@ -185,14 +185,14 @@ export default async function Home() {
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head" data-reveal>
-                            <p className="eyebrow">GAP · aggregation</p>
+                            <p className="eyebrow">Platform · aggregation</p>
                             <h2 className="display">The Game Aggregation <em>Platform.</em></h2>
                             <p className="lede">
                                 One platform, two sides. Studios bring their games in. Operators
                                 take the whole catalogue out through a single integration.
                             </p>
                         </div>
-                        <Link href="/gap" className="btn btn-ghost">Join the GAP →</Link>
+                        <Link href="/gap" className="btn btn-ghost">Join the platform →</Link>
                     </div>
 
                     <div className="flow" data-reveal>
@@ -203,7 +203,7 @@ export default async function Home() {
                         <div className="flow-arrow" aria-hidden>→</div>
                         <div className="flow-col flow-hub">
                             <div className="flow-hub-head">
-                                <h3>Revolver GAP</h3>
+                                <h3>Revolver Platform</h3>
                                 <span className="role">One integration</span>
                             </div>
                         </div>
@@ -218,7 +218,7 @@ export default async function Home() {
                         <p className="eyebrow">For studios</p>
                         <h3 className="sub-display">Get your games out.</h3>
                         <p className="lede">
-                            Onboard to the GAP and reach our operator network, whichever way
+                            Onboard to the platform and reach our operator network, whichever way
                             your tech is set up.
                         </p>
                         <div className="opt-grid">
@@ -236,7 +236,7 @@ export default async function Home() {
                         <p className="eyebrow">For operators</p>
                         <h3 className="sub-display">Get every game in.</h3>
                         <p className="lede">
-                            One integration to the GAP and your lobby fills with Revolver&apos;s
+                            One integration to the platform and your lobby fills with Revolver&apos;s
                             own slots and originals plus every partner studio on the platform.
                         </p>
                         <ul className="checks">

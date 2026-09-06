@@ -1,22 +1,18 @@
 import { getContact } from "@/lib/cms";
 
-const ENQUIRIES: [string, string, boolean][] = [
-    ["I run a casino", "Operator enquiry", true],
-    ["I'm an aggregator", "Aggregator enquiry", false],
-    ["I build games", "Studio partnership", false],
+const ENQUIRIES: [string, string][] = [
+    ["I run a casino", "Operator enquiry"],
+    ["I'm an aggregator", "Aggregator enquiry"],
+    ["I build games", "Studio partnership"],
 ];
 
-export default async function ContactPanel({ heading = true }: { heading?: boolean }) {
+export default async function ContactPanel() {
     const contact = await getContact();
     return (
         <div className="contact-panel" data-reveal>
             <div className="contact-copy">
-                {heading && (
-                    <>
-                        <p className="eyebrow">Last chamber</p>
-                        <h2 className="display">Talk business<em>.</em></h2>
-                    </>
-                )}
+                <p className="eyebrow">Last chamber</p>
+                <h2 className="display">Talk business<em>.</em></h2>
                 <p>
                     Tell us what you&apos;re loading up, and a member of the team
                     gets back to you fast.
@@ -28,10 +24,10 @@ export default async function ContactPanel({ heading = true }: { heading?: boole
                 </div>
             </div>
             <div className="contact-pills">
-                {ENQUIRIES.map(([label, subject, fire]) => (
+                {ENQUIRIES.map(([label, subject]) => (
                     <a
                         key={label}
-                        className={`contact-pill${fire ? " fire" : ""}`}
+                        className="contact-pill"
                         href={`mailto:${contact.email}?subject=${encodeURIComponent(subject)}`}
                     >
                         <span>{label}</span><span>→</span>

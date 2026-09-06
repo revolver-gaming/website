@@ -51,9 +51,9 @@ Ryan's brief (Sept 2026): the site is organised around product **pillars**, each
 | Slots | `/games` (`/slots` redirects here) | Our original slots, licensable and brandable |
 | Originals | `/originals` | Brandable casual originals (crash, dice, mines, plinko…), provably fair + RNG |
 | RGS | `/rgs` | RGS licensing: **Independent** (run it yourself) or **Managed service** |
-| GAP | `/gap` | Aggregation: studios in (RGS↔RGS, or Game→RGS where we host), operators out with one integration |
+| Platform (GAP) | `/gap` | Labelled "Platform" everywhere user-facing — "GAP" means nothing to outsiders. Aggregation: studios in (RGS↔RGS, or Game→RGS where we host), operators out with one integration |
 | Exclusives | `/exclusives` | Custom-built / branded games on our tech |
-| News, Contact | `/news`, `/contact` | Footer carries Careers, Terms, Privacy, Fairness, socials |
+| News, Contact | `/news`, `/#contact` (no contact page; the nav button anchors to the homepage section) | Footer carries Careers, Terms, Privacy, Fairness, socials |
 
 Pillar copy (titles, ledes, option cards, originals list, value props) lives in `lib/pillars.ts` and is shared by the nav, hero slides and pillar pages. **Homepage section copy is Ryan's, taken verbatim from the wireframe** — don't rewrite it; new sections need his words, not invented ones. Games, news, operators, partner studios, stats and contact stay CMS-driven. Homepage order follows the wireframe: hero (rotating pillar slides + banner deck) → operator ticker → value props ("Tech that fires on every cylinder") → about → slots (with New/Flagship/Branded/Seasonal filters) → originals → RGS (two options, engine room, operator roster) → GAP (flow, for studios, for operators, studio roster) → exclusives banner → news → contact.
 
