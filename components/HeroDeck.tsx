@@ -52,7 +52,7 @@ export default function HeroDeck({ games }: { games: Game[] }) {
                 <h3>{game.title}</h3>
                 <div className="actions">
                     {game.demo_url && (
-                        <button className="btn btn-fire" onClick={() => setDemo(game)}>Play demo</button>
+                        <button className="btn btn-ghost" onClick={() => setDemo(game)}>Play demo</button>
                     )}
                     <Link className="btn btn-ghost" href={`/game/${game.slug}`}>Details</Link>
                 </div>

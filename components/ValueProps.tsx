@@ -12,9 +12,9 @@ const art = [
             <path d="M20 110A80 80 0 0 1 180 110" stroke="rgba(255,167,85,.25)" strokeWidth="10" strokeLinecap="round" />
             <path d="M20 110A80 80 0 0 1 100 30" stroke="rgba(255,167,85,.6)" strokeWidth="10" strokeLinecap="round" strokeDasharray="4 8" />
             <g className="needle">
-                <path d="M100 100 100 40" stroke="var(--amber)" strokeWidth="3" strokeLinecap="round" />
+                <path d="M100 100 100 40" stroke="var(--brass)" strokeWidth="3" strokeLinecap="round" />
             </g>
-            <circle cx="100" cy="100" r="9" fill="var(--amber)" />
+            <circle cx="100" cy="100" r="9" fill="var(--brass)" />
             <text x="100" y="132" textAnchor="middle" fontFamily="var(--font-m)" fontSize="11" fill="var(--smoke)" letterSpacing="2">DAY 1</text>
         </svg>
     ),
@@ -33,8 +33,8 @@ const art = [
             <circle cx="100" cy="100" r="92" stroke="rgba(255,167,85,.25)" />
             <circle cx="100" cy="100" r="70" stroke="rgba(255,167,85,.5)" strokeDasharray="4 10" className="spin" />
             <circle cx="100" cy="100" r="48" stroke="rgba(244,240,227,.25)" strokeDasharray="1 8" className="spin rev" />
-            <circle cx="100" cy="100" r="22" fill="rgba(255,167,85,.12)" stroke="var(--amber)" />
-            <path d="M100 86v28M86 100h28" stroke="var(--amber)" strokeWidth="2" />
+            <circle cx="100" cy="100" r="22" fill="rgba(214,183,142,.12)" stroke="var(--brass)" />
+            <path d="M100 86v28M86 100h28" stroke="var(--brass)" strokeWidth="2" />
         </svg>
     ),
 ];
