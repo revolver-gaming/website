@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PILLARS } from "@/lib/pillars";
@@ -9,13 +9,23 @@ export default function Nav() {
     const [open, setOpen] = useState(false);
     const path = usePathname();
     const links = [...PILLARS.map((p) => [p.label, p.href]), ["News", "/news"]];
+
+    useEffect(() => setOpen(false), [path]);
+
+    useEffect(() => {
+        if (!open) return;
+        const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, [open]);
+
     return (
         <header className="nav">
             <div className="shell nav-inner">
                 <Link href="/" className="nav-brand" aria-label="Revolver Gaming home">
-                    <img src="/brand/logo-horizontal-white.svg" alt="Revolver Gaming" />
+                    <img src="/brand/logo-horizontal-white.svg" alt="Revolver Gaming" width={172} height={30} />
                 </Link>
-                <ul className={`nav-links${open ? " open" : ""}`}>
+                <ul className={`nav-links${open ? " open" : ""}`} id="nav-menu">
                     {links.map(([label, href]) => (
                         <li key={href}>
                             <Link
@@ -29,11 +39,12 @@ export default function Nav() {
                     ))}
                 </ul>
                 <div className="nav-right">
-                    <Link href="/#contact" className="btn btn-ghost" onClick={() => setOpen(false)}>Contact</Link>
+                    <Link href="/#contact" className="btn btn-fire" onClick={() => setOpen(false)}>Contact</Link>
                     <button
                         className="nav-burger"
                         aria-label={open ? "Close menu" : "Open menu"}
                         aria-expanded={open}
+                        aria-controls="nav-menu"
                         onClick={() => setOpen(!open)}
                     >
                         <span /><span /><span />

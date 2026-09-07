@@ -37,7 +37,7 @@ export default function HeroSlides() {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         const id = setInterval(() => {
             if (!paused.current) setActive((a) => (a + 1) % SLIDES.length);
-        }, 6500);
+        }, 7000);
         return () => clearInterval(id);
     }, []);
 
@@ -46,6 +46,8 @@ export default function HeroSlides() {
             className="hero-copy"
             onPointerEnter={() => (paused.current = true)}
             onPointerLeave={() => (paused.current = false)}
+            onFocusCapture={() => (paused.current = true)}
+            onBlurCapture={() => (paused.current = false)}
         >
             <div className="hero-slides">
                 {SLIDES.map((s, i) => (

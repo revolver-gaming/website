@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PageHero from "@/components/PageHero";
 import { listNewsPage, newsDateShort, type NewsListItem } from "@/lib/cms";
 
 const pageHref = (p: number) => (p === 1 ? "/news" : `/news/page/${p}`);
@@ -17,32 +18,34 @@ export default async function NewsIndex({ page }: { page: number }) {
         return groups;
     }, []);
     return (
-        <main>
-            <div className="shell page-hero">
-                <p className="eyebrow">Dispatches{page > 1 && ` — page ${page} of ${pages}`}</p>
-                <h1 className="display">From the chamber</h1>
-                <p className="lede">
-                    Game launches, partnerships and announcements from the studio.
-                </p>
+        <main id="main">
+            <PageHero
+                kicker={`Dispatches${page > 1 ? ` — page ${page} of ${pages}` : ""}`}
+                title={<>Latest from the <em>barrel.</em></>}
+                lede="Game launches, partnerships and announcements from the studio."
+            />
 
-                {page === 1 && (
-                    <Link className="news-feat" href={`/news/${lead.slug}`}>
-                        {lead.cover_image && <img src={lead.cover_image} alt="" />}
-                        <div className="news-feat-copy">
-                            <div className="feat-badges">
-                                <span className="badge-latest">LATEST</span>
-                                <span className="date">{newsDateShort(lead.published_at)}</span>
+            {page === 1 && (
+                <section data-chamber>
+                    <div className="shell indent">
+                        <Link className="news-feat" href={`/news/${lead.slug}`}>
+                            {lead.cover_image && <img src={lead.cover_image} alt="" />}
+                            <div className="news-feat-copy">
+                                <div className="feat-badges">
+                                    <span className="badge-latest">LATEST</span>
+                                    <span className="date">{newsDateShort(lead.published_at)}</span>
+                                </div>
+                                <h2 className="display">{lead.title}</h2>
+                                {lead.excerpt && <p>{lead.excerpt}</p>}
+                                <span className="read-on">Read the story →</span>
                             </div>
-                            <h2>{lead.title}</h2>
-                            {lead.excerpt && <p>{lead.excerpt}</p>}
-                            <span className="read-on">Read the story →</span>
-                        </div>
-                    </Link>
-                )}
-            </div>
+                        </Link>
+                    </div>
+                </section>
+            )}
 
             <section className="on-bone" data-chamber>
-                <div className="shell">
+                <div className="shell indent">
                     {byYear.map(([year, articles]) => (
                         <div key={year}>
                             <p className="year-tag">{year}</p>
@@ -51,7 +54,7 @@ export default async function NewsIndex({ page }: { page: number }) {
                                     <Link className="news-row" key={n.slug} href={`/news/${n.slug}`}>
                                         <span className="date">{newsDateShort(n.published_at)}</span>
                                         <h3>{n.title}</h3>
-                                        <span className="arrow">→</span>
+                                        <span className="arrow" aria-hidden>→</span>
                                     </Link>
                                 ))}
                             </div>

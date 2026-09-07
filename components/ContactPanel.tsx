@@ -9,9 +9,8 @@ const ENQUIRIES: [string, string][] = [
 export default async function ContactPanel() {
     const contact = await getContact();
     return (
-        <div className="contact-panel" data-reveal>
+        <div className="contact" data-reveal>
             <div className="contact-copy">
-                <p className="eyebrow">Last chamber</p>
                 <h2 className="display">Talk business<em>.</em></h2>
                 <p>
                     Tell us what you&apos;re loading up, and a member of the team
@@ -23,14 +22,14 @@ export default async function ContactPanel() {
                     {contact.address.join(", ")}
                 </div>
             </div>
-            <div className="contact-pills">
+            <div className="contact-list">
                 {ENQUIRIES.map(([label, subject]) => (
                     <a
                         key={label}
-                        className="contact-pill"
+                        className="contact-item"
                         href={`mailto:${contact.email}?subject=${encodeURIComponent(subject)}`}
                     >
-                        <span>{label}</span><span>→</span>
+                        <span>{label}</span><span aria-hidden>→</span>
                     </a>
                 ))}
             </div>

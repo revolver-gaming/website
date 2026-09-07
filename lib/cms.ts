@@ -45,11 +45,21 @@ export async function listNews(limit?: number): Promise<NewsListItem[]> {
     return data;
 }
 
+// A few migrated slugs are stored percent-encoded (emoji titles). Depending
+// on the caller the param can arrive raw, upper-cased, or decoded, so match
+// every spelling that could reach us.
+const slugVariants = (slug: string) => {
+    let decoded = slug;
+    try { decoded = decodeURIComponent(slug); } catch {}
+    return [...new Set([slug, slug.toLowerCase(), decoded, encodeURIComponent(decoded).toLowerCase()])];
+};
+
 export async function getNews(slug: string): Promise<NewsArticle | null> {
     const { data, error } = await supabase
         .from("news")
         .select("slug, title, excerpt, content_html, cover_image, published_at")
-        .eq("slug", slug)
+        .in("slug", slugVariants(slug))
+        .limit(1)
         .maybeSingle();
     if (error) throw error;
     return data;

@@ -19,25 +19,29 @@ export default function HomeSlots({ games }: { games: Game[] }) {
     const match = FILTERS.find(([name]) => name === filter)![1];
     const shown = games.filter((g) => match(g, games));
     return (
-        <>
-            <div className="filter-bar" role="group" aria-label="Filter slots" data-reveal>
-                {FILTERS.map(([name]) => (
-                    <button
-                        key={name}
-                        className={`chip${filter === name ? " on" : ""}`}
-                        onClick={() => setFilter(name)}
-                    >
-                        {name}
-                    </button>
-                ))}
+        <div data-reveal>
+            <div className="tabs" role="tablist" aria-label="Filter slots">
+                <div className="tabs-scroll">
+                    {FILTERS.map(([name]) => (
+                        <button
+                            key={name}
+                            role="tab"
+                            aria-selected={filter === name}
+                            className={`tab${filter === name ? " on" : ""}`}
+                            onClick={() => setFilter(name)}
+                        >
+                            {name}
+                        </button>
+                    ))}
+                </div>
             </div>
-            <div className="game-grid game-grid-mini game-grid-dark">
-                {shown.map((g, i) => (
-                    <div key={g.slug} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
-                        <GameCard game={g} />
-                    </div>
-                ))}
-            </div>
-        </>
+            {shown.length > 0 ? (
+                <div className="game-grid">
+                    {shown.map((g) => <GameCard key={g.slug} game={g} />)}
+                </div>
+            ) : (
+                <p className="empty-note">Nothing in the chamber under <b>{filter}</b> yet.</p>
+            )}
+        </div>
     );
 }

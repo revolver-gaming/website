@@ -24,7 +24,7 @@ export default async function JobPage({ params }: Props) {
     const job = await getJob((await params).slug);
     if (!job) notFound();
     return (
-        <main>
+        <main id="main">
             <article className="shell article">
                 <Link className="article-back" href="/job">← All open roles</Link>
                 <p className="article-date">Posted {newsDate(job.published_at)}</p>

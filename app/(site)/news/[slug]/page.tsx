@@ -33,7 +33,7 @@ export default async function NewsArticlePage({ params }: Props) {
     const article = await getNews((await params).slug);
     if (!article) notFound();
     return (
-        <main>
+        <main id="main">
             <article className="shell article">
                 <Link className="article-back" href="/news">← All news</Link>
                 <p className="article-date">{newsDate(article.published_at)}</p>

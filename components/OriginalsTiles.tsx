@@ -15,19 +15,23 @@ const ICONS: Record<string, React.ReactNode> = {
 
 export default function OriginalsTiles() {
     return (
-        <div className="otiles" data-reveal>
+        <div className="tgrid otiles" data-reveal>
             {ORIGINALS.map((o) => (
                 <div className="otile" key={o.name}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                         {ICONS[o.name]}
                     </svg>
-                    <b>{o.name}</b>
-                    <span>{o.type}</span>
+                    <div>
+                        <b>{o.name}</b>
+                        <span>{o.type}</span>
+                    </div>
                 </div>
             ))}
             <div className="otile more">
-                <b>+ More</b>
-                <span>New titles monthly</span>
+                <div>
+                    <b>+ More</b>
+                    <span>New titles monthly</span>
+                </div>
             </div>
         </div>
     );

@@ -6,13 +6,15 @@ export default async function Footer() {
     const [contact, links, socials] = await Promise.all([
         getContact(), getFooterLinks(), getSocials(),
     ]);
+    const careers = links.filter((l) => l.label === "Careers");
+    const legal = links.filter((l) => l.label !== "Careers");
     return (
         <footer className="footer">
             <div className="shell">
                 <div className="footer-grid">
                     <div className="footer-brand">
                         <Link href="/" aria-label="Revolver Gaming home">
-                            <img src="/brand/logo-horizontal-white.svg" alt="Revolver Gaming" />
+                            <img src="/brand/logo-horizontal-white.svg" alt="Revolver Gaming" width={149} height={26} />
                         </Link>
                         <p>
                             The studio that became the platform. Licensable slots, brandable
@@ -30,15 +32,11 @@ export default async function Footer() {
                         <Link href="/news">News</Link>
                         <Link href="/#contact">Contact</Link>
                         <Link href="/fairness">Fairness</Link>
-                        {links.filter((l) => l.label === "Careers").map((l) => (
-                            <a key={l.label} href={l.url}>{l.label}</a>
-                        ))}
+                        {careers.map((l) => <a key={l.label} href={l.url}>{l.label}</a>)}
                     </nav>
                     <nav className="footer-col" aria-label="Legal and social">
                         <h4>Legal</h4>
-                        {links.filter((l) => l.label !== "Careers").map((l) => (
-                            <a key={l.label} href={l.url}>{l.label}</a>
-                        ))}
+                        {legal.map((l) => <a key={l.label} href={l.url}>{l.label}</a>)}
                         <h4 className="footer-sub">Follow</h4>
                         {socials.map((s) => (
                             <a key={s.label} href={s.url} target="_blank" rel="noopener">{s.label}</a>

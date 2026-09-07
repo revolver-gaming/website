@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import GameCard from "@/components/GameCard";
+import PageHero from "@/components/PageHero";
 import type { Game } from "@/lib/cms";
 
 export default function GamesExplorer({ games }: { games: Game[] }) {
@@ -27,41 +28,41 @@ export default function GamesExplorer({ games }: { games: Game[] }) {
                 g.tags.some((t) => t.toLowerCase().includes(q))),
     );
 
+    const tabs: (string | null)[] = [null, ...topTags];
+
     return (
         <>
-            <div className="shell page-hero">
-                <p className="eyebrow">Slots · our core — {games.length} original titles</p>
-                <h1 className="display">Slots people <em>remember.</em></h1>
-                <p className="lede">
-                    Every title built in-house — concept, maths, art and sound — in HTML5,
-                    available across real money, social and sweepstakes platforms.
-                </p>
-                <div className="filter-bar" role="group" aria-label="Filter games">
-                    <button className={`chip${tag === null ? " on" : ""}`} onClick={() => setTag(null)}>
-                        All
-                    </button>
-                    {topTags.map((t) => (
-                        <button
-                            key={t}
-                            className={`chip${tag === t ? " on" : ""}`}
-                            onClick={() => setTag(tag === t ? null : t)}
-                        >
-                            {t}
-                        </button>
-                    ))}
-                    <input
-                        className="search"
-                        type="search"
-                        placeholder="Search titles or features…"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        aria-label="Search games"
-                    />
-                </div>
-            </div>
+            <PageHero
+                kicker={`Slots · our core — ${games.length} original titles`}
+                title={<>Slots people <em>remember.</em></>}
+                lede="Every title built in-house — concept, maths, art and sound — in HTML5, available across real money, social and sweepstakes platforms."
+            />
 
-            <section className="on-bone" data-chamber>
-                <div className="shell">
+            <section data-chamber>
+                <div className="shell indent">
+                    <div className="tabs">
+                        <div className="tabs-scroll" role="tablist" aria-label="Filter games">
+                            {tabs.map((t) => (
+                                <button
+                                    key={t ?? "all"}
+                                    role="tab"
+                                    aria-selected={tag === t}
+                                    className={`tab${tag === t ? " on" : ""}`}
+                                    onClick={() => setTag(t)}
+                                >
+                                    {t ?? "All"}
+                                </button>
+                            ))}
+                        </div>
+                        <input
+                            className="search"
+                            type="search"
+                            placeholder="Search titles or features…"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            aria-label="Search games"
+                        />
+                    </div>
                     {shown.length > 0 ? (
                         <div className="game-grid">
                             {shown.map((g) => <GameCard key={g.slug} game={g} />)}

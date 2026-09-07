@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export default function ScreenshotGallery({ shots, title }: { shots: string[]; title: string }) {
     const [index, setIndex] = useState<number | null>(null);
     const open = index !== null;
-    const step = (d: number) => setIndex((i) => (i! + d + shots.length) % shots.length);
+    const step = useCallback(
+        (d: number) => setIndex((i) => (i === null ? i : (i + d + shots.length) % shots.length)),
+        [shots.length],
+    );
 
     useEffect(() => {
         if (!open) return;
@@ -15,12 +19,13 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
             if (e.key === "ArrowRight") step(1);
         };
         window.addEventListener("keydown", onKey);
+        const prev = document.body.style.overflow;
         document.body.style.overflow = "hidden";
         return () => {
             window.removeEventListener("keydown", onKey);
-            document.body.style.overflow = "";
+            document.body.style.overflow = prev;
         };
-    }, [open]);
+    }, [open, step]);
 
     return (
         <>
@@ -31,7 +36,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
                     </button>
                 ))}
             </div>
-            {open && (
+            {index !== null && createPortal(
                 <div
                     className="overlay lightbox"
                     role="dialog"
@@ -39,7 +44,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
                     aria-label={`${title} screenshots`}
                     onClick={() => setIndex(null)}
                 >
-                    <button className="overlay-close" aria-label="Close">✕</button>
+                    <button className="overlay-close" aria-label="Close" autoFocus>✕</button>
                     <button
                         className="lightbox-nav prev"
                         aria-label="Previous screenshot"
@@ -58,7 +63,8 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
                     >
                         ›
                     </button>
-                </div>
+                </div>,
+                document.body,
             )}
         </>
     );

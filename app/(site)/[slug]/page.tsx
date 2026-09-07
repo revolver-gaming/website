@@ -23,7 +23,7 @@ export default async function ContentPage({ params }: Props) {
     const page = await getPage((await params).slug);
     if (!page) notFound();
     return (
-        <main>
+        <main id="main">
             <article className="shell article">
                 <h1 className="display">{page.title}</h1>
                 <div

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CtaBlock from "@/components/CtaBlock";
+import PageHero from "@/components/PageHero";
+import SectionHead from "@/components/SectionHead";
 
 export const metadata: Metadata = {
     title: "Provably Fair — Revolver Gaming",
@@ -34,30 +37,19 @@ const checks = [
 
 export default function Fairness() {
     return (
-        <main>
-            <section className="plat-hero" data-chamber>
-                <div className="shell">
-                    <div className="section-head">
-                        <p className="eyebrow">Fair by design</p>
-                        <h1 className="display">Provably<br /><em>fair.</em></h1>
-                        <p className="lede">
-                            Most casinos ask players to trust the math. Our engine lets anyone
-                            check it — every round, after the fact, cryptographically.
-                        </p>
-                    </div>
-                </div>
-            </section>
+        <main id="main">
+            <PageHero
+                kicker="Fair by design"
+                title={<>Provably <em>fair.</em></>}
+                lede="Most casinos ask players to trust the math. Our engine lets anyone check it — every round, after the fact, cryptographically."
+            />
 
             <section className="on-bone" data-chamber>
                 <div className="shell">
-                    <div className="section-head">
-                        <p className="eyebrow">How it works</p>
-                        <h2 className="display">Four steps, no trust required</h2>
-                    </div>
-                    <div className="fair-steps">
-                        {steps.map((s, i) => (
-                            <div className="feat-card fair-step" key={s.title}>
-                                <b>{String(i + 1).padStart(2, "0")}</b>
+                    <SectionHead kicker="How it works" title={<>Four steps, <em>no trust required.</em></>} />
+                    <div className="indent feat-grid feat-grid-4" data-reveal>
+                        {steps.map((s) => (
+                            <div className="feat" key={s.title}>
                                 <h3>{s.title}</h3>
                                 <p>{s.text}</p>
                             </div>
@@ -68,40 +60,31 @@ export default function Fairness() {
 
             <section data-chamber>
                 <div className="shell">
-                    <div className="section-head">
-                        <p className="eyebrow">And we check ourselves</p>
-                        <h2 className="display">Randomness, audited around the clock</h2>
-                        <p className="lede">
-                            Player verification is the last line, not the only one. The RNG behind
-                            every game is continuously tested in production — not once per audit cycle.
-                        </p>
-                    </div>
-                    <div className="stat-row fair-checks">
-                        {checks.map((c) => (
-                            <div className="stat" key={c.label}>
-                                <b>{c.value}</b>
-                                <span>{c.label}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section data-chamber>
-                <div className="shell">
-                    <div className="cta-card">
-                        <p className="eyebrow">Last chamber</p>
-                        <h2 className="display">Proof, <em>live.</em></h2>
-                        <p className="lede">
-                            Ask for a demo and verify a round yourself — seeds, hash and all.
-                        </p>
-                        <div className="hero-ctas">
-                            <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
-                            <Link href="/rgs" className="btn btn-ghost">Back to the RGS</Link>
+                    <SectionHead
+                        kicker="And we check ourselves"
+                        title={<>Randomness, audited <em>around the clock.</em></>}
+                        lede="Player verification is the last line, not the only one. The RNG behind every game is continuously tested in production — not once per audit cycle."
+                    />
+                    <div className="indent">
+                        <div className="stats row" data-reveal>
+                            {checks.map((c) => (
+                                <div key={c.label}>
+                                    <b>{c.value}</b>
+                                    <span>{c.label}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </section>
+
+            <CtaBlock
+                title={<>Proof, <em>live.</em></>}
+                lede="Ask for a demo and verify a round yourself — seeds, hash and all."
+            >
+                <Link href="/#contact" className="btn btn-fire">Book a demo</Link>
+                <Link href="/rgs" className="btn btn-ghost">Back to the RGS</Link>
+            </CtaBlock>
         </main>
     );
 }

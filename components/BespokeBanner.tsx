@@ -12,12 +12,20 @@ export default function BespokeBanner({ games }: { games: Game[] }) {
     const game = brandedGame(games);
     return (
         <Link className="bespoke" href={p.href} data-reveal>
-            {game && <img src={game.image} alt="" loading="lazy" />}
-            <p className="eyebrow">{p.kicker}</p>
-            <h2 className="display">{p.title[0]} <em>{p.title[1]}</em></h2>
-            <p>{p.lede}</p>
-            <span className="btn btn-fire">{p.cta}</span>
-            {game && <span className="bespoke-cap">Pictured: {game.title}</span>}
+            <div className="bespoke-copy">
+                <p className="eyebrow">{p.kicker}</p>
+                <h2 className="display">{p.title[0]} <em>{p.title[1]}</em></h2>
+                <p>{p.lede}</p>
+                <span className="btn btn-fire">{p.cta}</span>
+            </div>
+            <div className="bespoke-art">
+                {game && (
+                    <>
+                        <img src={game.image} alt="" loading="lazy" />
+                        <span className="bespoke-cap">Pictured: {game.title}</span>
+                    </>
+                )}
+            </div>
         </Link>
     );
 }

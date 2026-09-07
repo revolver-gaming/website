@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default async function GamesPage() {
     const games = await listGames();
     return (
-        <main>
+        <main id="main">
             <GamesExplorer games={games} />
             <section data-chamber className="tight">
                 <div className="shell">

@@ -32,7 +32,7 @@ export default async function GamePage({ params }: Props) {
     const game = await getGame((await params).slug);
     if (!game) notFound();
     return (
-        <main>
+        <main id="main">
             <div className="shell game-detail">
                 <Link className="article-back" href="/games">← All games</Link>
                 <div className="game-hero">
