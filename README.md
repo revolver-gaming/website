@@ -10,9 +10,9 @@ npm run build
 
 ## Design
 
-Palette and content come from the old site: velvet aubergine (`#301630`), muzzle-flash amber (`#ffa755`), bone cream (`#f4f0e3`). Type: Big Shoulders (display) / Instrument Sans (body) / IBM Plex Mono (labels), loaded via `next/font`.
+"White" design system: warm paper (`#faf8f4`) and sand (`#f0ebe4`) sections, ink (`#261028`) for text and the closing dark chambers, plum (`#5a2a60`) italic accents, amber (`#ff9a3d`) reserved for CTAs. Squared, flat, hairline-separated. Type: Archivo (display) / Figtree (body), loaded via `next/font`. Colour is handled with context tokens in `app/globals.css` (`:root`, `.on-bone`, `.on-ink`).
 
-Signature element: the **cylinder** — a revolver-chamber carousel in the hero holding the six newest games. Six chambers also structure the homepage (CH.01–CH.06 section labels).
+Signature element: the **deck** — the featured games' banners at their native ratio in the hero, one in front and the next three queued beneath it, auto-advancing.
 
 ## Structure
 

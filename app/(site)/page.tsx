@@ -7,7 +7,7 @@ import OriginalsTiles from "@/components/OriginalsTiles";
 import BespokeBanner from "@/components/BespokeBanner";
 import NewsCards from "@/components/NewsCards";
 import ContactPanel from "@/components/ContactPanel";
-import Ticker from "@/components/Ticker";
+import NetworkBand from "@/components/NetworkBand";
 import { listGames, listNews, listOperators, listPartnerStudios } from "@/lib/cms";
 import {
     GAP_OPERATOR_POINTS, GAP_ROUTES, RGS_ENGINE, RGS_OPTIONS, pillar,
@@ -41,7 +41,7 @@ export default async function Home() {
                 </div>
             </section>
 
-            <Ticker items={operators} label="Connected across the operator and aggregator network" />
+            <NetworkBand items={operators} label="Connected across the operator and aggregator network" />
 
             {/* value props */}
             <section data-chamber id="why">
@@ -50,7 +50,7 @@ export default async function Home() {
                         <p className="eyebrow">Precision engineered</p>
                         <h2 className="display">Tech that fires on <em>every cylinder.</em></h2>
                     </div>
-                    <ValueProps games={featured} />
+                    <ValueProps />
                 </div>
             </section>
 
@@ -84,7 +84,7 @@ export default async function Home() {
             </section>
 
             {/* slots */}
-            <section className="art-bg" data-chamber id="slots" style={{ "--art": `url(${featured[0]?.image})` } as React.CSSProperties}>
+            <section data-chamber id="slots">
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head" data-reveal>
@@ -102,12 +102,12 @@ export default async function Home() {
                     <div className="tag-bar" data-reveal>
                         {["Licensable", "Brandable", "Proven performers", "UKGC licensed"].map((t) => <span key={t}>{t}</span>)}
                     </div>
-                    <HomeSlots games={games.slice(0, 6)} />
+                    <HomeSlots games={games} />
                 </div>
             </section>
 
             {/* originals */}
-            <section data-chamber id="originals" className="dots-bg">
+            <section data-chamber id="originals" className="on-bone">
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head" data-reveal>
@@ -129,7 +129,7 @@ export default async function Home() {
             </section>
 
             {/* rgs */}
-            <section className="on-bone" data-chamber id="rgs">
+            <section data-chamber id="rgs">
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head" data-reveal>
@@ -181,7 +181,7 @@ export default async function Home() {
             </section>
 
             {/* gap */}
-            <section data-chamber id="gap" className="rings-bg">
+            <section data-chamber id="gap" className="on-bone">
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head" data-reveal>
@@ -214,38 +214,40 @@ export default async function Home() {
                         </div>
                     </div>
 
-                    <div className="gap-side" data-reveal>
-                        <p className="eyebrow">For studios</p>
-                        <h3 className="sub-display">Get your games out.</h3>
-                        <p className="lede">
-                            Onboard to the platform and reach our operator network, whichever way
-                            your tech is set up.
-                        </p>
-                        <div className="opt-grid">
-                            {GAP_ROUTES.map((r) => (
-                                <div className="opt-card" key={r.tag}>
-                                    <span className="tag">{r.tag}</span>
-                                    <h3>{r.title}</h3>
-                                    <p>{r.text}</p>
-                                </div>
-                            ))}
+                    <div className="gap-sides">
+                        <div className="gap-side" data-reveal>
+                            <p className="eyebrow">For studios</p>
+                            <h3 className="sub-display">Get your games out.</h3>
+                            <p className="lede">
+                                Onboard to the platform and reach our operator network, whichever way
+                                your tech is set up.
+                            </p>
+                            <div className="opt-grid">
+                                {GAP_ROUTES.map((r) => (
+                                    <div className="opt-card" key={r.tag}>
+                                        <span className="tag">{r.tag}</span>
+                                        <h3>{r.title}</h3>
+                                        <p>{r.text}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="gap-side" data-reveal>
-                        <p className="eyebrow">For operators</p>
-                        <h3 className="sub-display">Get every game in.</h3>
-                        <p className="lede">
-                            One integration to the platform and your lobby fills with Revolver&apos;s
-                            own slots and originals plus every partner studio on the platform.
-                        </p>
-                        <ul className="checks">
-                            {GAP_OPERATOR_POINTS.map((pt) => <li key={pt}>{pt}</li>)}
-                        </ul>
-                        <div className="roster roster-studios">
-                            <div><b>Revolver</b><span>Slots &amp; originals</span></div>
-                            {studios.map((s) => <div key={s.name}><b>{s.name}</b><span>{s.knownFor} · {s.genre}</span></div>)}
-                            <div className="more"><b>+ More</b><span>Added continuously</span></div>
+                        <div className="gap-side" data-reveal>
+                            <p className="eyebrow">For operators</p>
+                            <h3 className="sub-display">Get every game in.</h3>
+                            <p className="lede">
+                                One integration to the platform and your lobby fills with Revolver&apos;s
+                                own slots and originals plus every partner studio on the platform.
+                            </p>
+                            <ul className="checks">
+                                {GAP_OPERATOR_POINTS.map((pt) => <li key={pt}>{pt}</li>)}
+                            </ul>
+                            <div className="roster roster-studios">
+                                <div><b>Revolver</b><span>Slots &amp; originals</span></div>
+                                {studios.map((s) => <div key={s.name}><b>{s.name}</b><span>{s.knownFor} · {s.genre}</span></div>)}
+                                <div className="more"><b>+ More</b><span>Added continuously</span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -273,7 +275,7 @@ export default async function Home() {
             </section>
 
             {/* contact */}
-            <section data-chamber id="contact">
+            <section data-chamber id="contact" className="on-ink">
                 <div className="shell">
                     <ContactPanel />
                 </div>

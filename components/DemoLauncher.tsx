@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export function DemoOverlay({ url, title, close }: { url: string; title: string; close: () => void }) {
     useEffect(() => {
@@ -13,7 +14,9 @@ export function DemoOverlay({ url, title, close }: { url: string; title: string;
         };
     }, [close]);
 
-    return (
+    // Portalled to <body> so it escapes any section stacking context and
+    // sits above the sticky nav.
+    return createPortal(
         <div
             className="overlay"
             role="dialog"
@@ -29,7 +32,8 @@ export function DemoOverlay({ url, title, close }: { url: string; title: string;
                 allow="fullscreen; autoplay"
                 onClick={(e) => e.stopPropagation()}
             />
-        </div>
+        </div>,
+        document.body,
     );
 }
 

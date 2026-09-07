@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export default function ScreenshotGallery({ shots, title }: { shots: string[]; title: string }) {
     const [index, setIndex] = useState<number | null>(null);
@@ -31,7 +32,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
                     </button>
                 ))}
             </div>
-            {open && (
+            {open && createPortal(
                 <div
                     className="overlay lightbox"
                     role="dialog"
@@ -58,7 +59,8 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
                     >
                         ›
                     </button>
-                </div>
+                </div>,
+                document.body,
             )}
         </>
     );

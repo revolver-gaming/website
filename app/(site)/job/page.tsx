@@ -19,7 +19,7 @@ export default async function CareersPage() {
                     Join the <em>posse.</em>
                 </h1>
             </div>
-            <div className="shell">
+            <div className="shell page-body">
                 {jobs.length > 0 ? (
                     <div className="news-list">
                         {jobs.map((j) => (

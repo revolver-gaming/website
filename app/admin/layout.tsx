@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { IBM_Plex_Mono } from "next/font/google";
 import AdminShell from "./AdminShell";
+import "./admin.css";
+
+const mono = IBM_Plex_Mono({
+    subsets: ["latin"],
+    weight: ["400", "500"],
+    variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
     title: "Admin — Revolver Gaming",
@@ -7,5 +15,9 @@ export const metadata: Metadata = {
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-    return <AdminShell>{children}</AdminShell>;
+    return (
+        <div className={`admin-root ${mono.variable}`}>
+            <AdminShell>{children}</AdminShell>
+        </div>
+    );
 }

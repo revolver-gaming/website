@@ -20,9 +20,8 @@ export default async function Exclusives() {
     const examples = games.filter((g) => g.tags.some((t) => /brand|seasonal/i.test(t))).slice(0, 6);
     return (
         <main>
-            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${hero?.image})` } as React.CSSProperties}>
-                {hero && <img className="art-peek" src={hero.image} alt="" />}
-                <div className="shell">
+            <section className="plat-hero" data-chamber>
+                <div className="shell hero-grid">
                     <div className="section-head">
                         <p className="eyebrow">{p.kicker}</p>
                         <h1 className="display">{p.title[0]}<br /><em>{p.title[1]}</em></h1>
@@ -35,6 +34,7 @@ export default async function Exclusives() {
                             <Link href="/games" className="btn btn-ghost">See the catalogue</Link>
                         </div>
                     </div>
+                    {hero && <img className="plat-art" src={hero.image} alt={`${hero.title} artwork`} width={680} height={440} />}
                 </div>
             </section>
 
@@ -66,7 +66,7 @@ export default async function Exclusives() {
                                 top performers, built for a specific partner or calendar moment.
                             </p>
                         </div>
-                        <div className="game-grid game-grid-mini game-grid-dark">
+                        <div className="game-grid game-grid-mini">
                             {examples.map((g, i) => (
                                 <div key={g.slug} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
                                     <GameCard game={g} />

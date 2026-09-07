@@ -5,7 +5,8 @@ import GameCard from "./GameCard";
 import type { Game } from "@/lib/cms";
 
 /* Ryan's wireframe filters: All · New · Flagship · Branded · Seasonal.
-   Derived from CMS data until games carry an explicit category. */
+   Derived from CMS data until games carry an explicit category. Each
+   filter shows the first six matches from the whole catalogue. */
 const FILTERS: [string, (g: Game, games: Game[]) => boolean][] = [
     ["All", () => true],
     ["New", (g, games) => g.year === Math.max(...games.map((x) => x.year))],
@@ -17,10 +18,10 @@ const FILTERS: [string, (g: Game, games: Game[]) => boolean][] = [
 export default function HomeSlots({ games }: { games: Game[] }) {
     const [filter, setFilter] = useState("All");
     const match = FILTERS.find(([name]) => name === filter)![1];
-    const shown = games.filter((g) => match(g, games));
+    const shown = games.filter((g) => match(g, games)).slice(0, 6);
     return (
         <>
-            <div className="filter-bar" role="group" aria-label="Filter slots" data-reveal>
+            <div className="filter-bar" role="group" aria-label="Filter slots">
                 {FILTERS.map(([name]) => (
                     <button
                         key={name}
@@ -31,12 +32,10 @@ export default function HomeSlots({ games }: { games: Game[] }) {
                     </button>
                 ))}
             </div>
-            <div className="game-grid game-grid-mini game-grid-dark">
-                {shown.map((g, i) => (
-                    <div key={g.slug} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
-                        <GameCard game={g} />
-                    </div>
-                ))}
+            {/* reveal the grid as a whole: cards re-render on every filter
+                change, and freshly mounted nodes would never be observed */}
+            <div className="game-grid game-grid-mini" data-reveal>
+                {shown.map((g) => <GameCard key={g.slug} game={g} />)}
             </div>
         </>
     );

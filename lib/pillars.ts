@@ -6,7 +6,7 @@ export type Pillar = {
     href: string;
     label: string;
     kicker: string;
-    title: [string, string]; // [plain, amber]
+    title: [string, string]; // [plain, accented]
     lede: string;
     cta: string;
 };

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Ticker from "@/components/Ticker";
+import NetworkBand from "@/components/NetworkBand";
 import { listOperators, listPartnerStudios } from "@/lib/cms";
 import { GAP_OPERATOR_POINTS, GAP_ROUTES, pillar } from "@/lib/pillars";
 
@@ -36,7 +36,7 @@ export default async function Gap() {
                 </div>
             </section>
 
-            <Ticker items={operators} label="Connected across the operator and aggregator network" />
+            <NetworkBand items={operators} label="Connected across the operator and aggregator network" />
 
             <section data-chamber className="rings-bg">
                 <div className="shell">

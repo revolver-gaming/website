@@ -44,7 +44,7 @@ export default async function NewsIndex({ page }: { page: number }) {
             <section className="on-bone" data-chamber>
                 <div className="shell">
                     {byYear.map(([year, articles]) => (
-                        <div key={year}>
+                        <div className="news-group" key={year}>
                             <p className="year-tag">{year}</p>
                             <div className="news-list">
                                 {articles.map((n) => (
