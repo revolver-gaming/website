@@ -4,20 +4,20 @@
 --------------------------------------------------------------------------- */
 
 :root {
-    --chamber: #190c1b;        /* page base, deep plum-black */
-    --velvet: #301630;         /* primary surface / hairlines on dark */
-    --velvet-2: #442045;       /* lifted surface, card borders */
-    --velvet-3: #57285a;       /* ghost-button borders */
-    --amber: #ffa755;          /* signature accent */
-    --amber-hot: #ff8e3c;      /* gradient end */
+    --chamber: #1f0e1f;        /* page base, deepest brand purple */
+    --velvet: #301630;         /* brand purple: primary surface / hairlines on dark */
+    --velvet-2: #4d224d;       /* brand purple: lifted surface, card borders */
+    --velvet-3: #63305f;       /* ghost-button borders */
+    --amber: #ffa755;          /* brand orange: signature accent */
+    --amber-hot: #ee923d;      /* brand orange: deeper tone */
     --amber-soft: #ffb877;     /* fire-button hover */
-    --bone: #f4f0e3;           /* light sections */
-    --bone-2: #e9e2cf;         /* light section borders */
-    --bone-card: #fbf8ef;      /* cards on bone */
-    --ink: #2a1230;            /* text on bone */
-    --ink-soft: #6d5a70;       /* muted text on bone */
-    --smoke: #c9b2c6;          /* muted text on dark */
-    --rust: #b4622a;           /* amber's on-bone counterpart */
+    --bone: #f7f1ea;           /* light sections */
+    --bone-2: #eadfd3;         /* light section borders */
+    --bone-card: #fcf8f3;      /* cards on bone */
+    --ink: #301630;            /* text on bone */
+    --ink-soft: #6e5470;       /* muted text on bone */
+    --smoke: #cdb6cb;          /* muted text on dark */
+    --rust: #b85c14;           /* brand orange darkened for legibility on bone */
 
     --font-d: var(--font-display), "Arial Narrow", sans-serif;
     --font-b: var(--font-body), system-ui, sans-serif;
@@ -646,7 +646,7 @@ section[data-chamber]:not(.hero) {
     background: var(--ink);
     border-color: var(--ink);
     color: var(--bone);
-    box-shadow: 0 20px 50px rgba(42, 18, 48, 0.3);
+    box-shadow: 0 20px 50px rgba(48, 22, 48, 0.3);
 }
 
 .on-bone .flow-hub h3 {
@@ -794,13 +794,13 @@ section[data-chamber]:not(.hero) {
     aspect-ratio: 680 / 440; /* native banner ratio */
     object-fit: cover;
     border-radius: 14px;
-    box-shadow: 0 12px 30px rgba(42, 18, 48, 0.2);
+    box-shadow: 0 12px 30px rgba(48, 22, 48, 0.2);
     transition: transform 0.35s var(--detent), box-shadow 0.35s;
 }
 
 .game-card:hover .art {
     transform: translateY(-5px);
-    box-shadow: 0 18px 40px rgba(42, 18, 48, 0.3);
+    box-shadow: 0 18px 40px rgba(48, 22, 48, 0.3);
 }
 
 .gc-title {
@@ -1121,7 +1121,7 @@ section[data-chamber]:not(.hero) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(42, 18, 48, 0.35);
+    border: 1px solid rgba(48, 22, 48, 0.35);
     border-radius: 999px;
     color: var(--ink-soft);
     transition: border-color 0.2s, color 0.2s;
@@ -1140,7 +1140,7 @@ a.pager-num:hover {
 
 .pager-step {
     padding: 9px 18px;
-    border: 1px solid rgba(42, 18, 48, 0.35);
+    border: 1px solid rgba(48, 22, 48, 0.35);
     border-radius: 999px;
     color: var(--ink);
     transition: border-color 0.2s, color 0.2s;
@@ -2109,7 +2109,7 @@ a.pager-step:hover {
     justify-content: center;
     gap: clamp(8px, 2vw, 24px);
     padding: clamp(14px, 3vw, 48px);
-    background: rgba(25, 12, 27, 0.94);
+    background: rgba(31, 14, 31, 0.94);
 }
 
 .overlay-close {
@@ -2770,7 +2770,7 @@ a.pager-step:hover {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, var(--chamber) 0%, rgba(25, 12, 27, 0.62) 30%, rgba(25, 12, 27, 0.7) 70%, var(--chamber) 100%);
+        linear-gradient(180deg, var(--chamber) 0%, rgba(31, 14, 31, 0.62) 30%, rgba(31, 14, 31, 0.7) 70%, var(--chamber) 100%);
     z-index: -1;
 }
 
@@ -3004,7 +3004,7 @@ section[data-chamber].tight {
     font-size: 15px;
     letter-spacing: 0.04em;
     color: var(--amber);
-    background: rgba(25, 12, 27, 0.6);
+    background: rgba(31, 14, 31, 0.6);
     border: 1px solid rgba(255, 167, 85, 0.35);
     border-radius: 10px;
     padding: 8px 12px;
@@ -3334,7 +3334,7 @@ section[data-chamber].tight {
 
 .on-bone .opt-card .tag {
     color: var(--rust);
-    border-color: rgba(180, 98, 42, 0.4);
+    border-color: rgba(184, 92, 20, 0.4);
 }
 
 .on-bone .opt-card p,
@@ -3665,8 +3665,8 @@ section[data-chamber].tight {
     inset: 0;
     z-index: -1;
     background:
-        linear-gradient(180deg, rgba(25, 12, 27, 0.15), rgba(25, 12, 27, 0.8) 70%),
-        linear-gradient(90deg, rgba(25, 12, 27, 0.92) 0%, rgba(25, 12, 27, 0.5) 55%, rgba(25, 12, 27, 0.15) 100%);
+        linear-gradient(180deg, rgba(31, 14, 31, 0.15), rgba(31, 14, 31, 0.8) 70%),
+        linear-gradient(90deg, rgba(31, 14, 31, 0.92) 0%, rgba(31, 14, 31, 0.5) 55%, rgba(31, 14, 31, 0.15) 100%);
 }
 
 .bespoke h2 {
@@ -3694,7 +3694,7 @@ section[data-chamber].tight {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--smoke);
-    background: rgba(25, 12, 27, 0.6);
+    background: rgba(31, 14, 31, 0.6);
     border-radius: 999px;
     padding: 6px 12px;
 }
