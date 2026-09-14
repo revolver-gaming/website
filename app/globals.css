@@ -3962,3 +3962,149 @@ section[data-chamber].tight {
 .gap-side .roster-studios {
     margin-top: 28px;
 }
+
+/* ---- partner logos ------------------------------------------------------------------ */
+
+/* One colour for every brand: cream on dark, plum-black on bone. --s evens out visual weight. */
+.partner-logo {
+    height: calc(28px * var(--s, 1));
+    width: auto;
+    max-width: calc(150px * var(--s, 1));
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.72;
+    transition: opacity 0.3s;
+}
+
+.on-bone .partner-logo {
+    filter: brightness(0);
+    opacity: 0.68;
+}
+
+.ticker-track,
+.ticker-track > span,
+.ticker-track > span > span {
+    align-items: center;
+}
+
+.roster > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 92px;
+}
+
+.roster > div:hover .partner-logo {
+    opacity: 1;
+}
+
+/* admin */
+
+.admin-logo-strip {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 22px 40px;
+    padding: 20px 24px;
+    border-radius: 12px;
+    background: var(--chamber);
+    font-family: var(--font-m);
+    font-size: 13px;
+    color: var(--smoke);
+}
+
+.admin-logo-strip.on-bone {
+    background: var(--bone);
+    color: var(--ink);
+}
+
+.admin-partner-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 150px auto auto;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.admin-partner-row.studio {
+    grid-template-columns: 120px 1fr 1fr 1fr 150px auto auto;
+}
+
+.admin-logo-drop {
+    height: 48px;
+    display: grid;
+    place-items: center;
+    padding: 6px 10px;
+    border: 1px dashed var(--velvet-3);
+    border-radius: 10px;
+    cursor: pointer;
+    background: repeating-conic-gradient(#ffffff10 0 25%, transparent 0 50%) 0 0 / 12px 12px;
+    font-family: var(--font-m);
+    font-size: 11px;
+    color: var(--amber);
+}
+
+.admin-logo-drop:hover {
+    border-color: var(--amber);
+}
+
+.admin-logo-drop img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.admin-logo-drop input {
+    display: none;
+}
+
+.admin-scale {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--font-m);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--smoke);
+}
+
+.admin-scale input {
+    accent-color: var(--amber);
+}
+
+.admin-row-tools {
+    display: flex;
+    gap: 6px;
+}
+
+.admin-row-tools button {
+    border: 1px solid var(--velvet-3);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.admin-row-tools button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+@media (max-width: 900px) {
+    .admin-partner-row,
+    .admin-partner-row.studio {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* partners without a logo yet: read as a wordmark beside the logos */
+.ticker-track b {
+    font-family: var(--font-d);
+    font-weight: 800;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--bone);
+    opacity: 0.72;
+}

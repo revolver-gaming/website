@@ -12,6 +12,7 @@ const sections = [
     ["/admin/originals", "Originals"],
     ["/admin/jobs", "Jobs"],
     ["/admin/pages", "Pages"],
+    ["/admin/partners", "Partners"],
     ["/admin/settings", "Settings"],
 ] as const;
 

@@ -10,7 +10,8 @@ const cards = [
     ["/admin/originals", "Originals", "originals", "Casual originals: specs, features, art, demos"],
     ["/admin/jobs", "Jobs", "jobs", "Careers postings on /job"],
     ["/admin/pages", "Pages", "pages", "Terms, Privacy and other simple pages"],
-    ["/admin/settings", "Settings", null, "Contact, socials, footer, studios, operators"],
+    ["/admin/partners", "Partners", "operators", "Operator & studio logos: ticker and rosters"],
+    ["/admin/settings", "Settings", null, "Contact, socials, footer, stats, page copy"],
 ] as const;
 
 export default function AdminHome() {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PartnerLogo from "@/components/PartnerLogo";
 import { getContact, getRgsStats, listOperators } from "@/lib/cms";
 import { RGS_ENGINE, RGS_OPTIONS, pillar } from "@/lib/pillars";
 
@@ -98,7 +99,7 @@ export default async function Rgs() {
                         </p>
                     </div>
                     <div className="roster" data-reveal>
-                        {operators.map((o) => <div key={o}><b>{o}</b></div>)}
+                        {operators.map((o) => <div key={o.name}><PartnerLogo {...o} /></div>)}
                         <div className="more"><b>+ More</b><span>Added continuously</span></div>
                     </div>
                 </div>

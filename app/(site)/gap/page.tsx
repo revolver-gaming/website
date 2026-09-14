@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PartnerLogo from "@/components/PartnerLogo";
 import Ticker from "@/components/Ticker";
 import { listOperators, listPartnerStudios } from "@/lib/cms";
 import { GAP_OPERATOR_POINTS, GAP_ROUTES, pillar } from "@/lib/pillars";
@@ -94,8 +95,8 @@ export default async function Gap() {
                         {GAP_OPERATOR_POINTS.map((pt) => <li key={pt}>{pt}</li>)}
                     </ul>
                     <div className="roster roster-studios" data-reveal>
-                        <div><b>Revolver</b><span>Slots &amp; originals</span></div>
-                        {studios.map((s) => <div key={s.name}><b>{s.name}</b><span>{s.knownFor} · {s.genre}</span></div>)}
+                        <div><PartnerLogo name="Revolver Gaming" logo="/brand/logo-horizontal-white.svg" logoScale={1.2} /><span>Slots &amp; originals</span></div>
+                        {studios.map((s) => <div key={s.name}><PartnerLogo {...s} /><span>{s.knownFor} · {s.genre}</span></div>)}
                         <div className="more"><b>+ More</b><span>Added continuously</span></div>
                     </div>
                 </div>

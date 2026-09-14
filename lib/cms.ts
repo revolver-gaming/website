@@ -133,7 +133,10 @@ export type Contact = {
 
 export type LinkItem = { label: string; url: string };
 
-export type PartnerStudio = { name: string; knownFor: string; genre: string };
+// Logos are transparent SVG/PNG, rendered monochrome by the UI; scale evens out visual weight.
+export type Partner = { name: string; logo: string | null; logoScale: number };
+
+export type PartnerStudio = Partner & { knownFor: string; genre: string };
 
 async function content<T>(key: string): Promise<T> {
     const { data, error } = await supabase.from("site_content").select("value").eq("key", key).single();
@@ -173,16 +176,19 @@ export const getStudioOffer = () => content<StudioOffer>("studio_offer");
 export async function listPartnerStudios(): Promise<PartnerStudio[]> {
     const { data, error } = await supabase
         .from("partner_studios")
-        .select("name, knownFor:known_for, genre")
+        .select("name, knownFor:known_for, genre, logo, logoScale:logo_scale")
         .order("sort_order");
     if (error) throw error;
     return data;
 }
 
-export async function listOperators(): Promise<string[]> {
-    const { data, error } = await supabase.from("operators").select("name").order("sort_order");
+export async function listOperators(): Promise<Partner[]> {
+    const { data, error } = await supabase
+        .from("operators")
+        .select("name, logo, logoScale:logo_scale")
+        .order("sort_order");
     if (error) throw error;
-    return data.map((o) => o.name);
+    return data;
 }
 
 export type Page = { slug: string; title: string; content_html: string };

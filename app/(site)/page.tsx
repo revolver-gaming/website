@@ -7,6 +7,7 @@ import { OriginalsShowcase, liveCount } from "@/components/Originals";
 import BespokeBanner from "@/components/BespokeBanner";
 import NewsCards from "@/components/NewsCards";
 import ContactPanel from "@/components/ContactPanel";
+import PartnerLogo from "@/components/PartnerLogo";
 import Ticker from "@/components/Ticker";
 import {
     getStudioOffer, listGames, listNews, listOperators, listOriginals, listPartnerStudios,
@@ -178,7 +179,7 @@ export default async function Home() {
                         </p>
                     </div>
                     <div className="roster" data-reveal>
-                        {operators.map((o) => <div key={o}><b>{o}</b></div>)}
+                        {operators.map((o) => <div key={o.name}><PartnerLogo {...o} /></div>)}
                     </div>
                 </div>
             </section>
@@ -246,8 +247,8 @@ export default async function Home() {
                             {GAP_OPERATOR_POINTS.map((pt) => <li key={pt}>{pt}</li>)}
                         </ul>
                         <div className="roster roster-studios">
-                            <div><b>Revolver</b><span>Slots &amp; originals</span></div>
-                            {studios.map((s) => <div key={s.name}><b>{s.name}</b><span>{s.knownFor} · {s.genre}</span></div>)}
+                            <div><PartnerLogo name="Revolver Gaming" logo="/brand/logo-horizontal-white.svg" logoScale={1.2} /><span>Slots &amp; originals</span></div>
+                            {studios.map((s) => <div key={s.name}><PartnerLogo {...s} /><span>{s.knownFor} · {s.genre}</span></div>)}
                             <div className="more"><b>+ More</b><span>Added continuously</span></div>
                         </div>
                     </div>
