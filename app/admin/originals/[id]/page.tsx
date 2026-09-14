@@ -18,6 +18,7 @@ type Row = {
     volatility: string | null;
     features: Feature[];
     card_image: string | null;
+    hero_image: string | null;
     demo_url: string | null;
     is_new: boolean;
     featured: boolean;
@@ -28,7 +29,7 @@ type Row = {
 
 const blank = (): Row => ({
     slug: "", title: "", category: "", blurb: "", max_win: null, rtp: null, volatility: null,
-    features: [], card_image: null, demo_url: null, is_new: true, featured: false,
+    features: [], card_image: null, hero_image: null, demo_url: null, is_new: true, featured: false,
     coming_soon: false, sort_order: 0, published: true,
 });
 
@@ -97,11 +98,11 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
         done();
     };
 
-    const upload = async (file: File | undefined) => {
+    const upload = async (field: "card_image" | "hero_image", file: File | undefined) => {
         if (!file) return;
         setBusy("upload");
         setError("");
-        try { set({ card_image: await uploadMedia("originals", file) }); }
+        try { set({ [field]: await uploadMedia("originals", file) }); }
         catch (e) { setError(errMsg(e)); }
         setBusy("");
     };
@@ -182,8 +183,14 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                 <label className="wide">
                     Card artwork (optional — an icon placeholder is shown without it)
                     {row.card_image && <img className="admin-thumb" src={row.card_image} alt="" />}
-                    <input type="file" accept="image/*" onChange={(e) => upload(e.target.files?.[0])} />
+                    <input type="file" accept="image/*" onChange={(e) => upload("card_image", e.target.files?.[0])} />
                     {row.card_image && <button className="danger" onClick={() => set({ card_image: null })}>Remove artwork</button>}
+                </label>
+                <label className="wide">
+                    Wide banner (optional — full-width across the top of the game page, ~1200×370)
+                    {row.hero_image && <img className="admin-thumb" src={row.hero_image} alt="" />}
+                    <input type="file" accept="image/*" onChange={(e) => upload("hero_image", e.target.files?.[0])} />
+                    {row.hero_image && <button className="danger" onClick={() => set({ hero_image: null })}>Remove wide artwork</button>}
                 </label>
                 <label className="wide">
                     Demo launch URL

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: `${o.title} — Originals — Revolver Gaming`,
         description: o.blurb,
         alternates: { canonical: `/originals/${o.slug}` },
-        openGraph: { title: o.title, description: o.blurb, images: o.card_image ? [o.card_image] : undefined },
+        openGraph: { title: o.title, description: o.blurb, images: o.hero_image ?? o.card_image ?? undefined },
     };
 }
 
@@ -41,6 +41,7 @@ export default async function OriginalPage({ params }: Props) {
         <main>
             <div className="shell game-detail">
                 <Link className="article-back" href="/originals">← Originals</Link>
+                {o.hero_image && <img className="o-banner" src={o.hero_image} alt="" />}
                 <div className="game-hero">
                     <div>
                         <p className="eyebrow">Provably fair · RNG · Brandable</p>

@@ -108,6 +108,7 @@ export type Original = {
     volatility: string | null;
     features: { title: string; text: string }[];
     card_image: string | null;
+    hero_image: string | null;
     demo_url: string | null;
     is_new: boolean;
     featured: boolean;
@@ -117,7 +118,7 @@ export type Original = {
 export async function listOriginals(): Promise<Original[]> {
     const { data, error } = await supabase
         .from("originals")
-        .select("slug, title, category, blurb, max_win, rtp, volatility, features, card_image, demo_url, is_new, featured, coming_soon")
+        .select("slug, title, category, blurb, max_win, rtp, volatility, features, card_image, hero_image, demo_url, is_new, featured, coming_soon")
         .order("sort_order");
     if (error) throw error;
     return data;

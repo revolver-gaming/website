@@ -3328,7 +3328,7 @@ section[data-chamber].tight {
 
 .o-feature {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: minmax(0, 0.8fr) 1.2fr;
     gap: clamp(24px, 4vw, 48px);
     align-items: center;
     background: var(--velvet);
@@ -3339,7 +3339,7 @@ section[data-chamber].tight {
 }
 
 .o-feature .o-art {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1;
     border-radius: 14px;
 }
 
@@ -3373,9 +3373,28 @@ section[data-chamber].tight {
 }
 
 .game-hero .o-art {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1;
+    max-width: 420px;
+    justify-self: end;
     border-radius: var(--radius);
     border: 1px solid var(--velvet-2);
+}
+
+/* landscape key art across the top of an original's page */
+.o-banner {
+    width: 100%;
+    aspect-ratio: 1200 / 369;
+    object-fit: cover;
+    margin-top: 28px;
+    border-radius: var(--radius);
+    border: 1px solid var(--velvet-2);
+}
+
+/* stacked on narrow screens the banner already carries the art */
+@media (max-width: 860px) {
+    .o-banner + .game-hero .o-art {
+        display: none;
+    }
 }
 
 .game-hero .o-art-ph svg {
