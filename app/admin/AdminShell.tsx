@@ -9,6 +9,7 @@ import { sb, errMsg } from "./lib";
 const sections = [
     ["/admin/news", "News"],
     ["/admin/games", "Games"],
+    ["/admin/originals", "Originals"],
     ["/admin/jobs", "Jobs"],
     ["/admin/pages", "Pages"],
     ["/admin/settings", "Settings"],

@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
                 permanent: true,
             },
             // old-site pages whose content now lives elsewhere
-            { source: "/about-us", destination: "/", permanent: true },
+            { source: "/about-us", destination: "/about", permanent: true },
             { source: "/news-archived", destination: "/news", permanent: true },
             // the platform page was renamed when it split into /gap and /rgs
             { source: "/platform", destination: "/gap", permanent: true },

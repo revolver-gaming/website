@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import OriginalsTiles from "@/components/OriginalsTiles";
+import { OriginalsShowcase, liveCount } from "@/components/Originals";
+import { listOriginals } from "@/lib/cms";
 import { pillar } from "@/lib/pillars";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
     title: "Originals — Revolver Gaming",
@@ -22,7 +25,8 @@ const STEPS = [
     { title: "Keep it fresh", text: "New originals are added to your lobby as they ship, at no extra integration cost." },
 ];
 
-export default function Originals() {
+export default async function Originals() {
+    const items = await listOriginals();
     const p = pillar("originals");
     return (
         <main>
@@ -32,9 +36,10 @@ export default function Originals() {
                         <p className="eyebrow">{p.kicker}</p>
                         <h1 className="display">{p.title[0]}<br /><em>{p.title[1]}</em></h1>
                         <p className="lede">
-                            Fast, modern casual games in provably fair and RNG formats, every
-                            one brandable to your casino. Multiplayer crash, instant-win grids
-                            and classic table mechanics, all on the licensed Revolver RGS.
+                            Seventeen fast, modern casual games and counting, in provably fair
+                            and RNG formats, every one brandable to your casino. Stand up a
+                            complete originals lobby under your brand, with a new title landing
+                            every month.
                         </p>
                         <div className="hero-ctas">
                             <Link href="/#contact" className="btn btn-fire">Brand your lobby</Link>
@@ -42,7 +47,7 @@ export default function Originals() {
                         </div>
                     </div>
                     <div className="tag-bar">
-                        {["Provably fair + RNG", "Fully brandable", "Full lobby", "New titles monthly"].map((t) => <span key={t}>{t}</span>)}
+                        {["Provably fair + RNG", "Fully brandable", `${liveCount(items)} live · new monthly`].map((t) => <span key={t}>{t}</span>)}
                     </div>
                 </div>
             </section>
@@ -53,7 +58,7 @@ export default function Originals() {
                         <p className="eyebrow">The lobby</p>
                         <h2 className="display">Every table, <em>every taste</em></h2>
                     </div>
-                    <OriginalsTiles />
+                    <OriginalsShowcase items={items} />
                 </div>
             </section>
 

@@ -3,22 +3,24 @@ import HeroDeck from "@/components/HeroDeck";
 import HeroSlides from "@/components/HeroSlides";
 import HomeSlots from "@/components/HomeSlots";
 import ValueProps from "@/components/ValueProps";
-import OriginalsTiles from "@/components/OriginalsTiles";
+import { OriginalsShowcase, liveCount } from "@/components/Originals";
 import BespokeBanner from "@/components/BespokeBanner";
 import NewsCards from "@/components/NewsCards";
 import ContactPanel from "@/components/ContactPanel";
 import Ticker from "@/components/Ticker";
-import { listGames, listNews, listOperators, listPartnerStudios } from "@/lib/cms";
+import {
+    getStudioOffer, listGames, listNews, listOperators, listOriginals, listPartnerStudios,
+} from "@/lib/cms";
 import {
     GAP_OPERATOR_POINTS, GAP_ROUTES, RGS_ENGINE, RGS_OPTIONS, pillar,
 } from "@/lib/pillars";
 
 export const revalidate = 300;
 
-/* Section copy follows Ryan's homepage wireframe (revolver-gaming-redesign-v7). */
+/* Section copy follows Ryan's homepage wireframe (revolver-gaming-redesign-v9). */
 export default async function Home() {
-    const [news, games, studios, operators] = await Promise.all([
-        listNews(3), listGames(), listPartnerStudios(), listOperators(),
+    const [news, games, studios, operators, originalGames, offer] = await Promise.all([
+        listNews(3), listGames(), listPartnerStudios(), listOperators(), listOriginals(), getStudioOffer(),
     ]);
     const featured = games.filter((g) => g.featured);
     const originals = pillar("originals"), rgs = pillar("rgs");
@@ -114,17 +116,18 @@ export default async function Home() {
                             <p className="eyebrow">{originals.kicker}</p>
                             <h2 className="display">{originals.title[0]} <em>{originals.title[1]}</em></h2>
                             <p className="lede">
-                                Fast, modern casual games in provably fair and RNG formats, every
-                                one brandable to your casino. We can stand up a complete originals
-                                lobby under your brand, with new titles landing every month.
+                                Seventeen fast, modern casual games and counting, in provably fair
+                                and RNG formats, every one brandable to your casino. Stand up a
+                                complete originals lobby under your brand, with a new title landing
+                                every month.
                             </p>
                         </div>
                         <Link href={originals.href} className="btn btn-ghost">{originals.cta} →</Link>
                     </div>
                     <div className="tag-bar" data-reveal>
-                        {["Provably fair + RNG", "Fully brandable", "Full lobby", "New titles monthly"].map((t) => <span key={t}>{t}</span>)}
+                        {["Provably fair + RNG", "Fully brandable", `${liveCount(originalGames)} live · new monthly`].map((t) => <span key={t}>{t}</span>)}
                     </div>
-                    <OriginalsTiles />
+                    <OriginalsShowcase items={originalGames} />
                 </div>
             </section>
 
@@ -252,8 +255,24 @@ export default async function Home() {
             </section>
 
             {/* exclusives */}
-            <section data-chamber id="exclusives" className="tight">
+            <section data-chamber id="exclusives" className="on-bone">
                 <div className="shell">
+                    <div className="section-row">
+                        <div className="section-head" data-reveal>
+                            <p className="eyebrow">Exclusives · bespoke</p>
+                            <h2 className="display">Built for you. <em>Branded as you.</em></h2>
+                            <p className="lede">{offer.intro}</p>
+                        </div>
+                        <Link href="/exclusives" className="btn btn-ghost">How it works →</Link>
+                    </div>
+                    <div className="feat-grid feat-grid-4 excl-cards">
+                        {offer.cards.map((c, i) => (
+                            <div className="feat-card" key={c.title} data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
+                                <h3>{c.title}</h3>
+                                <p>{c.text}</p>
+                            </div>
+                        ))}
+                    </div>
                     <BespokeBanner games={games} />
                 </div>
             </section>

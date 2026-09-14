@@ -98,6 +98,31 @@ export async function getGame(slug: string): Promise<GameDetail | null> {
     return data as unknown as GameDetail | null;
 }
 
+export type Original = {
+    slug: string;
+    title: string;
+    category: string;
+    blurb: string;
+    max_win: string | null;
+    rtp: string | null;
+    volatility: string | null;
+    features: { title: string; text: string }[];
+    card_image: string | null;
+    demo_url: string | null;
+    is_new: boolean;
+    featured: boolean;
+    coming_soon: boolean;
+};
+
+export async function listOriginals(): Promise<Original[]> {
+    const { data, error } = await supabase
+        .from("originals")
+        .select("slug, title, category, blurb, max_win, rtp, volatility, features, card_image, demo_url, is_new, featured, coming_soon")
+        .order("sort_order");
+    if (error) throw error;
+    return data;
+}
+
 export type Contact = {
     email: string;
     address: string[];

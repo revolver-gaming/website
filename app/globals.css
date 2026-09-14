@@ -224,7 +224,7 @@ button {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 26px;
+    gap: 22px;
     list-style: none;
 }
 
@@ -250,6 +250,10 @@ button {
     padding: 11px 22px;
 }
 
+.nav-login-item {
+    display: none;
+}
+
 .nav-burger {
     display: none;
     flex-direction: column;
@@ -262,6 +266,16 @@ button {
     height: 2px;
     background: var(--bone);
     border-radius: 2px;
+}
+
+@media (max-width: 1100px) {
+    .nav-login {
+        display: none;
+    }
+
+    .nav-links.open .nav-login-item {
+        display: block;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -2062,13 +2076,14 @@ a.pager-step:hover {
 
 .shot-section h2 {
     font-size: clamp(28px, 3.6vw, 44px);
+    margin-bottom: 20px;
 }
 
 .shot-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 14px;
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 .shot-grid .shot {
@@ -3193,47 +3208,105 @@ section[data-chamber].tight {
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
-/* ---- originals tiles ---------------------------------------------------------------- */
+/* ---- originals (spec cards, featured title, detail art) ------------------------------ */
 
-.otiles {
+.o-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
 }
 
-.otile {
+.o-card {
     position: relative;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     background: var(--velvet);
     border: 1px solid var(--velvet-2);
-    border-radius: 16px;
-    padding: 26px 16px 22px;
-    text-align: center;
-    transition: border-color 0.3s, background 0.3s;
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.35s var(--detent), border-color 0.25s;
 }
 
-.otile svg {
-    position: relative;
-    width: 34px;
-    height: 34px;
-    margin: 0 auto 12px;
+.o-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--amber);
+}
+
+.o-card.is-soon {
+    opacity: 0.6;
+    border-style: dashed;
+}
+
+.o-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    font-family: var(--font-m);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--amber);
+    color: var(--chamber);
+    border-radius: 999px;
+    padding: 4px 10px;
+}
+
+.o-art {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.o-art-ph {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    background: radial-gradient(circle at 50% 38%, var(--velvet-3), var(--chamber) 78%);
     color: var(--amber);
 }
 
-.otile b {
-    position: relative;
-    display: block;
+.o-art-ph svg {
+    width: 52px;
+    height: 52px;
+}
+
+
+.o-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 16px 18px;
+}
+
+.o-meta h3 {
     font-family: var(--font-d);
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1;
 }
 
-.otile span {
-    position: relative;
-    display: block;
-    margin-top: 7px;
+.o-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+}
+
+.o-stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2px;
+}
+
+.o-stats dd {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.o-stats dt {
     font-family: var(--font-m);
     font-size: 9.5px;
     letter-spacing: 0.12em;
@@ -3241,27 +3314,145 @@ section[data-chamber].tight {
     color: var(--smoke);
 }
 
-.otile.more {
-    border-style: dashed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.o-soon {
+    font-size: 14px;
+    color: var(--smoke);
 }
 
-.otile.more b {
+.o-view {
+    margin-top: auto;
+    font-size: 13.5px;
+    font-weight: 700;
     color: var(--amber);
 }
 
-@media (max-width: 900px) {
-    .otiles {
-        grid-template-columns: repeat(3, 1fr);
+.o-feature {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+    background: var(--velvet);
+    border: 1px solid var(--velvet-2);
+    border-radius: 20px;
+    padding: clamp(18px, 3vw, 32px);
+    margin-bottom: 20px;
+}
+
+.o-feature .o-art {
+    aspect-ratio: 16 / 10;
+    border-radius: 14px;
+}
+
+.o-feature .o-art-ph svg {
+    width: 96px;
+    height: 96px;
+}
+
+
+.o-feature h3 {
+    font-size: clamp(44px, 6vw, 72px);
+    margin: 10px 0 12px;
+}
+
+.o-feature .lede {
+    color: var(--smoke);
+    margin-bottom: 22px;
+}
+
+.o-feature .o-stats {
+    gap: 8px 34px;
+    margin-bottom: 26px;
+}
+
+.o-feature .o-stats dd {
+    font-family: var(--font-d);
+    font-weight: 800;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1;
+    color: var(--amber);
+}
+
+.game-hero .o-art {
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius);
+    border: 1px solid var(--velvet-2);
+}
+
+.game-hero .o-art-ph svg {
+    width: 92px;
+    height: 92px;
+}
+
+
+@media (max-width: 860px) {
+    .o-feature {
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 520px) {
-    .otiles {
-        grid-template-columns: repeat(2, 1fr);
+    .o-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
     }
+
+    .o-meta {
+        padding: 12px;
+    }
+
+    .o-meta h3 {
+        font-size: 18px;
+    }
+
+    .o-stats {
+        gap: 4px 12px;
+    }
+}
+
+/* ---- about ------------------------------------------------------------------------ */
+
+.plat-hero .about-hero h1 {
+    font-size: clamp(44px, 7vw, 88px);
+    max-width: 17ch;
+}
+
+.about-hero .lede + .lede {
+    margin-top: -8px;
+}
+
+.offer-card {
+    transition: transform 0.35s var(--detent), border-color 0.25s;
+}
+
+.offer-card::before {
+    display: none;
+}
+
+.offer-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--rust);
+}
+
+.offer-card .feat-more {
+    margin-top: auto;
+    padding-top: 6px;
+}
+
+.offer-kicker {
+    font-family: var(--font-m);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+}
+
+.on-bone .offer-kicker {
+    color: var(--rust);
+}
+
+/* homepage exclusives: offer cards sit above the bespoke banner */
+.excl-cards {
+    margin-bottom: clamp(32px, 5vw, 48px);
 }
 
 /* ---- option cards (RGS ways / GAP routes) ------------------------------------------- */

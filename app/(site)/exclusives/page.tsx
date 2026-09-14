@@ -27,8 +27,7 @@ export default async function Exclusives() {
                         <p className="eyebrow">{p.kicker}</p>
                         <h1 className="display">{p.title[0]}<br /><em>{p.title[1]}</em></h1>
                         <p className="lede">
-                            {offer.intro} Ask for a game nobody else has, and we&apos;ll build
-                            it on the same certified engine as everything we ship.
+                            {offer.intro}
                         </p>
                         <div className="hero-ctas">
                             <Link href="/#contact" className="btn btn-fire">{p.cta}</Link>

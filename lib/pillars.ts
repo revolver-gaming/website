@@ -68,19 +68,6 @@ export const VALUE_PROPS = [
     { title: "Scales clean", text: "Cloud-ready and built to take the traffic. New markets, more volume, no wobble." },
 ];
 
-export const ORIGINALS = [
-    { name: "Crash", type: "Multiplayer" },
-    { name: "Dice", type: "Classic" },
-    { name: "Mines", type: "Grid" },
-    { name: "Plinko", type: "Drop" },
-    { name: "Limbo", type: "Target" },
-    { name: "Keno", type: "Numbers" },
-    { name: "Wheel", type: "Spin" },
-    { name: "Diamonds", type: "Match" },
-    { name: "Dragon Tower", type: "Climb" },
-    { name: "Punch", type: "Arcade" },
-];
-
 export const RGS_OPTIONS = [
     {
         tag: "Independent",
