@@ -414,97 +414,6 @@ section[data-chamber]:not(.hero) {
     }
 }
 
-/* ---- hero deck (game banners at native ratio) ----------------------------- */
-
-.deck-stage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
-    width: 100%;
-    user-select: none;
-}
-
-.deck {
-    position: relative;
-    width: min(540px, 100%);
-    aspect-ratio: 680 / 440;
-    margin-top: 6%;
-}
-
-.deck-card {
-    position: absolute;
-    inset: 0;
-    padding: 0;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
-    transform-origin: 80% 100%;
-    transition: transform 0.8s var(--detent), opacity 0.6s, filter 0.6s;
-    cursor: pointer;
-}
-
-.deck-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.deck-card[data-pos="0"] {
-    z-index: 3;
-    cursor: default;
-}
-
-.deck-card[data-pos="1"] {
-    z-index: 2;
-    transform: translate(-7%, -9%) rotate(-3deg) scale(0.95);
-    filter: brightness(0.8);
-}
-
-.deck-card[data-pos="2"] {
-    z-index: 1;
-    transform: translate(-14%, -18%) rotate(-6deg) scale(0.9);
-    filter: brightness(0.6);
-}
-
-.deck-card[data-pos="3"] {
-    z-index: 0;
-    opacity: 0;
-    transform: translate(-20%, -26%) rotate(-8deg) scale(0.86);
-    pointer-events: none;
-}
-
-.deck-card:not([data-pos="0"]):hover {
-    filter: brightness(0.9);
-}
-
-.deck-readout {
-    text-align: center;
-    min-height: 96px;
-}
-
-.deck-readout h3 {
-    font-family: var(--font-d);
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 30px;
-    line-height: 1;
-}
-
-.deck-readout .actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 16px;
-}
-
-.deck-readout .actions .btn {
-    padding: 10px 20px;
-    font-size: 13px;
-}
-
 /* ---- ticker -------------------------------------------------------------- */
 
 .ticker {
@@ -3772,230 +3681,103 @@ section[data-chamber].tight {
 
 /* ---- hero visual (follows the active slide) ---------------------------------------- */
 
+/* Key art bleeds off the right edge of the viewport: it is positioned against the hero
+   section rather than the shell, dissolves into the plum on its left, and sits on a blurred
+   wash of its own colours. The art is only 680x440, so the sharp layer stays near native size. */
+.hero > .shell {
+    position: static;
+}
+
+.hero-copy,
+.hero .hero-meta {
+    position: relative;
+    z-index: 2;
+}
+
 .hero-visual {
-    display: grid;
-    place-items: center;
-    width: 100%;
-    min-height: 480px;
-    animation: hv-in 0.6s var(--detent);
+    position: absolute;
+    inset: 0 0 0 38%;
+    z-index: 1;
+    pointer-events: none;
+    animation: hv-in 0.9s ease-out;
 }
 
 @keyframes hv-in {
     from {
         opacity: 0;
-        transform: translateY(14px) scale(0.98);
     }
 }
 
-.deck-square {
-    width: min(340px, 100%);
-    aspect-ratio: 1;
-}
-
-.hv-card {
-    width: min(500px, 100%);
-    background: var(--velvet);
-    border: 1px solid var(--velvet-2);
-    border-radius: 20px;
-    padding: clamp(20px, 3vw, 28px);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.hv-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--font-d);
-    font-weight: 800;
-    font-size: 30px;
-    line-height: 1;
-    text-transform: uppercase;
-}
-
-.hv-pulse {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--amber);
-    animation: hv-pulse 2s infinite;
-}
-
-@keyframes hv-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 167, 85, 0.6); }
-    70%, 100% { box-shadow: 0 0 0 12px rgba(255, 167, 85, 0); }
-}
-
-.hv-engine dl {
+.hero-art {
+    position: absolute;
+    inset: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--velvet-2);
-    border: 1px solid var(--velvet-2);
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-.hv-engine dl div {
-    background: var(--chamber);
-    padding: 18px;
-}
-
-.hv-engine dl .wide {
-    grid-column: 1 / -1;
-}
-
-.hv-engine dt,
-.hv-col .role,
-.hv-hub span,
-.hv-foot {
-    font-family: var(--font-m);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--smoke);
-}
-
-.hv-engine dd {
-    margin-top: 6px;
-    font-family: var(--font-d);
-    font-weight: 800;
-    font-size: clamp(30px, 3.4vw, 42px);
-    line-height: 1;
-    color: var(--amber);
-}
-
-.hv-engine .wide dd {
-    font-size: clamp(20px, 2.2vw, 26px);
-    color: var(--bone);
-}
-
-.hv-modules {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.hv-modules li {
-    font-family: var(--font-m);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--smoke);
-    border: 1px solid var(--velvet-3);
-    border-radius: 999px;
-    padding: 7px 12px;
-    animation: hv-glow 4.2s infinite;
-}
-
-@keyframes hv-glow {
-    0%, 30%, 100% {
-        border-color: var(--velvet-3);
-        color: var(--smoke);
-    }
-    15% {
-        border-color: var(--amber);
-        color: var(--amber);
-    }
-}
-
-.hv-network {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    gap: 22px;
+    justify-items: end;
 }
 
-.hv-col {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.hv-col .role {
-    color: var(--amber);
-}
-
-.hv-logo {
-    height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 12px;
-    background: var(--chamber);
-    border: 1px solid var(--velvet-2);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.hv-hub {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    max-width: 130px;
-    padding: 22px 14px;
-    text-align: center;
-    border: 1px solid var(--amber);
-    border-radius: 16px;
-    background: rgba(255, 167, 85, 0.08);
-}
-
-.hv-hub b {
-    font-family: var(--font-d);
-    font-weight: 800;
-    font-size: 22px;
-    line-height: 1;
-    text-transform: uppercase;
-}
-
-.hv-hub::before,
-.hv-hub::after {
+/* the wash fades out on every side, so the section's edges never clip it into a hard band */
+.hero-art::before {
     content: "";
     position: absolute;
-    top: 50%;
-    width: 22px;
-    border-top: 1px dashed var(--amber);
+    inset: 4% 0 4% 12%;
+    background: var(--art) center / cover no-repeat;
+    filter: blur(48px) saturate(1.35);
+    opacity: 0.4;
+    transform: scale(1.15);
+    -webkit-mask-image: radial-gradient(closest-side, #000 35%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 35%, transparent 100%);
 }
 
-.hv-hub::before { right: 100%; }
-.hv-hub::after { left: 100%; }
+.hero-art img {
+    position: relative;
+    width: min(780px, 100%);
+    aspect-ratio: 680 / 440;
+    object-fit: cover;
+    -webkit-mask-image:
+        linear-gradient(90deg, transparent 0%, #000 40%),
+        linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        linear-gradient(90deg, transparent 0%, #000 40%),
+        linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mask-composite: intersect;
+    animation: hv-settle 9s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
 
-.hv-foot {
-    grid-column: 1 / -1;
-    text-align: center;
-    border-top: 1px solid var(--velvet-2);
-    padding-top: 14px;
+@keyframes hv-settle {
+    from {
+        transform: scale(1.07);
+    }
 }
 
 @media (max-width: 960px) {
     .hero-visual {
-        min-height: 0;
-    }
-}
-
-@media (max-width: 520px) {
-    .hv-network {
-        grid-template-columns: 1fr;
-    }
-
-    .hv-hub {
-        max-width: none;
+        position: relative;
+        inset: auto;
+        justify-self: start;
+        width: 100vw;
+        height: clamp(240px, 64vw, 440px);
+        margin-inline: calc(50% - 50vw);
     }
 
-    .hv-hub::before,
-    .hv-hub::after {
-        display: none;
+    .hero-art {
+        justify-items: stretch;
+    }
+
+    .hero-art img {
+        width: 100%;
+        height: 100%;
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 72%, transparent 100%);
+        -webkit-mask-composite: source-over;
+        mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 72%, transparent 100%);
+        mask-composite: add;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .hero-visual,
-    .hv-pulse,
-    .hv-modules li {
+    .hero-art img {
         animation: none;
     }
 }

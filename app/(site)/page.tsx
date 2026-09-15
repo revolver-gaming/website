@@ -1,7 +1,6 @@
 import Link from "next/link";
-import HeroDeck, { type DeckItem } from "@/components/HeroDeck";
+import HeroArt from "@/components/HeroArt";
 import HeroSlides from "@/components/HeroSlides";
-import { NetworkVisual, RgsVisual } from "@/components/HeroVisuals";
 import HomeSlots from "@/components/HomeSlots";
 import { OriginalsShowcase, liveCount } from "@/components/Originals";
 import BespokeBanner from "@/components/BespokeBanner";
@@ -10,15 +9,13 @@ import ContactPanel from "@/components/ContactPanel";
 import PartnerLogo from "@/components/PartnerLogo";
 import Ticker from "@/components/Ticker";
 import {
-    type Game, getStudioOffer, listGames, listNews, listOperators, listOriginals, listPartnerStudios,
+    getStudioOffer, listGames, listNews, listOperators, listOriginals, listPartnerStudios,
 } from "@/lib/cms";
 import {
     GAP_OPERATOR_POINTS, GAP_ROUTES, OPERATOR_INTEGRATIONS, RGS_ENGINE, RGS_OPTIONS, THIRD_PARTY_GAMES, pillar,
 } from "@/lib/pillars";
 
 export const revalidate = 300;
-
-const slotItem = (g: Game): DeckItem => ({ key: g.slug, title: g.title, image: g.image, href: `/game/${g.slug}`, demo_url: g.demo_url });
 
 /* Section copy follows Ryan's homepage wireframe (revolver-gaming-redesign-v9). */
 export default async function Home() {
@@ -28,20 +25,19 @@ export default async function Home() {
     const featured = games.filter((g) => g.featured);
     const branded = games.filter((g) => g.tags.some((t) => /brand|seasonal/i.test(t)));
     const originals = pillar("originals"), rgs = pillar("rgs");
+    const heroOriginal = originalGames.find((o) => o.featured && !o.coming_soon) ?? originalGames[0];
+    // RGS and Platform borrow slot art until their own hero figures are designed.
+    const others = games.filter((g) => !g.featured && !branded.includes(g));
+    // Newest featured art carries "coming soon" stickers, so the intro opens on the last (longest-running) featured title.
+    const [introGame, slotsGame, exclusiveGame] = [featured.at(-1), featured[3] ?? featured[0], branded[0] ?? featured[0]];
+    const [rgsGame, gapGame] = [others[0] ?? featured[1], others[1] ?? featured[2]];
     const visuals = {
-        intro: <HeroDeck items={featured.map(slotItem)} />,
-        slots: <HeroDeck items={games.filter((g) => !g.featured).slice(0, 6).map(slotItem)} />,
-        originals: (
-            <HeroDeck
-                square
-                items={originalGames.filter((o) => o.card_image && !o.coming_soon).slice(0, 8).map((o) => ({
-                    key: o.slug, title: o.title, image: o.card_image!, href: `/originals/${o.slug}`, demo_url: o.demo_url,
-                }))}
-            />
-        ),
-        rgs: <RgsVisual />,
-        gap: <NetworkVisual studios={studios} operators={operators} />,
-        exclusives: <HeroDeck items={(branded.length ? branded : featured).map(slotItem)} />,
+        intro: <HeroArt src={introGame?.image} alt={introGame?.title} />,
+        slots: <HeroArt src={slotsGame?.image} alt={slotsGame?.title} />,
+        originals: <HeroArt src={heroOriginal?.card_image} alt={heroOriginal?.title} />,
+        rgs: <HeroArt src={rgsGame?.image} alt={rgsGame?.title} />,
+        gap: <HeroArt src={gapGame?.image} alt={gapGame?.title} />,
+        exclusives: <HeroArt src={exclusiveGame?.image} alt={exclusiveGame?.title} />,
     };
     return (
         <main>

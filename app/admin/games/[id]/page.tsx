@@ -137,7 +137,7 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                 </label>
                 <label className="check">
                     <input type="checkbox" checked={row.featured} onChange={(e) => set({ featured: e.target.checked })} />
-                    Featured (homepage hero deck & slots row)
+                    Featured (homepage hero art & slots row)
                 </label>
                 <label className="check">
                     <input type="checkbox" checked={row.published} onChange={(e) => set({ published: e.target.checked })} />
