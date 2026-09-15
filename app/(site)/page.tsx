@@ -1,8 +1,8 @@
 import Link from "next/link";
-import HeroDeck from "@/components/HeroDeck";
+import HeroDeck, { type DeckItem } from "@/components/HeroDeck";
 import HeroSlides from "@/components/HeroSlides";
+import { NetworkVisual, RgsVisual } from "@/components/HeroVisuals";
 import HomeSlots from "@/components/HomeSlots";
-import ValueProps from "@/components/ValueProps";
 import { OriginalsShowcase, liveCount } from "@/components/Originals";
 import BespokeBanner from "@/components/BespokeBanner";
 import NewsCards from "@/components/NewsCards";
@@ -10,13 +10,15 @@ import ContactPanel from "@/components/ContactPanel";
 import PartnerLogo from "@/components/PartnerLogo";
 import Ticker from "@/components/Ticker";
 import {
-    getStudioOffer, listGames, listNews, listOperators, listOriginals, listPartnerStudios,
+    type Game, getStudioOffer, listGames, listNews, listOperators, listOriginals, listPartnerStudios,
 } from "@/lib/cms";
 import {
-    GAP_OPERATOR_POINTS, GAP_ROUTES, RGS_ENGINE, RGS_OPTIONS, pillar,
+    GAP_OPERATOR_POINTS, GAP_ROUTES, OPERATOR_INTEGRATIONS, RGS_ENGINE, RGS_OPTIONS, THIRD_PARTY_GAMES, pillar,
 } from "@/lib/pillars";
 
 export const revalidate = 300;
+
+const slotItem = (g: Game): DeckItem => ({ key: g.slug, title: g.title, image: g.image, href: `/game/${g.slug}`, demo_url: g.demo_url });
 
 /* Section copy follows Ryan's homepage wireframe (revolver-gaming-redesign-v9). */
 export default async function Home() {
@@ -24,38 +26,40 @@ export default async function Home() {
         listNews(3), listGames(), listPartnerStudios(), listOperators(), listOriginals(), getStudioOffer(),
     ]);
     const featured = games.filter((g) => g.featured);
+    const branded = games.filter((g) => g.tags.some((t) => /brand|seasonal/i.test(t)));
     const originals = pillar("originals"), rgs = pillar("rgs");
+    const visuals = {
+        intro: <HeroDeck items={featured.map(slotItem)} />,
+        slots: <HeroDeck items={games.filter((g) => !g.featured).slice(0, 6).map(slotItem)} />,
+        originals: (
+            <HeroDeck
+                square
+                items={originalGames.filter((o) => o.card_image && !o.coming_soon).slice(0, 8).map((o) => ({
+                    key: o.slug, title: o.title, image: o.card_image!, href: `/originals/${o.slug}`, demo_url: o.demo_url,
+                }))}
+            />
+        ),
+        rgs: <RgsVisual />,
+        gap: <NetworkVisual studios={studios} operators={operators} />,
+        exclusives: <HeroDeck items={(branded.length ? branded : featured).map(slotItem)} />,
+    };
     return (
         <main>
             {/* hero */}
             <section className="hero" data-chamber id="top">
                 <div className="grid-mask" aria-hidden />
-                <div className="shell hero-grid">
-                    <HeroSlides />
-                    <HeroDeck games={featured} />
-                </div>
                 <div className="shell">
+                    <HeroSlides visuals={visuals} />
                     <div className="hero-meta">
-                        <span>UKGC licensed</span>
-                        <span>{games.length} original slots</span>
-                        <span>Brandable originals</span>
-                        <span>RGS + distribution</span>
+                        <span>Slots studio</span>
+                        <span>Branded originals</span>
+                        <span>Licensed RGS</span>
+                        <span>Game aggregation + distribution</span>
                     </div>
                 </div>
             </section>
 
             <Ticker items={operators} label="Connected across the operator and aggregator network" />
-
-            {/* value props */}
-            <section data-chamber id="why">
-                <div className="shell">
-                    <div className="section-head" data-reveal>
-                        <p className="eyebrow">Precision engineered</p>
-                        <h2 className="display">Tech that fires on <em>every cylinder.</em></h2>
-                    </div>
-                    <ValueProps games={featured} />
-                </div>
-            </section>
 
             {/* about */}
             <section className="on-bone" data-chamber id="about">
@@ -78,10 +82,12 @@ export default async function Home() {
                         </div>
                     </div>
                     <div className="mini-stats" data-reveal>
-                        <div><b>UKGC</b><span>Licensed &amp; regulated</span></div>
-                        <div><b>{games.length}</b><span>Original slots</span></div>
-                        <div><b>2</b><span>Platform integration routes</span></div>
-                        <div><b>{operators.length}+</b><span>Operator integrations</span></div>
+                        <div><b>UKGC</b><span>Licensed &amp; compliant</span></div>
+                        <div><b>{games.length}+</b><span>Original slots</span></div>
+                        <div><b>{liveCount(originalGames)}+</b><span>Casual originals</span></div>
+                        <div><b>{THIRD_PARTY_GAMES}</b><span>3rd-party games</span></div>
+                        <div><b>{OPERATOR_INTEGRATIONS}</b><span>Operator integrations</span></div>
+                        <div><b>RGS</b><span>License &amp; distribution</span></div>
                     </div>
                 </div>
             </section>
@@ -142,7 +148,8 @@ export default async function Home() {
                             <p className="lede">
                                 Have games but no server, or want to serve your players exclusive
                                 content? License the Revolver RGS and reach the market through our
-                                distribution network. Two ways to run it.
+                                distribution network. Independent, managed or hybrid models to
+                                suit your individual requirements.
                             </p>
                         </div>
                         <Link href={rgs.href} className="btn btn-ghost">{rgs.cta} →</Link>

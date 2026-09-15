@@ -25,13 +25,17 @@ type Row = {
     rtp: string | null;
     volatility: string | null;
     layout: string | null;
+    banner_image: string | null;
+    max_win: string | null;
+    languages: string[];
+    asset_pack: string | null;
 };
 
 const blank = (): Row => ({
     slug: "", title: "", blurb: "", card_image: "", year: new Date().getFullYear(),
     tags: [], featured: false, sort_order: -1, description_html: "", features: [],
     screenshots: [], product_sheet: null, demo_url: null, video_url: null, published: true,
-    rtp: null, volatility: null, layout: null,
+    rtp: null, volatility: null, layout: null, banner_image: null, max_win: null, languages: [], asset_pack: null,
 });
 
 export default function EditGame() {
@@ -147,9 +151,17 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     Volatility — e.g. Medium-High
                     <input value={row.volatility ?? ""} onChange={(e) => set({ volatility: e.target.value || null })} />
                 </label>
-                <label className="wide">
+                <label>
                     RTP variants — e.g. 90% / 92% / 94% / 96%
                     <input value={row.rtp ?? ""} onChange={(e) => set({ rtp: e.target.value || null })} />
+                </label>
+                <label>
+                    Max win — e.g. 5,300x
+                    <input value={row.max_win ?? ""} onChange={(e) => set({ max_win: e.target.value || null })} />
+                </label>
+                <label className="wide">
+                    Languages — comma-separated
+                    <input value={row.languages.join(", ")} onChange={(e) => set({ languages: e.target.value.split(",").map((l) => l.trim()).filter(Boolean) })} />
                 </label>
                 <label className="wide">
                     Blurb — card & page intro text
@@ -159,6 +171,11 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     Card artwork
                     {row.card_image && <img className="admin-thumb" src={row.card_image} alt="" />}
                     <input type="file" accept="image/*" onChange={(e) => upload("cards", e.target.files?.[0], (url) => set({ card_image: url }))} />
+                </label>
+                <label className="wide">
+                    Wide banner — top of the game page, 1400×430
+                    {row.banner_image && <img className="admin-thumb" src={row.banner_image} alt="" />}
+                    <input type="file" accept="image/*" onChange={(e) => upload("banners", e.target.files?.[0], (url) => set({ banner_image: url }))} />
                 </label>
                 <div className="wide">
                     <div className="admin-subhead">
@@ -199,6 +216,10 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     Product sheet (PDF)
                     {row.product_sheet && <small><a href={row.product_sheet} target="_blank">Current PDF ↗</a></small>}
                     <input type="file" accept="application/pdf" onChange={(e) => upload("pdf", e.target.files?.[0], (url) => set({ product_sheet: url }))} />
+                </label>
+                <label>
+                    Asset pack URL — e.g. a shared Drive folder
+                    <input value={row.asset_pack ?? ""} onChange={(e) => set({ asset_pack: e.target.value || null })} />
                 </label>
                 <label>
                     Demo launch URL

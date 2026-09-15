@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BrandingDemo from "@/components/BrandingDemo";
 import { OriginalsShowcase, liveCount } from "@/components/Originals";
 import { listOriginals } from "@/lib/cms";
 import { pillar } from "@/lib/pillars";
@@ -13,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 const PROMISES = [
-    { title: "Provably fair + RNG", text: "Every title runs on the licensed RGS. Players can verify any round after the fact, and the RNG is tested around the clock.", href: "/fairness" },
-    { title: "Fully brandable", text: "Your logo, your colours, your lobby. Each original ships as a branded edition for your casino, not a generic skin." },
+    { title: "Provably fair + RNG", text: "Every title runs on the licensed RGS. Players can verify any round after the fact, and the RNG is tested around the clock.", href: "/fairness", cta: "Learn more" },
+    { title: "Fully brandable", text: "Your logo, your colours, your lobby. Each original ships as a branded edition for your casino, not a generic skin.", href: "#branding", cta: "Try demo" },
     { title: "A full lobby, fast", text: "We stand up the whole originals lobby under your brand and keep it growing, with new titles landing every month." },
 ];
 
@@ -44,6 +45,7 @@ export default async function Originals() {
                         <div className="hero-ctas">
                             <Link href="/#contact" className="btn btn-fire">Brand your lobby</Link>
                             <Link href="/fairness" className="btn btn-ghost">How provably fair works</Link>
+                            <Link href="#branding" className="btn btn-ghost">Branding demo</Link>
                         </div>
                     </div>
                     <div className="tag-bar">
@@ -73,10 +75,24 @@ export default async function Originals() {
                             <div className="feat-card" key={f.title} data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
                                 <h3>{f.title}</h3>
                                 <p>{f.text}</p>
-                                {f.href && <Link className="feat-more" href={f.href}>Learn more →</Link>}
+                                {f.href && <Link className="feat-more" href={f.href}>{f.cta} →</Link>}
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            <section data-chamber id="branding" className="brand-section">
+                <div className="shell">
+                    <div className="section-head" data-reveal>
+                        <p className="eyebrow">Branding demo</p>
+                        <h2 className="display">Your lobby, <em>your colours</em></h2>
+                        <p className="lede">
+                            White-labelling here isn&apos;t a logo in the corner. Pick a palette,
+                            name your casino, and watch the same originals lobby take on your brand.
+                        </p>
+                    </div>
+                    <BrandingDemo items={items} />
                 </div>
             </section>
 

@@ -36,7 +36,7 @@ export const PILLARS: Pillar[] = [
         label: "RGS",
         kicker: "RGS · licensing",
         title: ["Your games on", "our engine."],
-        lede: "License the Revolver RGS, independent or fully managed, and plug straight into our distribution network. Games but no server? Sorted.",
+        lede: "License the Revolver RGS, independent, managed or hybrid, and plug straight into our distribution network. Games but no server? Sorted.",
         cta: "License the RGS",
     },
     {
@@ -61,12 +61,9 @@ export const PILLARS: Pillar[] = [
 
 export const pillar = (key: string) => PILLARS.find((p) => p.key === key)!;
 
-export const VALUE_PROPS = [
-    { title: "Speed to market", text: "We plug in and go live fast. Shorter launch cycles mean more days on the floor earning." },
-    { title: "No misfires", text: "We sweat every reel. Polished, reliable and built to hold players, not just fill a lobby." },
-    { title: "Modular by design", text: "Configure it your way. Rules, markets and mechanics arrive as settings, not rebuilds." },
-    { title: "Scales clean", text: "Cloud-ready and built to take the traffic. New markets, more volume, no wobble." },
-];
+// Network-wide figures Ryan quotes (Sep 2026 review); the CMS only lists the logos we show.
+export const OPERATOR_INTEGRATIONS = "60+";
+export const THIRD_PARTY_GAMES = "300+";
 
 export const RGS_OPTIONS = [
     {

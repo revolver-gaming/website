@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
-import { OriginalArt, OriginalsGrid } from "@/components/Originals";
+import { OriginalsGrid } from "@/components/Originals";
 import { listOriginals } from "@/lib/cms";
 
 export const revalidate = 300;
@@ -41,35 +41,35 @@ export default async function OriginalPage({ params }: Props) {
         <main>
             <div className="shell game-detail">
                 <Link className="article-back" href="/originals">← Originals</Link>
-                {o.hero_image && <img className="o-banner" src={o.hero_image} alt="" />}
-                <div className="game-hero">
+                {o.hero_image && <img className="game-banner" src={o.hero_image} alt={`${o.title} banner`} />}
+                <div className="game-body">
                     <div>
                         <p className="eyebrow">Provably fair · RNG · Brandable</p>
                         <h1 className="display">{o.title}</h1>
                         <p className="game-blurb">{o.blurb}</p>
-                        <dl className="game-specs">
+                        {o.features.length > 0 && (
+                            <ul className="o-points">
+                                {o.features.map((f) => (
+                                    <li key={f.title}>
+                                        <h3>{f.title}</h3>
+                                        <p>{f.text}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                    <aside className="game-panel">
+                        <h2>Features</h2>
+                        <dl className="spec-table">
                             {specs.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
                         </dl>
-                        <div className="game-ctas">
+                        <div className="panel-ctas">
                             {o.demo_url && <DemoLauncher url={o.demo_url} title={o.title} />}
+                            <Link className="btn btn-ghost" href="/originals#branding">Branding demo</Link>
                             <Link className={`btn ${o.demo_url ? "btn-ghost" : "btn-fire"}`} href="/#contact">Add to your lobby</Link>
                         </div>
-                    </div>
-                    <OriginalArt o={o} />
+                    </aside>
                 </div>
-                {o.features.length > 0 && (
-                    <section className="shot-section">
-                        <h2 className="display">Features</h2>
-                        <div className="feat-grid feat-grid-4">
-                            {o.features.map((f) => (
-                                <div className="feat-card" key={f.title}>
-                                    <h3>{f.title}</h3>
-                                    <p>{f.text}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-                )}
                 {more.length > 0 && (
                     <section className="shot-section">
                         <h2 className="display">More originals</h2>

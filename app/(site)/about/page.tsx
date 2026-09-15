@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { listGames, listOperators } from "@/lib/cms";
-import { PILLARS } from "@/lib/pillars";
+import { listGames } from "@/lib/cms";
+import { OPERATOR_INTEGRATIONS, PILLARS } from "@/lib/pillars";
 
 export const revalidate = 300;
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const OFFERINGS: Record<string, { title: string; text: string; cta: string }> = {
     slots: { title: "Original slots", text: "Proven, licensable, brandable slots built in-house, led by flagship Irish Coins and a growing line of branded and seasonal titles.", cta: "Explore slots" },
     originals: { title: "Casual originals", text: "A full lobby of brandable casual games, crash, dice, mines, plinko and more, in provably fair and RNG formats, with a new title every month.", cta: "Explore originals" },
-    rgs: { title: "Remote Gaming Server", text: "License our RGS, independent or fully managed, and plug straight into our distribution network of operators and aggregators.", cta: "Explore RGS" },
+    rgs: { title: "Remote Gaming Server", text: "License our RGS, independent, managed or hybrid, and plug straight into our distribution network of operators and aggregators.", cta: "Explore RGS" },
     gap: { title: "Game Aggregation Platform", text: "Studios bring their games in, operators take the whole catalogue out, Revolver's own games plus every partner studio, through one integration.", cta: "Explore the platform" },
     exclusives: { title: "Custom & branded games", text: "Branded reskins, seasonal editions and fully bespoke games, built in-house on the certified engine and exclusive to your casino.", cta: "Explore exclusives" },
 };
@@ -28,7 +28,7 @@ const PRINCIPLES = [
 ];
 
 export default async function About() {
-    const [games, operators] = await Promise.all([listGames(), listOperators()]);
+    const games = await listGames();
     const hero = games.find((g) => g.featured) ?? games[0];
     return (
         <main>
@@ -57,7 +57,7 @@ export default async function About() {
                         </p>
                     </div>
                     <div className="tag-bar">
-                        {["Since 2010", "UKGC licensed", `${games.length} original slots`, `${operators.length}+ operator integrations`].map((t) => <span key={t}>{t}</span>)}
+                        {["Since 2010", "UKGC licensed", `${games.length} original slots`, `${OPERATOR_INTEGRATIONS} operator integrations`].map((t) => <span key={t}>{t}</span>)}
                     </div>
                 </div>
             </section>

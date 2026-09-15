@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+/* A snap-scrolling strip of screenshots; any shot opens the lightbox. */
 export default function ScreenshotGallery({ shots, title }: { shots: string[]; title: string }) {
     const [index, setIndex] = useState<number | null>(null);
+    const track = useRef<HTMLDivElement>(null);
     const open = index !== null;
     const step = (d: number) => setIndex((i) => (i! + d + shots.length) % shots.length);
+    const slide = (d: number) => track.current?.scrollBy({ left: d * track.current.clientWidth * 0.75, behavior: "smooth" });
 
     useEffect(() => {
         if (!open) return;
@@ -24,12 +27,20 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
 
     return (
         <>
-            <div className="shot-grid">
-                {shots.map((s, i) => (
-                    <button key={s} className="shot" onClick={() => setIndex(i)} aria-label={`Open screenshot ${i + 1}`}>
-                        <img src={s} alt={`${title} screenshot ${i + 1}`} loading="lazy" />
-                    </button>
-                ))}
+            <div className="shot-carousel">
+                <div className="shot-track" ref={track}>
+                    {shots.map((s, i) => (
+                        <button key={s} className="shot" onClick={() => setIndex(i)} aria-label={`Open screenshot ${i + 1}`}>
+                            <img src={s} alt={`${title} screenshot ${i + 1}`} loading="lazy" />
+                        </button>
+                    ))}
+                </div>
+                {shots.length > 1 && (
+                    <div className="shot-nav">
+                        <button onClick={() => slide(-1)} aria-label="Previous screenshots">‹</button>
+                        <button onClick={() => slide(1)} aria-label="Next screenshots">›</button>
+                    </div>
+                )}
             </div>
             {open && (
                 <div

@@ -3,17 +3,18 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { DemoOverlay } from "./DemoLauncher";
-import type { Game } from "@/lib/cms";
 
-/* A stack of game banners at their native ratio. The front card advances
-   every few seconds; the rest fan back behind it. */
-export default function HeroDeck({ games }: { games: Game[] }) {
+export type DeckItem = { key: string; title: string; image: string; href: string; demo_url: string | null };
+
+/* A stack of game art at its native ratio (slot banners, or square originals art).
+   The front card advances every few seconds; the rest fan back behind it. */
+export default function HeroDeck({ items, square = false }: { items: DeckItem[]; square?: boolean }) {
     const [active, setActive] = useState(0);
-    const [demo, setDemo] = useState<Game | null>(null);
+    const [demo, setDemo] = useState<DeckItem | null>(null);
     const paused = useRef(false);
     const demoOpen = useRef(false);
     demoOpen.current = demo !== null;
-    const n = games.length;
+    const n = items.length;
 
     useEffect(() => {
         if (n < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -23,8 +24,8 @@ export default function HeroDeck({ games }: { games: Game[] }) {
         return () => clearInterval(id);
     }, [n]);
 
-    const game = games[active];
-    if (!game) return null;
+    const item = items[active];
+    if (!item) return null;
 
     return (
         <div
@@ -32,10 +33,10 @@ export default function HeroDeck({ games }: { games: Game[] }) {
             onPointerEnter={() => (paused.current = true)}
             onPointerLeave={() => (paused.current = false)}
         >
-            <div className="deck">
-                {games.map((g, i) => (
+            <div className={`deck${square ? " deck-square" : ""}`}>
+                {items.map((g, i) => (
                     <button
-                        key={g.slug}
+                        key={g.key}
                         className="deck-card"
                         data-pos={Math.min((i - active + n) % n, 3)}
                         onClick={() => setActive(i)}
@@ -49,12 +50,12 @@ export default function HeroDeck({ games }: { games: Game[] }) {
             </div>
 
             <div className="deck-readout" aria-live="polite">
-                <h3>{game.title}</h3>
+                <h3>{item.title}</h3>
                 <div className="actions">
-                    {game.demo_url && (
-                        <button className="btn btn-fire" onClick={() => setDemo(game)}>Play demo</button>
+                    {item.demo_url && (
+                        <button className="btn btn-fire" onClick={() => setDemo(item)}>Play demo</button>
                     )}
-                    <Link className="btn btn-ghost" href={`/game/${game.slug}`}>Details</Link>
+                    <Link className="btn btn-ghost" href={item.href}>Details</Link>
                 </div>
             </div>
             {demo?.demo_url && (

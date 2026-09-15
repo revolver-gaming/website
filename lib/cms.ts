@@ -75,6 +75,10 @@ export type GameDetail = Game & {
     rtp: string | null;
     volatility: string | null;
     layout: string | null;
+    banner_image: string | null;
+    max_win: string | null;
+    languages: string[];
+    asset_pack: string | null;
 };
 
 const GAME_FIELDS = "slug, title, blurb, image:card_image, year, tags, featured, demo_url";
@@ -91,7 +95,7 @@ export async function listGames(): Promise<Game[]> {
 export async function getGame(slug: string): Promise<GameDetail | null> {
     const { data, error } = await supabase
         .from("games")
-        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url, rtp, volatility, layout`)
+        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url, rtp, volatility, layout, banner_image, max_win, languages, asset_pack`)
         .eq("slug", slug)
         .maybeSingle();
     if (error) throw error;

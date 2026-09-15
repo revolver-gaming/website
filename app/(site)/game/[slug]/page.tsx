@@ -31,49 +31,52 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GamePage({ params }: Props) {
     const game = await getGame((await params).slug);
     if (!game) notFound();
+    const specs = [
+        ["Max win", game.max_win], ["RTP", game.rtp], ["Volatility", game.volatility],
+        ["Layout", game.layout], ["Released", String(game.year)], ["Format", "HTML5"],
+    ].filter(([, v]) => v);
     return (
         <main>
             <div className="shell game-detail">
                 <Link className="article-back" href="/games">← All games</Link>
-                <div className="game-hero">
+                <img className="game-banner" src={game.banner_image ?? game.image} alt={`${game.title} banner`} />
+                <div className="game-body">
                     <div>
                         <p className="eyebrow">{[game.year, ...game.tags].join(" · ")}</p>
                         <h1 className="display">{game.title}</h1>
                         <p className="game-blurb">{game.blurb}</p>
-                        {(game.layout || game.volatility || game.rtp) && (
-                            <dl className="game-specs">
-                                {game.layout && <div><dt>Layout</dt><dd>{game.layout}</dd></div>}
-                                {game.volatility && <div><dt>Volatility</dt><dd>{game.volatility}</dd></div>}
-                                {game.rtp && <div><dt>RTP</dt><dd>{game.rtp}</dd></div>}
-                            </dl>
-                        )}
                         <div className="game-ctas">
                             {game.demo_url && <DemoLauncher url={game.demo_url} title={game.title} />}
+                            {game.asset_pack && (
+                                <a className="btn btn-ghost" href={game.asset_pack} target="_blank" rel="noopener">Asset pack</a>
+                            )}
                             {game.product_sheet && (
-                                <a className="btn btn-ghost" href={game.product_sheet} target="_blank" rel="noopener">
-                                    Product sheet
-                                </a>
+                                <a className="btn btn-ghost" href={game.product_sheet} target="_blank" rel="noopener">Product sheet</a>
                             )}
                             {game.video_url && (
-                                <a className="btn btn-ghost" href={game.video_url} target="_blank" rel="noopener">
-                                    Watch video
-                                </a>
+                                <a className="btn btn-ghost" href={game.video_url} target="_blank" rel="noopener">Watch video</a>
                             )}
                         </div>
+                        <div className="article-body" dangerouslySetInnerHTML={{ __html: game.description_html ?? "" }} />
                     </div>
-                    <img className="game-art" src={game.image} alt={`${game.title} artwork`} />
-                </div>
-                <div className="game-cols">
-                    <div
-                        className="article-body"
-                        dangerouslySetInnerHTML={{ __html: game.description_html ?? "" }}
-                    />
-                    {game.features.length > 0 && (
-                        <aside className="game-facts">
-                            <h3>Features &amp; USPs</h3>
-                            <ul>{game.features.map((f) => <li key={f}>{f}</li>)}</ul>
-                        </aside>
-                    )}
+                    <aside className="game-panel">
+                        <h2>Features</h2>
+                        <dl className="spec-table">
+                            {specs.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
+                        </dl>
+                        {game.features.length > 0 && (
+                            <>
+                                <h3>Features &amp; USPs</h3>
+                                <ul>{game.features.map((f) => <li key={f}>{f}</li>)}</ul>
+                            </>
+                        )}
+                        {game.languages.length > 0 && (
+                            <>
+                                <h3>Languages</h3>
+                                <p className="game-langs">{game.languages.join(", ")}</p>
+                            </>
+                        )}
+                    </aside>
                 </div>
                 {game.screenshots.length > 0 && (
                     <section className="shot-section">
