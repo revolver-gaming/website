@@ -4637,41 +4637,38 @@ section[data-chamber].tight {
 }
 
 .tech {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(28px, 5vw, 64px);
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vw, 44px);
 }
 
 .tech .section-head {
     margin-bottom: 0;
 }
 
+/* Stack spec sheet: a hairline grid of monochrome marks (SVG mask via --logo), amber only on hover. */
 .tech-chips {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 10px;
+    gap: 1px;
+    background: var(--velvet-2);
+    border-block: 1px solid var(--velvet-2);
 }
 
-/* Logo tiles: the SVG is a mask painted in its brand colour (--logo, --brand set per tile), captioned so less familiar marks still read. */
 .tech-chips li {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    aspect-ratio: 1;
-    padding: 12px 8px;
-    color: var(--brand, var(--bone));
-    background: var(--velvet);
-    border: 1px solid var(--velvet-2);
-    border-radius: 14px;
-    transition: border-color 0.25s, transform 0.35s var(--detent);
+    gap: 14px;
+    padding: clamp(22px, 2.6vw, 30px) clamp(14px, 2vw, 24px);
+    color: var(--smoke);
+    background: var(--chamber);
+    transition: color 0.3s, background 0.3s;
 }
 
 .tech-logo {
-    width: clamp(30px, 3.4vw, 42px);
+    flex: none;
+    width: 24px;
     aspect-ratio: 1;
     background: currentColor;
     -webkit-mask: var(--logo) center / contain no-repeat;
@@ -4679,18 +4676,15 @@ section[data-chamber].tight {
 }
 
 .tech-name {
-    font-family: var(--font-m);
-    font-size: 9px;
-    letter-spacing: 0.04em;
-    text-align: center;
-    overflow-wrap: anywhere;
-    text-transform: uppercase;
-    color: var(--smoke);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--bone);
+    white-space: nowrap;
 }
 
 .tech-chips li:hover {
-    border-color: var(--brand, var(--amber));
-    transform: translateY(-3px);
+    color: var(--amber);
+    background: var(--velvet);
 }
 
 .checks li div {
@@ -4724,9 +4718,23 @@ section[data-chamber].tight {
     }
 }
 
-@media (max-width: 860px) {
-    .tech {
-        grid-template-columns: 1fr;
+@media (max-width: 1100px) {
+    .tech-chips {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .tech-chips li {
+        flex-direction: column;
+        gap: 10px;
+        padding: 22px 8px;
+        text-align: center;
+    }
+
+    .tech-name {
+        font-size: 12.5px;
+        white-space: normal;
     }
 }
 
@@ -4734,9 +4742,5 @@ section[data-chamber].tight {
     .int-band,
     .checks-3 {
         grid-template-columns: 1fr;
-    }
-
-    .tech-chips {
-        grid-template-columns: repeat(3, 1fr);
     }
 }

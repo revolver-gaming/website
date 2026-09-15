@@ -37,23 +37,24 @@ const RELIABILITY = [
     { title: "Monitored around the clock", text: "RTP and RNG are tested continuously. A game that drifts is switched off automatically." },
 ];
 
-/* Logos from Simple Icons 16.31.0 in public/tech/ (CC0; OpenTelemetry CC BY 4.0). Cloud and data first, then languages and services. */
+/* Logos from Simple Icons 16.31.0 in public/tech/ (CC0; OpenTelemetry CC BY 4.0), shown monochrome.
+   Cloud and data first, then languages and services. Only tech the RGS/GAP repos actually use. */
 const STACK = [
-    { name: "Google Cloud", logo: "googlecloud", brand: "#4285F4" },
-    { name: "Terraform", logo: "terraform", brand: "#9D6CF0" },
-    { name: "BigQuery", logo: "googlebigquery", brand: "#669DF6" },
-    { name: "Node.js", logo: "nodedotjs", brand: "#5FA04E" },
-    { name: "TypeScript", logo: "typescript", brand: "#3178C6" },
-    { name: "React", logo: "react", brand: "#61DAFB" },
-    { name: "NestJS", logo: "nestjs", brand: "#E0234E" },
-    { name: "Docker", logo: "docker", brand: "#2496ED" },
-    { name: "Redis", logo: "redis", brand: "#FF4438" },
-    { name: "MySQL", logo: "mysql", brand: "#6FA3D2" },
-    { name: "Pub/Sub", logo: "googlepubsub", brand: "#AECBFA" },
-    { name: "New Relic", logo: "newrelic", brand: "#1CE783" },
-    { name: "OpenTelemetry", logo: "opentelemetry", brand: "#F5A800" },
-    { name: "Fastify", logo: "fastify", brand: "#FFFFFF" },
-    { name: "Vite", logo: "vite", brand: "#9499FF" },
+    { name: "Google Cloud", logo: "googlecloud" },
+    { name: "Terraform", logo: "terraform" },
+    { name: "BigQuery", logo: "googlebigquery" },
+    { name: "Node.js", logo: "nodedotjs" },
+    { name: "TypeScript", logo: "typescript" },
+    { name: "React", logo: "react" },
+    { name: "NestJS", logo: "nestjs" },
+    { name: "Docker", logo: "docker" },
+    { name: "Redis", logo: "redis" },
+    { name: "MySQL", logo: "mysql" },
+    { name: "Pub/Sub", logo: "googlepubsub" },
+    { name: "New Relic", logo: "newrelic" },
+    { name: "OpenTelemetry", logo: "opentelemetry" },
+    { name: "Fastify", logo: "fastify" },
+    { name: "Vite", logo: "vite" },
 ];
 
 const COMPLIANCE = [
@@ -213,7 +214,7 @@ export default async function Rgs() {
                         </div>
                         <ul className="tech-chips">
                             {STACK.map((t) => (
-                                <li key={t.name} title={t.name} style={{ "--logo": `url(/tech/${t.logo}.svg)`, "--brand": t.brand } as CSSProperties}>
+                                <li key={t.name} style={{ "--logo": `url(/tech/${t.logo}.svg)` } as CSSProperties}>
                                     <span className="tech-logo" aria-hidden="true" />
                                     <span className="tech-name">{t.name}</span>
                                 </li>
