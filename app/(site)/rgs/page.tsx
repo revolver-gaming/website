@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import PartnerLogo from "@/components/PartnerLogo";
 import { getRgsStats, listOperators } from "@/lib/cms";
@@ -36,7 +37,24 @@ const RELIABILITY = [
     { title: "Monitored around the clock", text: "RTP and RNG are tested continuously. A game that drifts is switched off automatically." },
 ];
 
-const STACK = ["Node.js", "TypeScript", "NestJS", "React", "Google Cloud", "Terraform", "Docker", "Redis", "MySQL", "Pub/Sub", "BigQuery"];
+/* Logos from Simple Icons 16.31.0 in public/tech/ (CC0; OpenTelemetry CC BY 4.0). Cloud and data first, then languages and services. */
+const STACK = [
+    { name: "Google Cloud", logo: "googlecloud", brand: "#4285F4" },
+    { name: "Terraform", logo: "terraform", brand: "#9D6CF0" },
+    { name: "BigQuery", logo: "googlebigquery", brand: "#669DF6" },
+    { name: "Node.js", logo: "nodedotjs", brand: "#5FA04E" },
+    { name: "TypeScript", logo: "typescript", brand: "#3178C6" },
+    { name: "React", logo: "react", brand: "#61DAFB" },
+    { name: "NestJS", logo: "nestjs", brand: "#E0234E" },
+    { name: "Docker", logo: "docker", brand: "#2496ED" },
+    { name: "Redis", logo: "redis", brand: "#FF4438" },
+    { name: "MySQL", logo: "mysql", brand: "#6FA3D2" },
+    { name: "Pub/Sub", logo: "googlepubsub", brand: "#AECBFA" },
+    { name: "New Relic", logo: "newrelic", brand: "#1CE783" },
+    { name: "OpenTelemetry", logo: "opentelemetry", brand: "#F5A800" },
+    { name: "Fastify", logo: "fastify", brand: "#FFFFFF" },
+    { name: "Vite", logo: "vite", brand: "#9499FF" },
+];
 
 const COMPLIANCE = [
     { title: "UKGC licensed", text: "Built and operated to Gambling Commission standards." },
@@ -193,7 +211,14 @@ export default async function Rgs() {
                                 platform stays fast to build on and easy to support.
                             </p>
                         </div>
-                        <ul className="tech-chips">{STACK.map((t) => <li key={t}>{t}</li>)}</ul>
+                        <ul className="tech-chips">
+                            {STACK.map((t) => (
+                                <li key={t.name} title={t.name} style={{ "--logo": `url(/tech/${t.logo}.svg)`, "--brand": t.brand } as CSSProperties}>
+                                    <span className="tech-logo" aria-hidden="true" />
+                                    <span className="tech-name">{t.name}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </section>

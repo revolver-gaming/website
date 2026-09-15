@@ -4650,26 +4650,47 @@ section[data-chamber].tight {
 .tech-chips {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 10px;
 }
 
+/* Logo tiles: the SVG is a mask painted in its brand colour (--logo, --brand set per tile), captioned so less familiar marks still read. */
 .tech-chips li {
-    padding: 18px 12px;
-    font-family: var(--font-d);
-    font-weight: 800;
-    font-size: 20px;
-    text-align: center;
-    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    aspect-ratio: 1;
+    padding: 12px 8px;
+    color: var(--brand, var(--bone));
     background: var(--velvet);
     border: 1px solid var(--velvet-2);
     border-radius: 14px;
-    transition: border-color 0.25s, color 0.25s;
+    transition: border-color 0.25s, transform 0.35s var(--detent);
+}
+
+.tech-logo {
+    width: clamp(30px, 3.4vw, 42px);
+    aspect-ratio: 1;
+    background: currentColor;
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+}
+
+.tech-name {
+    font-family: var(--font-m);
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    overflow-wrap: anywhere;
+    text-transform: uppercase;
+    color: var(--smoke);
 }
 
 .tech-chips li:hover {
-    color: var(--amber);
-    border-color: var(--amber);
+    border-color: var(--brand, var(--amber));
+    transform: translateY(-3px);
 }
 
 .checks li div {
@@ -4713,5 +4734,9 @@ section[data-chamber].tight {
     .int-band,
     .checks-3 {
         grid-template-columns: 1fr;
+    }
+
+    .tech-chips {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
