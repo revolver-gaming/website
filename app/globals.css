@@ -4702,3 +4702,77 @@ section[data-chamber].tight {
 .age-deny:hover {
     color: var(--amber);
 }
+
+/* ---- cookie consent ------------------------------------------------------ */
+
+.cookie-bar {
+    position: fixed;
+    left: var(--gutter);
+    bottom: var(--gutter);
+    z-index: 180; /* under the demo overlay (200) and the age gate (300) */
+    width: min(calc(100vw - var(--gutter) * 2), 400px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: color-mix(in srgb, var(--velvet) 92%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--velvet-2);
+    border-radius: 18px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    padding: 20px 22px;
+    animation: cookie-in 0.45s var(--detent) 0.5s both;
+}
+
+.cookie-bar.is-leaving {
+    animation: cookie-out 0.22s ease forwards;
+}
+
+@keyframes cookie-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes cookie-out {
+    to { opacity: 0; transform: translateY(10px); }
+}
+
+.cookie-bar p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--smoke);
+}
+
+.cookie-bar a {
+    color: var(--amber);
+    text-decoration: underline;
+    white-space: nowrap;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Accept and Decline read as equal choices, as consent rules require. */
+.cookie-actions .btn {
+    flex: 1;
+    justify-content: center;
+    padding: 11px 18px;
+    font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cookie-bar,
+    .cookie-bar.is-leaving {
+        animation: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .cookie-bar {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        width: auto;
+    }
+}

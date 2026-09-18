@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-const KEY = "rg-age-ok";
+import { AGE_KEY, readChoice, saveChoice } from "@/lib/consent";
 
 /* Age check on entry. The answer is kept per browser, so it asks once.
    Rendering is deferred until the stored answer is read, otherwise every
@@ -12,9 +11,7 @@ export default function AgeGate() {
     const [blocked, setBlocked] = useState(false);
 
     useEffect(() => {
-        let confirmed = false;
-        try { confirmed = localStorage.getItem(KEY) === "1"; } catch { /* private mode */ }
-        setAsk(!confirmed);
+        setAsk(readChoice(AGE_KEY) !== "1");
     }, []);
 
     useEffect(() => {
@@ -26,7 +23,7 @@ export default function AgeGate() {
     if (!ask) return null;
 
     const confirm = () => {
-        try { localStorage.setItem(KEY, "1"); } catch { /* private mode: ask again next visit */ }
+        saveChoice(AGE_KEY, "1");
         setAsk(false);
     };
 
