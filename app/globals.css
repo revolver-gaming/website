@@ -1892,13 +1892,6 @@ a.pager-step:hover {
     max-width: 56ch;
 }
 
-.game-ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 26px;
-}
-
 .shot-section {
     margin-top: clamp(48px, 7vw, 80px);
 }
@@ -3839,9 +3832,19 @@ section[data-chamber].tight {
 .game-body {
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    gap: clamp(28px, 5vw, 56px);
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(28px, 5vw, 56px);
+    row-gap: clamp(22px, 3vw, 34px);
     align-items: start;
     margin-top: clamp(28px, 4vw, 44px);
+}
+
+.game-intro {
+    grid-area: 1 / 1;
+}
+
+.game-copy {
+    grid-area: 2 / 1;
 }
 
 .game-body h1 {
@@ -3849,11 +3852,8 @@ section[data-chamber].tight {
     margin: 10px 0 18px;
 }
 
-.game-body .article-body {
-    margin-top: clamp(28px, 4vw, 40px);
-}
-
 .game-panel {
+    grid-area: 1 / 2 / span 2;
     position: sticky;
     top: 96px;
     display: flex;
@@ -3951,12 +3951,28 @@ section[data-chamber].tight {
     text-align: center;
 }
 
+.panel-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.panel-links a {
+    color: var(--amber);
+}
+
+.panel-links a:hover {
+    color: var(--amber-soft);
+    text-decoration: underline;
+}
+
 .o-points {
     list-style: none;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 22px 32px;
-    margin-top: clamp(28px, 4vw, 40px);
 }
 
 .o-points li {
@@ -3982,6 +3998,10 @@ section[data-chamber].tight {
     .game-body,
     .o-points {
         grid-template-columns: 1fr;
+    }
+
+    .game-body > * {
+        grid-area: auto;
     }
 
     .game-panel {

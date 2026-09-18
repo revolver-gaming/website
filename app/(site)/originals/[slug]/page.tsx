@@ -43,21 +43,11 @@ export default async function OriginalPage({ params }: Props) {
                 <Link className="article-back" href="/originals">← Originals</Link>
                 {o.hero_image && <img className="game-banner" src={o.hero_image} alt={`${o.title} banner`} />}
                 <div className="game-body">
-                    <div>
+                    <header className="game-intro">
                         <p className="eyebrow">{o.category} · Provably fair · Brandable</p>
                         <h1 className="display">{o.title}</h1>
                         <p className="game-blurb">{o.blurb}</p>
-                        {o.features.length > 0 && (
-                            <ul className="o-points">
-                                {o.features.map((f) => (
-                                    <li key={f.title}>
-                                        <h3>{f.title}</h3>
-                                        <p>{f.text}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
+                    </header>
                     <aside className="game-panel">
                         <h2>Features</h2>
                         <dl className="spec-table">
@@ -69,6 +59,16 @@ export default async function OriginalPage({ params }: Props) {
                             <Link className={`btn ${o.demo_url ? "btn-ghost" : "btn-fire"}`} href="/#contact">Add to your lobby</Link>
                         </div>
                     </aside>
+                    {o.features.length > 0 && (
+                        <ul className="game-copy o-points">
+                            {o.features.map((f) => (
+                                <li key={f.title}>
+                                    <h3>{f.title}</h3>
+                                    <p>{f.text}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
                 {more.length > 0 && (
                     <section className="shot-section">
