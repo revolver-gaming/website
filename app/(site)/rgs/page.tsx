@@ -169,6 +169,19 @@ export default async function Rgs() {
                             </div>
                         ))}
                     </div>
+
+                    <div className="section-head" data-reveal>
+                        <p className="eyebrow">Plug into the network</p>
+                        <h2 className="display">Distribution, ready <em>on day one</em></h2>
+                        <p className="lede">
+                            License the Revolver RGS and you inherit our reach. Connected
+                            across leading operators and aggregators, with new hook-ups added fast.
+                        </p>
+                    </div>
+                    <div className="roster" data-reveal>
+                        {operators.map((o) => <div key={o.name}><PartnerLogo {...o} /></div>)}
+                        <div className="more"><b>+ More</b><span>Added continuously</span></div>
+                    </div>
                 </div>
             </section>
 
@@ -240,18 +253,6 @@ export default async function Rgs() {
 
             <section data-chamber>
                 <div className="shell">
-                    <div className="section-head" data-reveal>
-                        <p className="eyebrow">Plug into the network</p>
-                        <h2 className="display">Distribution, ready <em>on day one</em></h2>
-                        <p className="lede">
-                            License the Revolver RGS and you inherit our reach. Connected
-                            across leading operators and aggregators, with new hook-ups added fast.
-                        </p>
-                    </div>
-                    <div className="roster" data-reveal>
-                        {operators.map((o) => <div key={o.name}><PartnerLogo {...o} /></div>)}
-                        <div className="more"><b>+ More</b><span>Added continuously</span></div>
-                    </div>
                     <div className="cta-card rgs-cta" data-reveal>
                         <p className="eyebrow">Last chamber</p>
                         <h2 className="display">Load it <em>your way.</em></h2>

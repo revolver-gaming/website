@@ -4415,6 +4415,11 @@ section[data-chamber].tight {
     padding: 8px 14px;
 }
 
+/* A second heading inside the same section needs the gap a section break would give. */
+.int-band + .section-head {
+    margin-top: clamp(56px, 7vw, 88px);
+}
+
 .int-band {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
