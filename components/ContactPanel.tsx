@@ -1,9 +1,9 @@
 import { getContact } from "@/lib/cms";
 
 const ENQUIRIES: [string, string][] = [
-    ["I run a casino", "Operator enquiry"],
-    ["I'm an aggregator", "Aggregator enquiry"],
-    ["I build games", "Studio partnership"],
+    ["I'm an Operator", "Operator enquiry"],
+    ["I'm a Platform / Aggregator", "Platform / aggregator enquiry"],
+    ["I'm a Games Studio", "Studio partnership"],
 ];
 
 export default async function ContactPanel() {
@@ -30,7 +30,7 @@ export default async function ContactPanel() {
                         className="contact-pill"
                         href={`mailto:${contact.email}?subject=${encodeURIComponent(subject)}`}
                     >
-                        <span>{label}</span><span>→</span>
+                        <span>{label}</span><span aria-hidden>→</span>
                     </a>
                 ))}
             </div>

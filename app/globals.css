@@ -233,7 +233,7 @@ button {
 }
 
 .nav-brand img {
-    height: 34px;
+    height: 44px;
     width: auto;
 }
 
@@ -1289,11 +1289,16 @@ a.pager-step:hover {
 /* ---- page heroes (subpages) ----------------------------------------------- */
 
 .page-hero {
-    padding-block: clamp(48px, 7vw, 72px) clamp(36px, 5vw, 56px);
+    padding-block: clamp(48px, 7vw, 72px) clamp(28px, 4vw, 44px);
     display: flex;
     flex-direction: column;
     gap: 24px;
     align-items: flex-start;
+}
+
+/* The hero already ends on a filter bar, so the grid under it starts tighter. */
+.page-hero + section[data-chamber] {
+    padding-top: clamp(44px, 5.5vw, 64px);
 }
 
 .page-hero h1 {
@@ -1890,6 +1895,27 @@ a.pager-step:hover {
     color: var(--smoke);
     font-size: 17px;
     max-width: 56ch;
+}
+
+.game-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+/* "Demo soon": reads as a button, but there is nothing to click yet. */
+.btn-inert {
+    cursor: default;
+    opacity: 0.65;
+}
+
+.btn-inert:hover {
+    transform: none;
+    border-color: var(--velvet-3);
+    color: var(--bone);
+    background: none;
+    box-shadow: none;
 }
 
 .shot-section {
@@ -4604,4 +4630,75 @@ section[data-chamber].tight {
     .checks-3 {
         grid-template-columns: 1fr;
     }
+}
+
+/* ---- age gate (18+ on entry) --------------------------------------------- */
+
+.age-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 300; /* above the demo overlay, which sits at 200 */
+    display: grid;
+    place-items: center;
+    padding: var(--gutter);
+    background: rgba(15, 6, 15, 0.86);
+    backdrop-filter: blur(6px);
+}
+
+.age-card {
+    width: min(100%, 520px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+    background: var(--velvet);
+    border: 1px solid var(--velvet-2);
+    border-radius: 22px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+    padding: clamp(28px, 5vw, 44px);
+}
+
+.age-card img {
+    width: 64px;
+    height: auto;
+}
+
+.age-card h2 {
+    font-family: var(--font-d);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(28px, 4.5vw, 38px);
+    line-height: 1.02;
+}
+
+.age-card p {
+    color: var(--smoke);
+    font-size: 16px;
+    max-width: 42ch;
+}
+
+.age-card a {
+    color: var(--amber);
+    text-decoration: underline;
+}
+
+.age-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px 22px;
+    margin-top: 6px;
+}
+
+.age-deny {
+    font-size: 15px;
+    color: var(--smoke);
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.age-deny:hover {
+    color: var(--amber);
 }

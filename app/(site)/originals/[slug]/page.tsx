@@ -52,17 +52,19 @@ export default async function OriginalPage({ params }: Props) {
                         <p className="eyebrow">{o.category} · Provably fair · Brandable</p>
                         <h1 className="display">{o.title}</h1>
                         <p className="game-blurb">{o.blurb}</p>
+                        <div className="game-ctas">
+                            {o.demo_url
+                                ? <DemoLauncher url={o.demo_url} title={o.title} />
+                                : <span className="btn btn-ghost btn-inert">Demo soon</span>}
+                            <Link className="btn btn-ghost" href="/originals#branding">Branding demo</Link>
+                            <Link className="btn btn-ghost" href="/#contact">Add to your lobby</Link>
+                        </div>
                     </header>
                     <aside className="game-panel">
                         <h2>Features</h2>
                         <dl className="spec-table">
                             {specs.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
                         </dl>
-                        <div className="panel-ctas">
-                            {o.demo_url && <DemoLauncher url={o.demo_url} title={o.title} />}
-                            <Link className="btn btn-ghost" href="/originals#branding">Branding demo</Link>
-                            <Link className={`btn ${o.demo_url ? "btn-ghost" : "btn-fire"}`} href="/#contact">Add to your lobby</Link>
-                        </div>
                     </aside>
                     {o.features.length > 0 && (
                         <ul className="game-copy o-points">

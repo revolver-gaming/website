@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import AgeGate from "@/components/AgeGate";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -9,6 +10,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             {children}
             <Footer />
             <Reveal />
+            <AgeGate />
         </>
     );
 }

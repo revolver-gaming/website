@@ -38,9 +38,9 @@ export default async function GamePage({ params }: Props) {
         ["Paylines", game.paylines],
         ["Bonus buy", game.bonus_buy === null ? null : game.bonus_buy ? "Yes" : "No"],
     ].filter(([, v]) => v);
-    // Play demo is the panel's one button; the rest ride under it as quiet links.
-    const downloads = ([
-        ["Asset pack", game.asset_pack], ["Product sheet", game.product_sheet], ["Watch video", game.video_url],
+    // Ryan wants the CTAs beside the copy: Play demo in amber, the rest as ghost buttons.
+    const links = ([
+        ["Product sheet", game.product_sheet], ["Asset pack", game.asset_pack], ["Watch video", game.video_url],
     ] as const).filter(([, href]) => href);
     return (
         <main>
@@ -57,24 +57,20 @@ export default async function GamePage({ params }: Props) {
                         <p className="eyebrow">{[game.year, ...game.tags].join(" · ")}</p>
                         <h1 className="display">{game.title}</h1>
                         <p className="game-blurb">{game.blurb}</p>
+                        <div className="game-ctas">
+                            {game.demo_url
+                                ? <DemoLauncher url={game.demo_url} title={game.title} />
+                                : <span className="btn btn-ghost btn-inert">Demo soon</span>}
+                            {links.map(([label, href]) => (
+                                <a key={label} className="btn btn-ghost" href={href!} target="_blank" rel="noopener">{label}</a>
+                            ))}
+                        </div>
                     </header>
                     <aside className="game-panel">
                         <h2>Features</h2>
                         <dl className="spec-table">
                             {specs.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
                         </dl>
-                        {game.demo_url && (
-                            <div className="panel-ctas">
-                                <DemoLauncher url={game.demo_url} title={game.title} />
-                            </div>
-                        )}
-                        {downloads.length > 0 && (
-                            <p className="panel-links">
-                                {downloads.map(([label, href]) => (
-                                    <a key={label} href={href!} target="_blank" rel="noopener">{label}</a>
-                                ))}
-                            </p>
-                        )}
                         {game.features.length > 0 && (
                             <>
                                 <h3>Features &amp; USPs</h3>
