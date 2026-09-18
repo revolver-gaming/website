@@ -5,9 +5,11 @@
 
 :root {
     --chamber: #1f0e1f;        /* page base, deepest brand purple */
-    --velvet: #301630;         /* brand purple: primary surface / hairlines on dark */
-    --velvet-2: #4d224d;       /* brand purple: lifted surface, card borders */
-    --velvet-3: #63305f;       /* ghost-button borders */
+    --velvet: #3d1d3e;         /* brand purple: primary surface / hairlines on dark */
+    --velvet-2: #5e2f5e;       /* brand purple: lifted surface, card borders */
+    --velvet-3: #7a3f74;       /* ghost-button borders */
+    --lift: 0 10px 28px rgba(0, 0, 0, 0.35);           /* separates panels from the page base */
+    --lift-bone: 0 8px 22px rgba(48, 22, 48, 0.09);    /* the same, softened for bone sections */
     --amber: #ffa755;          /* brand orange: signature accent */
     --amber-hot: #ee923d;      /* brand orange: deeper tone */
     --amber-soft: #ffb877;     /* fire-button hover */
@@ -16,7 +18,7 @@
     --bone-card: #fcf8f3;      /* cards on bone */
     --ink: #301630;            /* text on bone */
     --ink-soft: #6e5470;       /* muted text on bone */
-    --smoke: #cdb6cb;          /* muted text on dark */
+    --smoke: #d7c1d4;          /* muted text on dark */
     --rust: #b85c14;           /* brand orange darkened for legibility on bone */
 
     --font-d: var(--font-display), "Arial Narrow", sans-serif;
@@ -99,7 +101,7 @@ button {
 
 .eyebrow {
     font-family: var(--font-m);
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--amber);
@@ -130,7 +132,7 @@ button {
 .section-head .lede {
     max-width: 62ch;
     color: var(--smoke);
-    font-size: 17px;
+    font-size: 18px;
     text-wrap: pretty;
 }
 
@@ -166,14 +168,25 @@ button {
         color 0.25s, border-color 0.25s;
 }
 
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+    transition-duration: 0.08s;
+}
+
 .btn-fire {
-    background: var(--amber);
+    background: linear-gradient(180deg, var(--amber-soft), var(--amber-hot));
     color: var(--chamber);
     font-weight: 700;
+    box-shadow: 0 4px 14px rgba(238, 146, 61, 0.28);
 }
 
 .btn-fire:hover {
-    background: var(--amber-soft);
+    background: linear-gradient(180deg, #ffc48f, var(--amber));
+    box-shadow: 0 10px 26px rgba(255, 167, 85, 0.45);
 }
 
 .btn-ghost {
@@ -184,6 +197,8 @@ button {
 .btn-ghost:hover {
     border-color: var(--amber);
     color: var(--amber);
+    background: rgba(255, 167, 85, 0.1);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
 }
 
 .on-bone .btn-ghost {
@@ -194,6 +209,7 @@ button {
 .on-bone .btn-ghost:hover {
     background: var(--ink);
     color: var(--bone);
+    box-shadow: 0 10px 24px rgba(48, 22, 48, 0.28);
 }
 
 /* ---- nav ----------------------------------------------------------------- */
@@ -738,7 +754,7 @@ section[data-chamber]:not(.hero) {
 
 .gc-title .yr {
     font-family: var(--font-m);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--ink-soft);
 }
 
@@ -1326,12 +1342,19 @@ a.pager-step:hover {
     border-radius: 999px;
     padding: 8px 18px;
     color: var(--smoke);
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    transition: transform 0.2s var(--detent), border-color 0.2s, color 0.2s, background 0.2s,
+        box-shadow 0.2s;
 }
 
 .chip:hover {
+    transform: translateY(-2px);
     border-color: var(--amber);
     color: var(--amber);
+    background: rgba(255, 167, 85, 0.1);
+}
+
+.chip:active {
+    transform: translateY(0);
 }
 
 .chip.on {
@@ -1339,6 +1362,7 @@ a.pager-step:hover {
     border-color: var(--amber);
     color: var(--chamber);
     font-weight: 700;
+    box-shadow: 0 4px 14px rgba(255, 167, 85, 0.3);
 }
 
 .filter-bar .search {
@@ -1403,13 +1427,14 @@ a.pager-step:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    box-shadow: var(--lift);
 }
 
 .feat-card::before {
     counter-increment: feat;
     content: counter(feat, decimal-leading-zero);
     font-family: var(--font-m);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.2em;
     color: var(--amber);
 }
@@ -1428,7 +1453,7 @@ a.pager-step:hover {
 }
 
 .feat-card p {
-    font-size: 14.5px;
+    font-size: 15.5px;
     line-height: 1.6;
     color: var(--smoke);
 }
@@ -1436,6 +1461,7 @@ a.pager-step:hover {
 .on-bone .feat-card {
     background: var(--bone-card);
     border-color: var(--bone-2);
+    box-shadow: var(--lift-bone);
 }
 
 .on-bone .feat-card::before {
@@ -1465,7 +1491,7 @@ a.pager-step:hover {
 .badge-roadmap {
     font-family: var(--font-m);
     font-weight: 500;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     border: 1px solid var(--amber);
@@ -2813,6 +2839,36 @@ section[data-chamber].tight {
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
+/* ---- New / Coming soon badge (slot + original cards) --------------------- */
+
+.tag-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    font-family: var(--font-m);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--amber);
+    color: var(--chamber);
+    border-radius: 999px;
+    padding: 5px 11px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Slot cards have no frame, so the badge sits on the artwork itself. */
+.game-card .tag-badge {
+    top: 10px;
+    left: 10px;
+}
+
+.game-card:hover .tag-badge {
+    transform: translateY(-5px);
+    transition: transform 0.35s var(--detent);
+}
+
 /* ---- originals (spec cards, featured title, detail art) ------------------------------ */
 
 .o-grid {
@@ -2830,6 +2886,7 @@ section[data-chamber].tight {
     border-radius: var(--radius);
     overflow: hidden;
     transition: transform 0.35s var(--detent), border-color 0.25s;
+    box-shadow: var(--lift);
 }
 
 .o-card:hover {
@@ -2838,24 +2895,7 @@ section[data-chamber].tight {
 }
 
 .o-card.is-soon {
-    opacity: 0.6;
     border-style: dashed;
-}
-
-.o-tag {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    z-index: 1;
-    font-family: var(--font-m);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    background: var(--amber);
-    color: var(--chamber);
-    border-radius: 999px;
-    padding: 4px 10px;
 }
 
 .o-art {
@@ -2912,7 +2952,7 @@ section[data-chamber].tight {
 
 .o-stats dt {
     font-family: var(--font-m);
-    font-size: 9.5px;
+    font-size: 10.5px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--smoke);
@@ -2940,6 +2980,7 @@ section[data-chamber].tight {
     border-radius: 20px;
     padding: clamp(18px, 3vw, 32px);
     margin-bottom: 20px;
+    box-shadow: var(--lift);
 }
 
 .o-feature .o-art {
@@ -3069,12 +3110,13 @@ section[data-chamber].tight {
     flex-direction: column;
     gap: 12px;
     transition: transform 0.3s var(--detent), border-color 0.3s;
+    box-shadow: var(--lift);
 }
 
 .opt-card .tag {
     align-self: flex-start;
     font-family: var(--font-m);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--amber);
@@ -3116,6 +3158,7 @@ section[data-chamber].tight {
 .on-bone .opt-card {
     background: var(--bone-card);
     border-color: var(--bone-2);
+    box-shadow: var(--lift-bone);
 }
 
 .on-bone .opt-card .tag {
@@ -3820,6 +3863,7 @@ section[data-chamber].tight {
     border: 1px solid var(--velvet-2);
     border-radius: var(--radius);
     padding: 26px;
+    box-shadow: var(--lift);
 }
 
 .game-panel h2 {
@@ -3875,7 +3919,7 @@ section[data-chamber].tight {
 
 .spec-table dt {
     font-family: var(--font-m);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--smoke);

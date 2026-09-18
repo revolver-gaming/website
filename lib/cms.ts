@@ -64,6 +64,8 @@ export type Game = {
     tags: string[];
     featured: boolean;
     demo_url: string | null;
+    is_new: boolean;
+    coming_soon: boolean;
 };
 
 export type GameDetail = Game & {
@@ -74,14 +76,15 @@ export type GameDetail = Game & {
     video_url: string | null;
     rtp: string | null;
     volatility: string | null;
-    layout: string | null;
     banner_image: string | null;
     max_win: string | null;
+    paylines: string | null;
+    bonus_buy: boolean | null;
     languages: string[];
     asset_pack: string | null;
 };
 
-const GAME_FIELDS = "slug, title, blurb, image:card_image, year, tags, featured, demo_url";
+const GAME_FIELDS = "slug, title, blurb, image:card_image, year, tags, featured, demo_url, is_new, coming_soon";
 
 export async function listGames(): Promise<Game[]> {
     const { data, error } = await supabase
@@ -95,11 +98,22 @@ export async function listGames(): Promise<Game[]> {
 export async function getGame(slug: string): Promise<GameDetail | null> {
     const { data, error } = await supabase
         .from("games")
-        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url, rtp, volatility, layout, banner_image, max_win, languages, asset_pack`)
+        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url, rtp, volatility, banner_image, max_win, paylines, bonus_buy, languages, asset_pack`)
         .eq("slug", slug)
         .maybeSingle();
     if (error) throw error;
     return data as unknown as GameDetail | null;
+}
+
+// Studios quote RTP as a list of certified bands ("90% / 92% / 94% / 96%").
+// Operators only care about the span, so collapse it to "90–96%".
+export function rtpRange(rtp: string | null): string | null {
+    if (!rtp?.includes("%")) return rtp;
+    const values = (rtp.match(/\d+(?:\.\d+)?/g) ?? []).map(Number);
+    if (values.length === 0) return rtp;
+    const [low, high] = [Math.min(...values), Math.max(...values)];
+    // A single certified figure is quoted as written — "96.10%", not "96.1%".
+    return low === high ? rtp : `${low}–${high}%`;
 }
 
 export type Original = {

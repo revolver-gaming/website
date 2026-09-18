@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
-import { getGame, listGames } from "@/lib/cms";
+import { getGame, listGames, rtpRange } from "@/lib/cms";
 
 export const revalidate = 300;
 
@@ -31,9 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GamePage({ params }: Props) {
     const game = await getGame((await params).slug);
     if (!game) notFound();
+    // Spec order is Ryan's: release date, RTP, volatility, max multiplier, paylines, bonus buy.
     const specs = [
-        ["Max win", game.max_win], ["RTP", game.rtp], ["Volatility", game.volatility],
-        ["Layout", game.layout], ["Released", String(game.year)], ["Format", "HTML5"],
+        ["Release date", String(game.year)], ["RTP", rtpRange(game.rtp)],
+        ["Volatility", game.volatility], ["Max multiplier", game.max_win],
+        ["Paylines", game.paylines],
+        ["Bonus buy", game.bonus_buy === null ? null : game.bonus_buy ? "Yes" : "No"],
     ].filter(([, v]) => v);
     return (
         <main>

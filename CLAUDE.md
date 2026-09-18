@@ -34,7 +34,7 @@ Two route groups, two Supabase clients:
 - **`app/(site)/`** — the public site, fully **server-rendered from Supabase** via `lib/cms.ts`. That module creates a client whose fetch is capped at `revalidate: 300` (5-min ISR), so CMS edits appear without redeploys. Everything is CMS-driven: games, news, jobs, generic pages, partner studios, operators, contact/socials/footer (the last three as JSON values in the `site_content` key/value table).
 - **`app/admin/`** — a client-side CMS admin (CRUD for news, games, jobs, pages, settings). Uses its own browser client in `app/admin/lib.ts` (keeps the Supabase Auth session, no fetch caching). `AdminShell` gates everything behind Supabase email/password login; the layout sets `robots: noindex`. Media uploads go to the public `media` storage bucket via `uploadMedia`.
 
-Supabase tables: `news`, `games`, `originals`, `jobs`, `pages`, `partner_studios`, `operators`, `site_content`. New tables need both RLS policies and explicit `grant`s to `anon`/`authenticated`, or the build fails with "permission denied". Types in `lib/cms.ts` mirror them; DB columns are snake_case, sometimes aliased in selects (e.g. `image:card_image`, `knownFor:known_for`).
+Supabase tables: `news`, `games`, `originals`, `jobs`, `pages`, `partner_studios`, `operators`, `site_content`. `games` and `originals` both carry `is_new` / `coming_soon`, which drive the shared `.tag-badge` on their cards. The slot spec panel is fixed to Ryan's six fields — release date, RTP, volatility, max multiplier, paylines, bonus buy — with `rtpRange()` collapsing a list of certified bands to a span ("90% / 92% / 94% / 96%" → "90–96%"). New tables need both RLS policies and explicit `grant`s to `anon`/`authenticated`, or the build fails with "permission denied". Types in `lib/cms.ts` mirror them; DB columns are snake_case, sometimes aliased in selects (e.g. `image:card_image`, `knownFor:known_for`).
 
 ### URL compatibility with the old site (do not break)
 
@@ -50,7 +50,7 @@ Ryan's brief (Sept 2026): the site is organised around product **pillars**, each
 |--------|-------|---------------|
 | About | `/about` | Company overview: one card per pillar, how we work (first nav item) |
 | Slots | `/games` (`/slots` redirects here) | Our original slots, licensable and brandable |
-| Originals | `/originals`, `/originals/{slug}` | Brandable casual originals (white-labelled Bet4Win product), provably fair + RNG. CMS-driven from the `originals` table: specs, features, optional art/demo, one `featured`, `coming_soon` titles get a card but no page |
+| Originals | `/originals`, `/originals/{slug}` | Brandable casual originals (white-labelled Bet4Win product, live at https://www.bet4.win/ — copy category labels from there; these games are **provably fair, not RNG**). CMS-driven from the `originals` table: specs, features, optional art/demo, one `featured`, `coming_soon` titles get a card but no page |
 | RGS | `/rgs` | RGS licensing: **Independent** (run it yourself) or **Managed service** |
 | Platform (GAP) | `/gap` | Labelled "Platform" everywhere user-facing — "GAP" means nothing to outsiders. Aggregation: studios in (RGS↔RGS, or Game→RGS where we host), operators out with one integration |
 | Exclusives | `/exclusives` | Custom-built / branded games on our tech |

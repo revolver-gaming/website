@@ -18,7 +18,7 @@ const steps = [
     },
     {
         title: "Every round is recorded",
-        text: "The full RNG state of each round is stored with the round itself: seeds, nonce and outcome, kept as a permanent audit trail.",
+        text: "The full state of each round is stored with the round itself: seeds, nonce and outcome, kept as a permanent audit trail.",
     },
     {
         title: "Verify after the fact",

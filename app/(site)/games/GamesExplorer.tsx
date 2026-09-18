@@ -30,7 +30,7 @@ export default function GamesExplorer({ games }: { games: Game[] }) {
     return (
         <>
             <div className="shell page-hero">
-                <p className="eyebrow">Slots · our core — {games.length} original titles</p>
+                <p className="eyebrow">Slots · our core</p>
                 <h1 className="display">Slots people <em>remember.</em></h1>
                 <p className="lede">
                     Every title built in-house — concept, maths, art and sound — in HTML5,
@@ -69,7 +69,7 @@ export default function GamesExplorer({ games }: { games: Game[] }) {
                     ) : (
                         <p className="empty-note">
                             Nothing in the chamber for “<b>{query}</b>”. Try another title or
-                            feature — or clear the filters to reload all {games.length} games.
+                            feature — or clear the filters to reload every title.
                         </p>
                     )}
                 </div>

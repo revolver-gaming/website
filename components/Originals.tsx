@@ -46,7 +46,7 @@ function OriginalStats({ o }: { o: Original }) {
 export function OriginalCard({ o }: { o: Original }) {
     return (
         <Link className={`o-card${o.coming_soon ? " is-soon" : ""}`} href={o.coming_soon ? "/#contact" : `/originals/${o.slug}`}>
-            {(o.is_new || o.coming_soon) && <span className="o-tag">{o.coming_soon ? "Soon" : "New"}</span>}
+            {(o.is_new || o.coming_soon) && <span className="tag-badge">{o.coming_soon ? "Coming soon" : "New"}</span>}
             <OriginalArt o={o} />
             <div className="o-meta">
                 <h3>{o.title}</h3>

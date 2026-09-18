@@ -5,10 +5,11 @@ import GameCard from "./GameCard";
 import type { Game } from "@/lib/cms";
 
 /* Ryan's wireframe filters: All · New · Flagship · Branded · Seasonal.
-   Derived from CMS data until games carry an explicit category. */
-const FILTERS: [string, (g: Game, games: Game[]) => boolean][] = [
+   New and Coming soon are flags on the game; the rest come from tags. */
+const FILTERS: [string, (g: Game) => boolean][] = [
     ["All", () => true],
-    ["New", (g, games) => g.year === Math.max(...games.map((x) => x.year))],
+    ["New", (g) => g.is_new],
+    ["Coming soon", (g) => g.coming_soon],
     ["Flagship", (g) => g.featured],
     ["Branded", (g) => g.tags.some((t) => /brand/i.test(t))],
     ["Seasonal", (g) => g.tags.some((t) => /seasonal/i.test(t))],
@@ -17,7 +18,7 @@ const FILTERS: [string, (g: Game, games: Game[]) => boolean][] = [
 export default function HomeSlots({ games }: { games: Game[] }) {
     const [filter, setFilter] = useState("All");
     const match = FILTERS.find(([name]) => name === filter)![1];
-    const shown = games.filter((g) => match(g, games));
+    const shown = games.filter(match);
     return (
         <>
             <div className="filter-bar" role="group" aria-label="Filter slots" data-reveal>

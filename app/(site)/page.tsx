@@ -28,9 +28,10 @@ export default async function Home() {
     const heroOriginal = originalGames.find((o) => o.featured && !o.coming_soon) ?? originalGames[0];
     // RGS and Platform borrow slot art until their own hero figures are designed.
     const others = games.filter((g) => !g.featured && !branded.includes(g));
-    // Newest featured art carries "coming soon" stickers, so the intro opens on the last (longest-running) featured title.
-    const [introGame, slotsGame, exclusiveGame] = [featured.at(-1), featured[3] ?? featured[0], branded[0] ?? featured[0]];
-    const [rgsGame, gapGame] = [others[0] ?? featured[1], others[1] ?? featured[2]];
+    // Hero art should be a title operators can actually take, so skip anything still coming soon.
+    const live = featured.filter((g) => !g.coming_soon);
+    const [introGame, slotsGame, exclusiveGame] = [live.at(-1), live[1] ?? live[0], branded[0] ?? live[0]];
+    const [rgsGame, gapGame] = [others[0] ?? live[0], others[1] ?? live[1]];
     const visuals = {
         intro: <HeroArt src={introGame?.image} alt={introGame?.title} />,
         slots: <HeroArt src={slotsGame?.image} alt={slotsGame?.title} />,
@@ -89,7 +90,7 @@ export default async function Home() {
             </section>
 
             {/* slots */}
-            <section className="art-bg" data-chamber id="slots" style={{ "--art": `url(${featured[0]?.image})` } as React.CSSProperties}>
+            <section className="art-bg" data-chamber id="slots" style={{ "--art": `url(${live[0]?.image})` } as React.CSSProperties}>
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head" data-reveal>
@@ -102,7 +103,7 @@ export default async function Home() {
                                 This is the business we were founded on.
                             </p>
                         </div>
-                        <Link href="/games" className="btn btn-ghost">See all {games.length} titles →</Link>
+                        <Link href="/games" className="btn btn-ghost">See all titles →</Link>
                     </div>
                     <div className="tag-bar" data-reveal>
                         {["Licensable", "Brandable", "Proven performers", "UKGC licensed"].map((t) => <span key={t}>{t}</span>)}
@@ -119,8 +120,8 @@ export default async function Home() {
                             <p className="eyebrow">{originals.kicker}</p>
                             <h2 className="display">{originals.title[0]} <em>{originals.title[1]}</em></h2>
                             <p className="lede">
-                                Seventeen fast, modern casual games and counting, in provably fair
-                                and RNG formats, every one brandable to your casino. Stand up a
+                                Seventeen fast, modern casual games and counting, every round
+                                provably fair and every one brandable to your casino. Stand up a
                                 complete originals lobby under your brand, with a new title landing
                                 every month.
                             </p>
@@ -128,7 +129,7 @@ export default async function Home() {
                         <Link href={originals.href} className="btn btn-ghost">{originals.cta} →</Link>
                     </div>
                     <div className="tag-bar" data-reveal>
-                        {["Provably fair + RNG", "Fully brandable", `${liveCount(originalGames)} live · new monthly`].map((t) => <span key={t}>{t}</span>)}
+                        {["Provably fair", "Fully brandable", `${liveCount(originalGames)} live · new monthly`].map((t) => <span key={t}>{t}</span>)}
                     </div>
                     <OriginalsShowcase items={originalGames} />
                 </div>

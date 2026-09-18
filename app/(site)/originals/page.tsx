@@ -10,11 +10,11 @@ export const revalidate = 300;
 export const metadata: Metadata = {
     title: "Originals — Revolver Gaming",
     description:
-        "Brandable casual originals — crash, dice, mines, plinko and more — in provably fair and RNG formats. A complete originals lobby under your brand, with new titles monthly.",
+        "Brandable casual originals — crash, dice, mines, plinko and more, every round provably fair. A complete originals lobby under your brand, with new titles monthly.",
 };
 
 const PROMISES = [
-    { title: "Provably fair + RNG", text: "Every title runs on the licensed RGS. Players can verify any round after the fact, and the RNG is tested around the clock.", href: "/fairness", cta: "Learn more" },
+    { title: "Provably fair", text: "Every title runs on the licensed RGS, with the seeds published up front so players can verify any round after the fact.", href: "/fairness", cta: "Learn more" },
     { title: "Fully brandable", text: "Your logo, your colours, your lobby. Each original ships as a branded edition for your casino, not a generic skin.", href: "#branding", cta: "Try demo" },
     { title: "A full lobby, fast", text: "We stand up the whole originals lobby under your brand and keep it growing, with new titles landing every month." },
 ];
@@ -37,8 +37,8 @@ export default async function Originals() {
                         <p className="eyebrow">{p.kicker}</p>
                         <h1 className="display">{p.title[0]}<br /><em>{p.title[1]}</em></h1>
                         <p className="lede">
-                            Seventeen fast, modern casual games and counting, in provably fair
-                            and RNG formats, every one brandable to your casino. Stand up a
+                            Seventeen fast, modern casual games and counting, every round
+                            provably fair and every one brandable to your casino. Stand up a
                             complete originals lobby under your brand, with a new title landing
                             every month.
                         </p>
@@ -49,7 +49,7 @@ export default async function Originals() {
                         </div>
                     </div>
                     <div className="tag-bar">
-                        {["Provably fair + RNG", "Fully brandable", `${liveCount(items)} live · new monthly`].map((t) => <span key={t}>{t}</span>)}
+                        {["Provably fair", "Fully brandable", `${liveCount(items)} live · new monthly`].map((t) => <span key={t}>{t}</span>)}
                     </div>
                 </div>
             </section>

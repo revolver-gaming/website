@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 /* Copy is Ryan's (wireframe v9), with MGA and "GAP" adapted to what we claim and call it. */
 const OFFERINGS: Record<string, { title: string; text: string; cta: string }> = {
     slots: { title: "Original slots", text: "Proven, licensable, brandable slots built in-house, led by flagship Irish Coins and a growing line of branded and seasonal titles.", cta: "Explore slots" },
-    originals: { title: "Casual originals", text: "A full lobby of brandable casual games, crash, dice, mines, plinko and more, in provably fair and RNG formats, with a new title every month.", cta: "Explore originals" },
+    originals: { title: "Casual originals", text: "A full lobby of brandable casual games, crash, dice, mines, plinko and more, every round provably fair, with a new title every month.", cta: "Explore originals" },
     rgs: { title: "Remote Gaming Server", text: "License our RGS, independent, managed or hybrid, and plug straight into our distribution network of operators and aggregators.", cta: "Explore RGS" },
     gap: { title: "Game Aggregation Platform", text: "Studios bring their games in, operators take the whole catalogue out, Revolver's own games plus every partner studio, through one integration.", cta: "Explore the platform" },
     exclusives: { title: "Custom & branded games", text: "Branded reskins, seasonal editions and fully bespoke games, built in-house on the certified engine and exclusive to your casino.", cta: "Explore exclusives" },

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
 import { OriginalsGrid } from "@/components/Originals";
-import { listOriginals } from "@/lib/cms";
+import { listOriginals, rtpRange } from "@/lib/cms";
 
 export const revalidate = 300;
 
@@ -33,8 +33,8 @@ export default async function OriginalPage({ params }: Props) {
     const { all, o } = await findLive((await params).slug);
     if (!o) notFound();
     const specs = [
-        ["Max win", o.max_win], ["RTP", o.rtp], ["Volatility", o.volatility],
-        ["Category", o.category], ["Fairness", "Provably fair + RNG"], ["Brandable", "Yes"],
+        ["Max win", o.max_win], ["RTP", rtpRange(o.rtp)], ["Volatility", o.volatility],
+        ["Category", o.category], ["Fairness", "Provably fair"], ["Brandable", "Yes"],
     ].filter(([, v]) => v);
     const more = all.filter((x) => x.slug !== o.slug && !x.coming_soon).slice(0, 4);
     return (
@@ -44,7 +44,7 @@ export default async function OriginalPage({ params }: Props) {
                 {o.hero_image && <img className="game-banner" src={o.hero_image} alt={`${o.title} banner`} />}
                 <div className="game-body">
                     <div>
-                        <p className="eyebrow">Provably fair · RNG · Brandable</p>
+                        <p className="eyebrow">{o.category} · Provably fair · Brandable</p>
                         <h1 className="display">{o.title}</h1>
                         <p className="game-blurb">{o.blurb}</p>
                         {o.features.length > 0 && (

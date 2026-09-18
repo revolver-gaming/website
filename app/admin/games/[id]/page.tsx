@@ -24,9 +24,12 @@ type Row = {
     published: boolean;
     rtp: string | null;
     volatility: string | null;
-    layout: string | null;
     banner_image: string | null;
     max_win: string | null;
+    paylines: string | null;
+    bonus_buy: boolean | null;
+    is_new: boolean;
+    coming_soon: boolean;
     languages: string[];
     asset_pack: string | null;
 };
@@ -35,7 +38,8 @@ const blank = (): Row => ({
     slug: "", title: "", blurb: "", card_image: "", year: new Date().getFullYear(),
     tags: [], featured: false, sort_order: -1, description_html: "", features: [],
     screenshots: [], product_sheet: null, demo_url: null, video_url: null, published: true,
-    rtp: null, volatility: null, layout: null, banner_image: null, max_win: null, languages: [], asset_pack: null,
+    rtp: null, volatility: null, banner_image: null, max_win: null, paylines: null,
+    bonus_buy: null, is_new: false, coming_soon: false, languages: [], asset_pack: null,
 });
 
 export default function EditGame() {
@@ -143,9 +147,13 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     <input type="checkbox" checked={row.published} onChange={(e) => set({ published: e.target.checked })} />
                     Published (visible on the site)
                 </label>
-                <label>
-                    Layout — e.g. 5 Reels, 3 Rows, 20 Lines
-                    <input value={row.layout ?? ""} onChange={(e) => set({ layout: e.target.value || null })} />
+                <label className="check">
+                    <input type="checkbox" checked={row.is_new} onChange={(e) => set({ is_new: e.target.checked, coming_soon: e.target.checked ? false : row.coming_soon })} />
+                    New — shows a “New” badge on the card
+                </label>
+                <label className="check">
+                    <input type="checkbox" checked={row.coming_soon} onChange={(e) => set({ coming_soon: e.target.checked, is_new: e.target.checked ? false : row.is_new })} />
+                    Coming soon — shows a “Coming soon” badge instead
                 </label>
                 <label>
                     Volatility — e.g. Medium-High
@@ -156,8 +164,21 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     <input value={row.rtp ?? ""} onChange={(e) => set({ rtp: e.target.value || null })} />
                 </label>
                 <label>
-                    Max win — e.g. 5,300x
+                    Max multiplier — e.g. 5,300x
                     <input value={row.max_win ?? ""} onChange={(e) => set({ max_win: e.target.value || null })} />
+                </label>
+                <label>
+                    Paylines — e.g. 20, or “243 ways”
+                    <input value={row.paylines ?? ""} onChange={(e) => set({ paylines: e.target.value || null })} />
+                </label>
+                <label>
+                    Bonus buy
+                    <select value={row.bonus_buy === null ? "" : String(row.bonus_buy)}
+                        onChange={(e) => set({ bonus_buy: e.target.value === "" ? null : e.target.value === "true" })}>
+                        <option value="">Not shown</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
                 </label>
                 <label className="wide">
                     Languages — comma-separated

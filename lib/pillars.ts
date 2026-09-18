@@ -27,7 +27,7 @@ export const PILLARS: Pillar[] = [
         label: "Originals",
         kicker: "Originals · expanding",
         title: ["A full lobby,", "fully branded."],
-        lede: "Crash, dice, mines and more. Provably fair and RNG, every one brandable to your casino, with new titles landing every month.",
+        lede: "Crash, dice, mines and more. Every round provably fair, every one brandable to your casino, with new titles landing every month.",
         cta: "See the originals",
     },
     {
