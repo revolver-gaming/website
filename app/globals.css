@@ -1911,7 +1911,8 @@ a.pager-step:hover {
     align-items: center;
     justify-content: center;
     gap: clamp(8px, 2vw, 24px);
-    padding: clamp(14px, 3vw, 48px);
+    --demo-pad: clamp(14px, 3vw, 48px);
+    padding: var(--demo-pad);
     background: rgba(31, 14, 31, 0.94);
 }
 
@@ -1930,8 +1931,10 @@ a.pager-step:hover {
 }
 
 .demo-frame {
-    width: min(100%, 1280px);
-    height: min(100%, 76vw);
+    /* Cap the width by the height the window actually leaves, then let
+       aspect-ratio derive the height. Setting a height directly overrides the
+       ratio and squashes the game on short windows. */
+    width: min(100%, 1280px, calc((100dvh - 2 * var(--demo-pad)) * 16 / 9));
     aspect-ratio: 16 / 9;
     border: 1px solid var(--velvet-2);
     border-radius: var(--radius);
@@ -3819,6 +3822,18 @@ section[data-chamber].tight {
 }
 
 /* ---- game & original detail: banner, copy, features panel ---------------------------- */
+
+.game-banner-wrap {
+    position: relative;
+}
+
+/* Same pill as the card, scaled up for the hero banner. */
+.game-banner-wrap .tag-badge {
+    top: 40px;
+    left: 16px;
+    font-size: 12px;
+    padding: 7px 14px;
+}
 
 .game-banner {
     width: 100%;

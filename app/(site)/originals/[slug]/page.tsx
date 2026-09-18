@@ -41,7 +41,12 @@ export default async function OriginalPage({ params }: Props) {
         <main>
             <div className="shell game-detail">
                 <Link className="article-back" href="/originals">← Originals</Link>
-                {o.hero_image && <img className="game-banner" src={o.hero_image} alt={`${o.title} banner`} />}
+                {o.hero_image && (
+                    <div className="game-banner-wrap">
+                        <img className="game-banner" src={o.hero_image} alt={`${o.title} banner`} />
+                        {o.is_new && <span className="tag-badge">New</span>}
+                    </div>
+                )}
                 <div className="game-body">
                     <header className="game-intro">
                         <p className="eyebrow">{o.category} · Provably fair · Brandable</p>

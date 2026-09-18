@@ -46,7 +46,12 @@ export default async function GamePage({ params }: Props) {
         <main>
             <div className="shell game-detail">
                 <Link className="article-back" href="/games">← All games</Link>
-                <img className="game-banner" src={game.banner_image ?? game.image} alt={`${game.title} banner`} />
+                <div className="game-banner-wrap">
+                    <img className="game-banner" src={game.banner_image ?? game.image} alt={`${game.title} banner`} />
+                    {(game.coming_soon || game.is_new) && (
+                        <span className="tag-badge">{game.coming_soon ? "Coming soon" : "New"}</span>
+                    )}
+                </div>
                 <div className="game-body">
                     <header className="game-intro">
                         <p className="eyebrow">{[game.year, ...game.tags].join(" · ")}</p>

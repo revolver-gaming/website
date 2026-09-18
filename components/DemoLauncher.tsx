@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export function DemoOverlay({ url, title, close }: { url: string; title: string; close: () => void }) {
     useEffect(() => {
@@ -33,6 +34,9 @@ export function DemoOverlay({ url, title, close }: { url: string; title: string;
     );
 }
 
+/* The overlay renders into <body>: the launcher sits inside the sticky .game-panel,
+   and position:sticky always creates a stacking context, which would otherwise trap
+   the overlay's z-index behind the nav and the cards further down the page. */
 export default function DemoLauncher({ url, title }: { url: string; title: string }) {
     const [open, setOpen] = useState(false);
     return (
@@ -40,7 +44,10 @@ export default function DemoLauncher({ url, title }: { url: string; title: strin
             <button className="btn btn-fire" onClick={() => setOpen(true)}>
                 Play demo
             </button>
-            {open && <DemoOverlay url={url} title={title} close={() => setOpen(false)} />}
+            {open && createPortal(
+                <DemoOverlay url={url} title={title} close={() => setOpen(false)} />,
+                document.body,
+            )}
         </>
     );
 }
