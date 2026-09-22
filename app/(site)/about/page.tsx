@@ -23,7 +23,7 @@ const OFFERINGS: Record<string, { title: string; text: string; cta: string }> = 
 const PRINCIPLES = [
     { title: "Founder-led", text: "Close to the detail, fast to decide, straight to deal with." },
     { title: "Studio-first", text: "We make the games, so we know what makes them perform." },
-    { title: "Licensed & compliant", text: "UKGC licensed, built for regulated markets." },
+    { title: "Licensed & compliant", text: "UK and MGA licenced, built for regulated markets." },
     { title: "Lean & fast", text: "No legacy, no bloat. Speed and precision as standard." },
 ];
 
@@ -39,7 +39,7 @@ export default async function About() {
                         <p className="eyebrow">About Revolver</p>
                         <h1 className="display">A fully faceted iGaming <em>products and services</em> provider.</h1>
                         <p className="lede">
-                            Revolver Gaming has been a licensed games software provider since 2010.
+                            Established in 2010, Revolver is a licensed games software provider.
                             We started as a slots studio, and every layer we&apos;ve added since has
                             been built on the same standard: make games operators want, and run the
                             tech that gets them live.
@@ -52,12 +52,12 @@ export default async function About() {
                             to the detail, across the whole chain from concept to lobby.
                         </p>
                         <p className="lede">
-                            Founder-led, UKGC licensed, and lean by design. No bloat, no legacy
-                            weight, no excuses.
+                            Founder-led, UK and MGA licenced, and lean by design. No bloat, no
+                            legacy weight, no excuses.
                         </p>
                     </div>
                     <div className="tag-bar">
-                        {["Since 2010", "UKGC licensed", `${games.length} original slots`, `${OPERATOR_INTEGRATIONS} operator integrations`].map((t) => <span key={t}>{t}</span>)}
+                        {["Since 2010", "Licenced + Certified", `${games.length} original slots`, `${OPERATOR_INTEGRATIONS} operator integrations`].map((t) => <span key={t}>{t}</span>)}
                     </div>
                 </div>
             </section>
@@ -89,7 +89,7 @@ export default async function About() {
                 <div className="shell">
                     <div className="section-head" data-reveal>
                         <p className="eyebrow">How we work</p>
-                        <h2 className="display">We live and breathe <em>iGaming.</em></h2>
+                        <h2 className="display">iGaming is <em>our DNA.</em></h2>
                         <p className="lede">
                             Years of hands-on experience across games, technology and the commercial
                             side of the business.

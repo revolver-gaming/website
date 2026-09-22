@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import BrandingDemo from "@/components/BrandingDemo";
-import { OriginalsShowcase, liveCount } from "@/components/Originals";
+import { OriginalsShowcase } from "@/components/Originals";
 import { listOriginals } from "@/lib/cms";
 import { pillar } from "@/lib/pillars";
 
@@ -36,12 +36,7 @@ export default async function Originals() {
                     <div className="section-head">
                         <p className="eyebrow">{p.kicker}</p>
                         <h1 className="display">{p.title[0]}<br /><em>{p.title[1]}</em></h1>
-                        <p className="lede">
-                            Seventeen fast, modern casual games and counting, every round
-                            provably fair and every one brandable to your casino. Stand up a
-                            complete originals lobby under your brand, with a new title landing
-                            every month.
-                        </p>
+                        <p className="lede">{p.lede}</p>
                         <div className="hero-ctas">
                             <Link href="/#contact" className="btn btn-fire">Brand your lobby</Link>
                             <Link href="/fairness" className="btn btn-ghost">How provably fair works</Link>
@@ -49,7 +44,7 @@ export default async function Originals() {
                         </div>
                     </div>
                     <div className="tag-bar">
-                        {["Provably fair", "Fully brandable", `${liveCount(items)} live · new monthly`].map((t) => <span key={t}>{t}</span>)}
+                        {["Provably fair", "Fully brandable", "New releases monthly"].map((t) => <span key={t}>{t}</span>)}
                     </div>
                 </div>
             </section>

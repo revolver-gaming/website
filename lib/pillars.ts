@@ -18,7 +18,7 @@ export const PILLARS: Pillar[] = [
         label: "Slots",
         kicker: "Slots · our core",
         title: ["Our arsenal.", "Your lobby."],
-        lede: "A proven, growing portfolio of original slots to license and brand as your own. This is where we started, and what still sets us apart.",
+        lede: "A proven, growing portfolio of original slots to license and options to brand as your own. This is where we started, and what still sets us apart.",
         cta: "See the slots",
     },
     {
@@ -27,7 +27,7 @@ export const PILLARS: Pillar[] = [
         label: "Originals",
         kicker: "Originals · expanding",
         title: ["A full lobby,", "fully branded."],
-        lede: "Crash, dice, mines and more. Every round provably fair, every one brandable to your casino, with new titles landing every month.",
+        lede: "A portfolio of fast, modern casual games. Every round provably fair and every one brandable to your casino. Stand up a complete originals lobby under your brand, with a new title landing every month.",
         cta: "See the originals",
     },
     {
@@ -35,7 +35,7 @@ export const PILLARS: Pillar[] = [
         href: "/rgs",
         label: "RGS",
         kicker: "RGS · licensing",
-        title: ["Your games on", "our engine."],
+        title: ["Your games.", "Our engine."],
         lede: "License the Revolver RGS, independent, managed or hybrid, and plug straight into our distribution network. Games but no server? Sorted.",
         cta: "License the RGS",
     },
@@ -79,12 +79,12 @@ export const RGS_OPTIONS = [
 ];
 
 export const RGS_ENGINE = [
-    { title: "Multiplayer-ready GDK", text: "A fully automated, cloud-based game development kit built for multiplayer from the ground up." },
+    { title: "Client Framework Kit", text: "A feature rich frontend framework allowing for rapid development of slots and other games." },
     { title: "Promo & jackpot tools", text: "End-to-end free spins and jackpots, served in your platform's own bonus dialect." },
     { title: "Built-in distribution", text: "Live integrations across leading operators and aggregators, ready the day you go live." },
     { title: "Infrastructure as code", text: "Spin up a new environment in half an hour. No manual builds, no drama." },
     { title: "A modern stack", text: "No legacy weight and no technical debt dragging the platform down." },
-    { title: "Regulated and ready", text: "UKGC licensed and live across major regulated markets, with per-licence config profiles." },
+    { title: "Regulated and ready", text: "UK & MGA licenced and live across major regulated markets, with per-licence config profiles." },
 ];
 
 export const GAP_ROUTES = [
@@ -109,7 +109,7 @@ export const GAP_OPERATOR_POINTS = [
 
 export const BESPOKE_STEPS = [
     { title: "Brief", text: "Your brand, your audience, your market. We agree the theme, the mechanic and the maths targets." },
-    { title: "Design & maths", text: "Concept art, sound and a certified maths model built in-house in London." },
+    { title: "Design & maths", text: "Concept art, sound and a certified maths model built in-house." },
     { title: "Build & certify", text: "HTML5 build on the licensed RGS, tested and certified for your jurisdictions." },
     { title: "Live, exclusively", text: "Launched to your lobby through the platform — and to nobody else's unless you say so." },
 ];

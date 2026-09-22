@@ -58,7 +58,7 @@ const STACK = [
 ];
 
 const COMPLIANCE = [
-    { title: "UKGC licensed", text: "Built and operated to Gambling Commission standards." },
+    { title: "UK & MGA licenced", text: "Built and operated to Gambling Commission and MGA standards." },
     { title: "NIST RNG monitoring", text: "Continuous statistical testing of every RNG-enabled game." },
     { title: "RTP monitoring", text: "Live RTP tracking with alerts and automatic disable and re-enable." },
     { title: "Reality check & game history", text: "Player-protection prompts and full in-game round history." },

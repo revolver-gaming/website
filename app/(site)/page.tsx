@@ -65,9 +65,9 @@ export default async function Home() {
                         <p className="eyebrow">Since 2010</p>
                         <h2 className="display">Where a slots studio became a <em>platform.</em></h2>
                         <p className="lede">
-                            Revolver has been a licensed games software provider since 2010,
-                            built on a slots portfolio operators come back for. That is still
-                            the core, and still the thing most platforms can&apos;t offer.
+                            Established in 2010, Revolver is a licensed games software
+                            provider, built on a slots portfolio operators come back for. That
+                            is still the core, and still the thing most platforms can&apos;t offer.
                         </p>
                         <p className="lede">
                             Today it sits inside a full stack: brandable casual originals, a
@@ -79,7 +79,7 @@ export default async function Home() {
                         </div>
                     </div>
                     <div className="mini-stats" data-reveal>
-                        <div><b>UKGC</b><span>Licensed &amp; compliant</span></div>
+                        <div className="wordmark"><b>UKGC + MGA</b><span>Licensed &amp; compliant</span></div>
                         <div><b>{games.length}+</b><span>Original slots</span></div>
                         <div><b>{liveCount(originalGames)}+</b><span>Casual originals</span></div>
                         <div><b>{THIRD_PARTY_GAMES}</b><span>3rd-party games</span></div>
@@ -106,7 +106,7 @@ export default async function Home() {
                         <Link href="/games" className="btn btn-ghost">See all titles →</Link>
                     </div>
                     <div className="tag-bar" data-reveal>
-                        {["Licensable", "Brandable", "Proven performers", "UKGC licensed"].map((t) => <span key={t}>{t}</span>)}
+                        {["Licensable", "Brandable", "Proven performers", "RNG & Game Certified"].map((t) => <span key={t}>{t}</span>)}
                     </div>
                     <HomeSlots games={games.slice(0, 6)} />
                 </div>
@@ -119,17 +119,12 @@ export default async function Home() {
                         <div className="section-head" data-reveal>
                             <p className="eyebrow">{originals.kicker}</p>
                             <h2 className="display">{originals.title[0]} <em>{originals.title[1]}</em></h2>
-                            <p className="lede">
-                                Seventeen fast, modern casual games and counting, every round
-                                provably fair and every one brandable to your casino. Stand up a
-                                complete originals lobby under your brand, with a new title landing
-                                every month.
-                            </p>
+                            <p className="lede">{originals.lede}</p>
                         </div>
                         <Link href={originals.href} className="btn btn-ghost">{originals.cta} →</Link>
                     </div>
                     <div className="tag-bar" data-reveal>
-                        {["Provably fair", "Fully brandable", `${liveCount(originalGames)} live · new monthly`].map((t) => <span key={t}>{t}</span>)}
+                        {["Provably fair", "Fully brandable", "New releases monthly"].map((t) => <span key={t}>{t}</span>)}
                     </div>
                     <OriginalsShowcase items={originalGames} />
                 </div>

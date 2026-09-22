@@ -2789,12 +2789,22 @@ section[data-chamber].tight {
 }
 
 .mini-stats b {
-    display: block;
+    /* Fixed-height, bottom-aligned box so a tile set at a smaller size still drops
+       its label on the same line as the numbers beside it. */
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(34px, 4vw, 44px);
     font-family: var(--font-d);
     font-weight: 800;
     font-size: clamp(34px, 4vw, 44px);
     line-height: 1;
     color: var(--rust);
+}
+
+/* A two-word value wraps at the size the numbers use, so shrink it to one line. */
+.mini-stats .wordmark b {
+    font-size: clamp(22px, 2.6vw, 30px);
+    white-space: nowrap;
 }
 
 .mini-stats span {
