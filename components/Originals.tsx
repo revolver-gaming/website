@@ -1,4 +1,5 @@
 import Link from "next/link";
+import TagBadge from "@/components/TagBadge";
 import type { Original } from "@/lib/cms";
 
 // Line icons stand in for card art until each title's artwork is uploaded.
@@ -46,7 +47,7 @@ function OriginalStats({ o }: { o: Original }) {
 export function OriginalCard({ o }: { o: Original }) {
     return (
         <Link className={`o-card${o.coming_soon ? " is-soon" : ""}`} href={o.coming_soon ? "/#contact" : `/originals/${o.slug}`}>
-            {(o.is_new || o.coming_soon) && <span className="tag-badge">{o.coming_soon ? "Coming soon" : "New"}</span>}
+            {(o.is_new || o.coming_soon) && <TagBadge soon={o.coming_soon} />}
             <OriginalArt o={o} />
             <div className="o-meta">
                 <h3>{o.title}</h3>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
+import TagBadge from "@/components/TagBadge";
 import { getGame, listGames, rtpRange } from "@/lib/cms";
 
 export const revalidate = 300;
@@ -48,9 +49,7 @@ export default async function GamePage({ params }: Props) {
                 <Link className="article-back" href="/games">← All games</Link>
                 <div className="game-banner-wrap">
                     <img className="game-banner" src={game.banner_image ?? game.image} alt={`${game.title} banner`} />
-                    {(game.coming_soon || game.is_new) && (
-                        <span className="tag-badge">{game.coming_soon ? "Coming soon" : "New"}</span>
-                    )}
+                    {(game.coming_soon || game.is_new) && <TagBadge soon={game.coming_soon} />}
                 </div>
                 <div className="game-body">
                     <header className="game-intro">
