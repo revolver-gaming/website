@@ -6,7 +6,7 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
     title: "Careers — Revolver Gaming",
-    description: "Open roles at Revolver Gaming, the London-based slot studio and aggregation platform.",
+    description: "Open roles at Revolver Gaming, the London-based games studio and aggregation platform.",
 };
 
 export default async function CareersPage() {

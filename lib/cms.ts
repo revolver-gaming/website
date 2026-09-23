@@ -208,7 +208,7 @@ export type AboutPage = {
     eyebrow: string;
     title: string;
     paragraphs: string[];
-    tags: string[]; // "{slots}" becomes the live slot count
+    tags: string[]; // "{games}" becomes the live game count
     offer: { eyebrow: string; title: string; lede: string; cards: Record<string, Card & { cta: string }> };
     principles: { eyebrow: string; title: string; lede: string; items: Card[] };
     cta: { eyebrow: string; title: string; lede: string; label: string };

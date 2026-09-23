@@ -32,7 +32,7 @@ export default async function Home() {
                 <div className="shell">
                     <HeroSlides slides={slides} />
                     <div className="hero-meta">
-                        <span>Slots studio</span>
+                        <span>Games studio</span>
                         <span>Branded originals</span>
                         <span>Licensed RGS</span>
                         <span>Game aggregation + distribution</span>
@@ -47,10 +47,10 @@ export default async function Home() {
                 <div className="shell split">
                     <div className="section-head" data-reveal>
                         <p className="eyebrow">Since 2010</p>
-                        <h2 className="display">Where a slots studio became a <em>platform.</em></h2>
+                        <h2 className="display">Where a games studio became a <em>platform.</em></h2>
                         <p className="lede">
                             Established in 2010, Revolver is a licensed games software
-                            provider, built on a slots portfolio operators come back for. That
+                            provider, built on a games portfolio operators come back for. That
                             is still the core, and still the thing most platforms can&apos;t offer.
                         </p>
                         <p className="lede">
@@ -64,7 +64,7 @@ export default async function Home() {
                     </div>
                     <div className="mini-stats" data-reveal>
                         <div className="wordmark"><b>UKGC + MGA</b><span>Licensed &amp; compliant</span></div>
-                        <div><b>{games.length}+</b><span>Original slots</span></div>
+                        <div><b>{games.length}+</b><span>Original games</span></div>
                         <div><b>{liveCount(originalGames)}+</b><span>Casual originals</span></div>
                         <div><b>{THIRD_PARTY_GAMES}</b><span>3rd-party games</span></div>
                         <div><b>{OPERATOR_INTEGRATIONS}</b><span>Operator integrations</span></div>
@@ -81,7 +81,7 @@ export default async function Home() {
                             <p className="eyebrow">Games · our core</p>
                             <h2 className="display">The <em>arsenal.</em></h2>
                             <p className="lede">
-                                Original slots built in-house from concept to cabinet, ready to
+                                Original games built in-house from concept to cabinet, ready to
                                 license and brand as your own. Flagship Irish Coins, branded IP
                                 collaborations and seasonal editions engineered for real uplift.
                                 This is the business we were founded on.
@@ -224,13 +224,13 @@ export default async function Home() {
                         <h3 className="sub-display">Get every game in.</h3>
                         <p className="lede">
                             One integration to the platform and your lobby fills with Revolver&apos;s
-                            own slots and originals plus every partner studio on the platform.
+                            own games and originals plus every partner studio on the platform.
                         </p>
                         <ul className="checks">
                             {GAP_OPERATOR_POINTS.map((pt) => <li key={pt}>{pt}</li>)}
                         </ul>
                         <div className="roster roster-studios">
-                            <div><PartnerLogo name="Revolver Gaming" logo="/brand/logo-horizontal-white.svg" logoScale={1.2} /><span>Slots &amp; originals</span></div>
+                            <div><PartnerLogo name="Revolver Gaming" logo="/brand/logo-horizontal-white.svg" logoScale={1.2} /><span>Games &amp; originals</span></div>
                             {studios.map((s) => <div key={s.name}><PartnerLogo {...s} /><span>{s.knownFor} · {s.genre}</span></div>)}
                             <div className="more"><b>+ More</b><span>Added continuously</span></div>
                         </div>

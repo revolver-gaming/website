@@ -69,7 +69,7 @@ export default function AdminAbout() {
                             onChange={(e) => set({ ...page, paragraphs: e.target.value.split(/\n\s*\n/) })} />
                     </label>
                     <label className="wide">
-                        Tags — one per line; {"{slots}"} becomes the live slot count
+                        Tags — one per line; {"{games}"} becomes the live game count
                         <textarea rows={4} value={page.tags.join("\n")}
                             onChange={(e) => set({ ...page, tags: e.target.value.split("\n") })} />
                     </label>

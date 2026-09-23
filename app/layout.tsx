@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     metadataBase: new URL("https://revolvergaming.com"),
     title: "Revolver Gaming — One integration. 300+ games.",
     description:
-        "London-based slot studio and game aggregation platform. Original HTML5 slots, partner studios and a UKGC-licensed engine — live in your lobby the same day.",
+        "London-based games studio and game aggregation platform. Original HTML5 games, partner studios and a UKGC-licensed engine — live in your lobby the same day.",
     icons: { icon: "/brand/favicon.png" },
 };
 

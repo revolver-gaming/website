@@ -9,7 +9,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
     title: "About us — Revolver Gaming",
     description:
-        "Revolver Gaming is a fully faceted iGaming products and services provider: licensable slots, brandable originals, RGS licensing, the aggregation platform and bespoke games. London, since 2010.",
+        "Revolver Gaming is a fully faceted iGaming products and services provider: licensable games, brandable originals, RGS licensing, the aggregation platform and bespoke games. London, since 2010.",
 };
 
 export default async function About() {
@@ -27,7 +27,7 @@ export default async function About() {
                         {page.paragraphs.map((text, i) => <p className="lede" key={i}>{text}</p>)}
                     </div>
                     <div className="tag-bar">
-                        {page.tags.map((t) => <span key={t}>{t.replace("{slots}", String(games.length))}</span>)}
+                        {page.tags.map((t) => <span key={t}>{t.replace("{games}", String(games.length))}</span>)}
                     </div>
                 </div>
             </section>

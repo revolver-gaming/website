@@ -10,7 +10,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
     title: "Platform — Game Aggregation — Revolver Gaming",
     description:
-        "The Revolver Game Aggregation Platform: studios bring games in through one integration, operators take the whole catalogue out — Revolver slots and originals plus every partner studio.",
+        "The Revolver Game Aggregation Platform: studios bring games in through one integration, operators take the whole catalogue out — Revolver games and originals plus every partner studio.",
 };
 
 /* Copy is Ryan's (wireframe v7). Nothing here that isn't in his text. */
@@ -88,14 +88,14 @@ export default async function Gap() {
                         <h2 className="display">Get every <em>game in.</em></h2>
                         <p className="lede">
                             One integration to the platform and your lobby fills with Revolver&apos;s
-                            own slots and originals plus every partner studio on the platform.
+                            own games and originals plus every partner studio on the platform.
                         </p>
                     </div>
                     <ul className="checks" data-reveal>
                         {GAP_OPERATOR_POINTS.map((pt) => <li key={pt}>{pt}</li>)}
                     </ul>
                     <div className="roster roster-studios" data-reveal>
-                        <div><PartnerLogo name="Revolver Gaming" logo="/brand/logo-horizontal-white.svg" logoScale={1.2} /><span>Slots &amp; originals</span></div>
+                        <div><PartnerLogo name="Revolver Gaming" logo="/brand/logo-horizontal-white.svg" logoScale={1.2} /><span>Games &amp; originals</span></div>
                         {studios.map((s) => <div key={s.name}><PartnerLogo {...s} /><span>{s.knownFor} · {s.genre}</span></div>)}
                         <div className="more"><b>+ More</b><span>Added continuously</span></div>
                     </div>
@@ -112,7 +112,7 @@ export default async function Gap() {
                         </p>
                         <div className="hero-ctas">
                             <Link href="/#contact" className="btn btn-fire">Talk to the team</Link>
-                            <Link href="/games" className="btn btn-ghost">See the slots</Link>
+                            <Link href="/games" className="btn btn-ghost">See the games</Link>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
     title: "Exclusives & bespoke games — Revolver Gaming",
     description:
-        "Custom-built and branded slots powered by Revolver's tech and studio: branded reskins, seasonal editions, market-tuned maths and fully bespoke games, exclusive to your casino.",
+        "Custom-built and branded games powered by Revolver's tech and studio: branded reskins, seasonal editions, market-tuned maths and fully bespoke games, exclusive to your casino.",
 };
 
 export default async function Exclusives() {

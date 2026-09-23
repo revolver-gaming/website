@@ -15,7 +15,7 @@ export default async function Footer() {
                             <img src="/brand/logo-horizontal-white.svg" alt="Revolver Gaming" />
                         </Link>
                         <p>
-                            The studio that became the platform. Licensable slots, brandable
+                            The studio that became the platform. Licensable games, brandable
                             originals, RGS licensing and the aggregation platform. London,
                             since 2010.
                         </p>

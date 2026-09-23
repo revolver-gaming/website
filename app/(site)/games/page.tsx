@@ -7,7 +7,7 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
     title: "Games — Revolver Gaming",
-    description: "The full catalogue of Revolver Gaming original slots, ready to license and brand as your own.",
+    description: "The full catalogue of Revolver Gaming original games, ready to license and brand as your own.",
 };
 
 export default async function GamesPage() {

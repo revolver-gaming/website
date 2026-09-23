@@ -18,8 +18,8 @@ export const PILLARS: Pillar[] = [
         label: "Games",
         kicker: "Games · our core",
         title: ["Our arsenal.", "Your lobby."],
-        lede: "A proven, growing portfolio of original slots to license and options to brand as your own. This is where we started, and what still sets us apart.",
-        cta: "See the slots",
+        lede: "A proven, growing portfolio of original games to license and options to brand as your own. This is where we started, and what still sets us apart.",
+        cta: "See the games",
     },
     {
         key: "originals",
@@ -79,7 +79,7 @@ export const RGS_OPTIONS = [
 ];
 
 export const RGS_ENGINE = [
-    { title: "Client Framework Kit", text: "A feature rich frontend framework allowing for rapid development of slots and other games." },
+    { title: "Client Framework Kit", text: "A feature rich frontend framework allowing for rapid development of games." },
     { title: "Promo & jackpot tools", text: "End-to-end free spins and jackpots, served in your platform's own bonus dialect." },
     { title: "Built-in distribution", text: "Live integrations across leading operators and aggregators, ready the day you go live." },
     { title: "Infrastructure as code", text: "Spin up a new environment in half an hour. No manual builds, no drama." },
@@ -101,8 +101,8 @@ export const GAP_ROUTES = [
 ];
 
 export const GAP_OPERATOR_POINTS = [
-    "One integration, hundreds of games — Revolver slots and originals plus every partner studio.",
-    "Our own proven slots portfolio included, not third-party content alone.",
+    "One integration, hundreds of games — Revolver games and originals plus every partner studio.",
+    "Our own proven games portfolio included, not third-party content alone.",
     "One contract, one integration, one set of reporting across the lot.",
     "New studios and titles added continuously, with no extra integration your side.",
 ];

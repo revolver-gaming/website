@@ -21,7 +21,7 @@ export default function HomeSlots({ games }: { games: Game[] }) {
     const shown = games.filter(match);
     return (
         <>
-            <div className="filter-bar" role="group" aria-label="Filter slots" data-reveal>
+            <div className="filter-bar" role="group" aria-label="Filter games" data-reveal>
                 {FILTERS.map(([name]) => (
                     <button
                         key={name}
