@@ -2871,90 +2871,36 @@ section[data-chamber].tight {
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
-/* ---- New / Coming soon corner ribbon (slot + original cards) -------------
-   A triangle wedged into the top-right corner of the artwork with the label
-   rotated along its hypotenuse — the treatment our own key art already uses.
-   One plum wedge for both states; the label carries the meaning. Sized by
-   --tag per context.
-
-   Two elements on purpose: the wedge and its shadow live on ::before, and
-   .tag-badge is only a rounded clipper. Putting clip-path and filter on one
-   element paints a square shadow in the notch that border-radius carves out
-   of the corner — a grey right angle poking out of the rounded artwork. */
+/* ---- New / Coming soon badge (slot + original cards) --------------------- */
 
 .tag-badge {
-    --tag: 86px;      /* leg length of the triangle */
-    --tag-fs: 10px;   /* set by the stacked "Coming soon"; "New" scales up */
-    --tag-r: 14px;    /* must match the corner radius it sits on */
     position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    width: var(--tag);
-    height: var(--tag);
-    overflow: hidden;
-    border-top-right-radius: var(--tag-r);
-    pointer-events: none;
-    /* same transition as the artwork it rides, declared here (not under :hover)
-       so it eases out as well as in — otherwise the ribbon snaps back early */
-    transition: transform 0.35s var(--detent);
-    color: var(--bone);
-}
-
-/* Deep at the corner, lifting only near the diagonal — the curve the key art
-   uses. Held flat across the band the label sits on so the type stays legible,
-   and interpolated in oklab so the ramp never passes through a muddy midtone. */
-.tag-badge::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
-    filter: drop-shadow(-1px 2px 5px rgba(31, 14, 31, 0.5));
-    background: linear-gradient(225deg, #764174 0%, #7d457a 30%, #c566b9 100%); /* pre-oklab fallback */
-    background: linear-gradient(225deg in oklab, #764174 0%, #7d457a 30%, #c566b9 100%);
-}
-
-.tag-badge b {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    /* centre the block, turn it onto the diagonal, then push it off the
-       hypotenuse toward the corner so it lands on the triangle's centroid */
-    transform: translate(-50%, -50%) rotate(45deg) translateY(calc(var(--tag) * -0.25));
-    font-family: var(--font-b);
-    font-weight: 700;
-    font-size: var(--tag-fs);
-    line-height: 1.18;
-    letter-spacing: 0.04em;
-    text-indent: 0.04em; /* cancel the trailing letter-space so the block stays centred */
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    font-family: var(--font-m);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    text-align: center;
-    white-space: nowrap;
+    background: var(--amber);
+    color: var(--chamber);
+    border-radius: 999px;
+    padding: 5px 11px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    /* matches the artwork it rides; declared here rather than under :hover so it
+       eases out as well as in — otherwise the pill snaps back on mouse-out */
+    transition: transform 0.35s var(--detent);
 }
 
-.tag-badge b span {
-    display: block;
-    text-shadow: 0 1px 2px rgba(20, 8, 20, 0.45);
+/* Slot cards have no frame, so the badge sits on the artwork itself. */
+.game-card .tag-badge {
+    top: 10px;
+    left: 10px;
 }
 
-/* One line of caps reads slightly smaller than two, so "New" takes a hairline
-   bump and wide tracking to match the stacked label's footprint — the two
-   ribbons are otherwise identical and must read as equal weight. */
-.tag-badge:not(.is-soon) b {
-    font-size: calc(var(--tag-fs) * 1.15);
-    letter-spacing: 0.16em;
-    text-indent: 0.16em;
-}
-
-/* Slot cards take the base size; the ribbon rides the artwork, which lifts on hover. */
 .game-card:hover .tag-badge {
     transform: translateY(-5px);
-}
-
-.o-card .tag-badge {
-    --tag: 78px;
-    --tag-fs: 9px;
-    --tag-r: var(--radius);
 }
 
 /* ---- originals (spec cards, featured title, detail art) ------------------------------ */
@@ -3919,12 +3865,12 @@ section[data-chamber].tight {
     position: relative;
 }
 
-/* Same ribbon, scaled up for the hero banner (which starts 24px down). */
+/* Same pill as the card, scaled up for the hero banner. */
 .game-banner-wrap .tag-badge {
-    --tag: clamp(90px, 12vw, 142px);
-    --tag-fs: clamp(10px, 1.1vw, 13px);
-    --tag-r: var(--radius);
-    top: 24px;
+    top: 40px;
+    left: 16px;
+    font-size: 12px;
+    padding: 7px 14px;
 }
 
 .game-banner {

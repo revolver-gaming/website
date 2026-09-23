@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
 import { OriginalsGrid } from "@/components/Originals";
-import TagBadge from "@/components/TagBadge";
 import { listOriginals, rtpRange } from "@/lib/cms";
 
 export const revalidate = 300;
@@ -45,7 +44,7 @@ export default async function OriginalPage({ params }: Props) {
                 {o.hero_image && (
                     <div className="game-banner-wrap">
                         <img className="game-banner" src={o.hero_image} alt={`${o.title} banner`} />
-                        {o.is_new && <TagBadge />}
+                        {o.is_new && <span className="tag-badge">New</span>}
                     </div>
                 )}
                 <div className="game-body">
