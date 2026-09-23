@@ -6,7 +6,7 @@ import { listGames } from "@/lib/cms";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-    title: "Slots — Revolver Gaming",
+    title: "Games — Revolver Gaming",
     description: "The full catalogue of Revolver Gaming original slots, ready to license and brand as your own.",
 };
 

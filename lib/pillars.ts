@@ -15,8 +15,8 @@ export const PILLARS: Pillar[] = [
     {
         key: "slots",
         href: "/games",
-        label: "Slots",
-        kicker: "Slots · our core",
+        label: "Games",
+        kicker: "Games · our core",
         title: ["Our arsenal.", "Your lobby."],
         lede: "A proven, growing portfolio of original slots to license and options to brand as your own. This is where we started, and what still sets us apart.",
         cta: "See the slots",

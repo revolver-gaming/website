@@ -51,7 +51,7 @@ Ryan's brief (Sept 2026): the site is organised around product **pillars**, each
 | Pillar | Route | What it sells |
 |--------|-------|---------------|
 | About | `/about` | Company overview: one card per pillar, how we work (first nav item) |
-| Slots | `/games` (`/slots` redirects here) | Our original slots, licensable and brandable |
+| Games | `/games` (`/slots` redirects here) | Our original games, licensable and brandable — slots today, scratch cards and other types to come (labelled "Games", not "Slots") |
 | Originals | `/originals`, `/originals/{slug}` | Brandable casual originals (white-labelled Bet4Win product, live at https://www.bet4.win/ — copy category labels from there; these games are **provably fair, not RNG**). CMS-driven from the `originals` table: specs, features, optional art/demo, one `featured`, `coming_soon` titles get a card but no page |
 | RGS | `/rgs` | RGS licensing: **Independent** (run it yourself) or **Managed service** |
 | Platform (GAP) | `/gap` | Labelled "Platform" everywhere user-facing — "GAP" means nothing to outsiders. Aggregation: studios in (RGS↔RGS, or Game→RGS where we host), operators out with one integration |

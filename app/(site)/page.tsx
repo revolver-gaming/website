@@ -78,7 +78,7 @@ export default async function Home() {
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head" data-reveal>
-                            <p className="eyebrow">Slots · our core</p>
+                            <p className="eyebrow">Games · our core</p>
                             <h2 className="display">The <em>arsenal.</em></h2>
                             <p className="lede">
                                 Original slots built in-house from concept to cabinet, ready to

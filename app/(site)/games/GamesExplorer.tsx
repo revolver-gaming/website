@@ -30,8 +30,8 @@ export default function GamesExplorer({ games }: { games: Game[] }) {
     return (
         <>
             <div className="shell page-hero">
-                <p className="eyebrow">Slots · our core</p>
-                <h1 className="display">Slots people <em>remember.</em></h1>
+                <p className="eyebrow">Games · our core</p>
+                <h1 className="display">Games people <em>remember.</em></h1>
                 <p className="lede">
                     Every title built in-house — concept, maths, art and sound — in HTML5,
                     available across real money, social and sweepstakes platforms.
