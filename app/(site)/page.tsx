@@ -1,6 +1,6 @@
 import Link from "next/link";
 import HeroSlides from "@/components/HeroSlides";
-import HomeSlots from "@/components/HomeSlots";
+import GameCard from "@/components/GameCard";
 import { OriginalsShowcase, liveCount } from "@/components/Originals";
 import BespokeBanner from "@/components/BespokeBanner";
 import NewsCards from "@/components/NewsCards";
@@ -92,7 +92,13 @@ export default async function Home() {
                     <div className="tag-bar" data-reveal>
                         {["Licensable", "Brandable", "Proven performers", "RNG & Game Certified"].map((t) => <span key={t}>{t}</span>)}
                     </div>
-                    <HomeSlots games={games.slice(0, 6)} />
+                    <div className="game-grid game-grid-mini game-grid-dark">
+                        {games.slice(0, 6).map((g, i) => (
+                            <div key={g.slug} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
+                                <GameCard game={g} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 

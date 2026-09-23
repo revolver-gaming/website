@@ -2765,10 +2765,6 @@ section[data-chamber].tight {
     100% { transform: scale(1.8); opacity: 0; }
 }
 
-#slots .filter-bar {
-    margin-bottom: 28px;
-}
-
 /* ---- split (about) ------------------------------------------------------------ */
 
 .split {
