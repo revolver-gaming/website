@@ -83,13 +83,13 @@ export function OriginalFeature({ o }: { o: Original }) {
     );
 }
 
-// Featured title up top, everything else (coming-soon last, by sort order) in the grid.
-export function OriginalsShowcase({ items }: { items: Original[] }) {
+// Featured title up top, everything else (coming-soon last, by sort order) in the grid, optionally capped.
+export function OriginalsShowcase({ items, limit }: { items: Original[]; limit?: number }) {
     const featured = items.find((o) => o.featured && !o.coming_soon);
     return (
         <>
             {featured && <OriginalFeature o={featured} />}
-            <OriginalsGrid items={items.filter((o) => o !== featured)} />
+            <OriginalsGrid items={items.filter((o) => o !== featured).slice(0, limit)} />
         </>
     );
 }

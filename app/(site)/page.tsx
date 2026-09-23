@@ -116,7 +116,7 @@ export default async function Home() {
                     <div className="tag-bar" data-reveal>
                         {["Provably fair", "Fully brandable", "New releases monthly"].map((t) => <span key={t}>{t}</span>)}
                     </div>
-                    <OriginalsShowcase items={originalGames} />
+                    <OriginalsShowcase items={originalGames} limit={8} />
                 </div>
             </section>
 
