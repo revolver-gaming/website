@@ -3507,6 +3507,7 @@ section[data-chamber].tight {
     align-items: flex-start;
     gap: 16px;
     min-height: 440px;
+    color: var(--bone);
     border-radius: 24px;
     border: 1px solid rgba(255, 167, 85, 0.25);
     padding: clamp(32px, 5vw, 64px);
@@ -3540,6 +3541,16 @@ section[data-chamber].tight {
 .bespoke h2 {
     font-size: clamp(44px, 6vw, 72px);
     max-width: 12ch;
+}
+
+/* The banner is dark even inside an .on-bone section, so keep the dark-section accents. */
+.bespoke .eyebrow,
+.bespoke .display em {
+    color: var(--amber);
+}
+
+.bespoke .eyebrow::before {
+    background: var(--amber);
 }
 
 .bespoke > p:not(.eyebrow) {
