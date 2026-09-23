@@ -2765,6 +2765,13 @@ section[data-chamber].tight {
     100% { transform: scale(1.8); opacity: 0; }
 }
 
+/* bottom "See more titles" under the capped homepage grids */
+.see-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+}
+
 /* ---- split (about) ------------------------------------------------------------ */
 
 .split {

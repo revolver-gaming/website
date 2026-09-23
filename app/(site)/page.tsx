@@ -99,6 +99,7 @@ export default async function Home() {
                             </div>
                         ))}
                     </div>
+                    <div className="see-more"><Link href="/games" className="btn btn-ghost">See more titles →</Link></div>
                 </div>
             </section>
 
@@ -117,6 +118,7 @@ export default async function Home() {
                         {["Provably fair", "Fully brandable", "New releases monthly"].map((t) => <span key={t}>{t}</span>)}
                     </div>
                     <OriginalsShowcase items={originalGames} limit={8} />
+                    <div className="see-more"><Link href={originals.href} className="btn btn-ghost">See more titles →</Link></div>
                 </div>
             </section>
 
