@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GameCard from "@/components/GameCard";
 import { brandedGame } from "@/components/BespokeBanner";
-import { getStudioOffer, listGames } from "@/lib/cms";
+import { getExclusivesPage, getStudioOffer, listGames } from "@/lib/cms";
 import { BESPOKE_STEPS, pillar } from "@/lib/pillars";
 
 export const revalidate = 300;
@@ -14,14 +14,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Exclusives() {
-    const [games, offer] = await Promise.all([listGames(), getStudioOffer()]);
+    const [games, offer, page] = await Promise.all([listGames(), getStudioOffer(), getExclusivesPage()]);
     const p = pillar("exclusives");
-    const hero = brandedGame(games);
+    const art = page.hero_image || brandedGame(games)?.image;
     const examples = games.filter((g) => g.tags.some((t) => /brand|seasonal/i.test(t))).slice(0, 6);
     return (
         <main>
-            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${hero?.image})` } as React.CSSProperties}>
-                {hero && <img className="art-peek" src={hero.image} alt="" />}
+            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${art})` } as React.CSSProperties}>
+                {art && <img className="art-peek" src={art} alt="" />}
                 <div className="shell">
                     <div className="section-head">
                         <p className="eyebrow">{p.kicker}</p>

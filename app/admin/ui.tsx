@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { sb, errMsg } from "./lib";
+import { sb, errMsg, uploadMedia } from "./lib";
 
 export const PAGE_SIZE = 15;
 
@@ -58,4 +58,52 @@ export function useUnsavedWarning(dirty: boolean) {
         window.addEventListener("beforeunload", warn);
         return () => window.removeEventListener("beforeunload", warn);
     }, [dirty]);
+}
+
+// One JSON value from site_content, with dirty tracking and a save that reports back.
+export function useContent<T>(key: string) {
+    const [value, setValue] = useState<T | null>(null);
+    const [dirty, setDirty] = useState(false);
+    const [status, setStatus] = useState("");
+    useUnsavedWarning(dirty);
+
+    useEffect(() => {
+        sb.from("site_content").select("value").eq("key", key).single()
+            .then(({ data, error }) => (error ? setStatus(errMsg(error)) : setValue(data.value)));
+    }, [key]);
+
+    const set = (v: T) => { setValue(v); setDirty(true); };
+    const save = async (v: T = value!) => {
+        const { error } = await sb.from("site_content")
+            .upsert({ key, value: v, updated_at: new Date().toISOString() });
+        if (!error) { setValue(v); setDirty(false); }
+        setStatus(error ? errMsg(error) : "Saved ✓");
+        setTimeout(() => setStatus(""), 3000);
+    };
+    return { value, set, save, dirty, status };
+}
+
+// Image picker that uploads straight to the media bucket and hands back the public URL.
+export function ImageField({ label, value, folder, onChange }: {
+    label: string; value: string; folder: string; onChange: (url: string) => void;
+}) {
+    const [busy, setBusy] = useState(false);
+    const [error, setError] = useState("");
+    const upload = async (file: File | undefined) => {
+        if (!file) return;
+        setBusy(true);
+        setError("");
+        try { onChange(await uploadMedia(folder, file)); }
+        catch (e) { setError(errMsg(e)); }
+        setBusy(false);
+    };
+    return (
+        <label className="wide">
+            {label}
+            {value && <img className="admin-thumb" src={value} alt="" />}
+            <input type="file" accept="image/*" disabled={busy} onChange={(e) => upload(e.target.files?.[0])} />
+            {busy && <small>Uploading…</small>}
+            {error && <small className="admin-error">{error}</small>}
+        </label>
+    );
 }

@@ -191,6 +191,35 @@ export type StudioOffer = {
 
 export const getStudioOffer = () => content<StudioOffer>("studio_offer");
 
+// Titles mark their amber (<em>) part with *asterisks* — see components/Accent.tsx.
+export type HeroSlide = {
+    kicker: string;
+    title: string;
+    lede: string;
+    image: string;
+    image_alt: string;
+    ctas: { label: string; href: string; fire: boolean }[];
+};
+
+export type Card = { title: string; text: string };
+
+export type AboutPage = {
+    hero_image: string;
+    eyebrow: string;
+    title: string;
+    paragraphs: string[];
+    tags: string[]; // "{slots}" becomes the live slot count
+    offer: { eyebrow: string; title: string; lede: string; cards: Record<string, Card & { cta: string }> };
+    principles: { eyebrow: string; title: string; lede: string; items: Card[] };
+    cta: { eyebrow: string; title: string; lede: string; label: string };
+};
+
+export type ExclusivesPage = { hero_image: string };
+
+export const getHeroSlides = () => content<HeroSlide[]>("hero_slides");
+export const getAboutPage = () => content<AboutPage>("about_page");
+export const getExclusivesPage = () => content<ExclusivesPage>("exclusives_page");
+
 export async function listPartnerStudios(): Promise<PartnerStudio[]> {
     const { data, error } = await supabase
         .from("partner_studios")

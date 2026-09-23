@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 import { sb } from "./lib";
 
 const cards = [
+    ["/admin/hero", "Hero", null, "Homepage hero slides: titles, text, buttons, images"],
     ["/admin/news", "News", "news", "Articles on /news and the homepage"],
     ["/admin/games", "Games", "games", "Game pages, cards, screenshots, PDFs"],
     ["/admin/originals", "Originals", "originals", "Casual originals: specs, features, art, demos"],
     ["/admin/jobs", "Jobs", "jobs", "Careers postings on /job"],
-    ["/admin/pages", "Pages", "pages", "Terms, Privacy and other simple pages"],
+    ["/admin/pages", "Pages", "pages", "About, Exclusives, Terms, Privacy and other pages"],
     ["/admin/partners", "Partners", "operators", "Operator & studio logos: ticker and rosters"],
     ["/admin/settings", "Settings", null, "Contact, socials, footer, stats, page copy"],
 ] as const;

@@ -1,40 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { PILLARS } from "@/lib/pillars";
+import Accent from "./Accent";
+import HeroArt from "./HeroArt";
+import type { HeroSlide } from "@/lib/cms";
 
-type Slide = {
-    key: string;
-    kicker: string;
-    title: [string, string];
-    lede: string;
-    ctas: { label: string; href: string; fire?: boolean }[];
-};
-
-const SLIDES: Slide[] = [
-    {
-        key: "intro",
-        kicker: "Games software provider · since 2010",
-        title: ["The studio that became the", "platform."],
-        lede: "Revolver started by building slots operators come back for. Today that core sits inside a full platform: licensable slots, brandable originals, our RGS and an aggregation network.",
-        ctas: [
-            { label: "See the slots", href: "/games", fire: true },
-            { label: "Explore the platform", href: "/gap" },
-        ],
-    },
-    ...PILLARS.map((p) => ({
-        key: p.key,
-        kicker: p.kicker,
-        title: p.title,
-        lede: p.lede,
-        ctas: [{ label: p.cta, href: p.href, fire: true }],
-    })),
-];
-
-/* Rotating pillar copy on the left; the visual on the right follows the active slide.
-   `visuals` is keyed by slide key: "intro" plus each pillar key. */
-export default function HeroSlides({ visuals }: { visuals: Record<string, ReactNode> }) {
+/* Rotating slide copy on the left; the art on the right follows the active slide.
+   Slides are CMS-driven (site_content "hero_slides", edited in /admin/hero). */
+export default function HeroSlides({ slides }: { slides: HeroSlide[] }) {
     const [active, setActive] = useState(0);
     const paused = useRef(false);
 
@@ -42,12 +16,12 @@ export default function HeroSlides({ visuals }: { visuals: Record<string, ReactN
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         const id = setInterval(() => {
             // hold the slide while hovered or while a demo is open over it
-            if (!paused.current && !document.querySelector(".overlay")) setActive((a) => (a + 1) % SLIDES.length);
+            if (!paused.current && !document.querySelector(".overlay")) setActive((a) => (a + 1) % slides.length);
         }, 6500);
         return () => clearInterval(id);
-    }, []);
+    }, [slides.length]);
 
-    const current = SLIDES[active];
+    const current = slides[active];
 
     return (
         <div
@@ -57,21 +31,21 @@ export default function HeroSlides({ visuals }: { visuals: Record<string, ReactN
         >
             <div className="hero-copy">
                 <div className="hero-slides">
-                    {SLIDES.map((s, i) => (
+                    {slides.map((s, i) => (
                         <div
                             className={`hero-slide${i === active ? " active" : ""}`}
-                            key={s.key}
+                            key={i}
                             aria-hidden={i !== active}
                         >
                             <p className="eyebrow">{s.kicker}</p>
                             <h1 className="display">
-                                {s.title[0]} <em>{s.title[1]}</em>
+                                <Accent text={s.title} />
                             </h1>
                             <p>{s.lede}</p>
                             <div className="hero-ctas">
                                 {s.ctas.map((c) => (
                                     <Link
-                                        key={c.label}
+                                        key={c.label + c.href}
                                         href={c.href}
                                         className={`btn ${c.fire ? "btn-fire" : "btn-ghost"}`}
                                         tabIndex={i === active ? 0 : -1}
@@ -84,9 +58,9 @@ export default function HeroSlides({ visuals }: { visuals: Record<string, ReactN
                     ))}
                 </div>
                 <div className="hero-dots" role="tablist" aria-label="Hero slides">
-                    {SLIDES.map((s, i) => (
+                    {slides.map((s, i) => (
                         <button
-                            key={s.key}
+                            key={i}
                             role="tab"
                             aria-selected={i === active}
                             aria-label={s.kicker}
@@ -96,7 +70,7 @@ export default function HeroSlides({ visuals }: { visuals: Record<string, ReactN
                     ))}
                 </div>
             </div>
-            <div className="hero-visual" key={current.key}>{visuals[current.key]}</div>
+            <div className="hero-visual" key={active}><HeroArt src={current?.image} alt={current?.image_alt} /></div>
         </div>
     );
 }

@@ -7,6 +7,7 @@ import type { Session } from "@supabase/supabase-js";
 import { sb, errMsg } from "./lib";
 
 const sections = [
+    ["/admin/hero", "Hero"],
     ["/admin/news", "News"],
     ["/admin/games", "Games"],
     ["/admin/originals", "Originals"],

@@ -6,6 +6,9 @@ import { usePaged, Pager } from "../ui";
 
 type Row = { slug: string; title: string; published: boolean };
 
+// Coded pages whose copy/art lives in site_content; they have their own editors.
+const BUILT_IN = [["about", "About us"], ["exclusives", "Exclusives"]];
+
 export default function AdminPages() {
     const [q, setQ] = useState("");
     const { rows, count, page, setPage, error } =
@@ -25,6 +28,17 @@ export default function AdminPages() {
             <table className="admin-table">
                 <thead><tr><th>URL</th><th>Title</th><th>Status</th><th /></tr></thead>
                 <tbody>
+                    {!q && BUILT_IN.map(([slug, title]) => (
+                        <tr key={slug}>
+                            <td className="mono">/{slug}</td>
+                            <td>{title}</td>
+                            <td><em>Built-in</em></td>
+                            <td className="admin-row-actions">
+                                <a href={`/${slug}`} target="_blank">View ↗</a>
+                                <Link href={`/admin/pages/${slug}`}>Edit</Link>
+                            </td>
+                        </tr>
+                    ))}
                     {rows?.map((r) => (
                         <tr key={r.slug}>
                             <td className="mono">/{r.slug}</td>

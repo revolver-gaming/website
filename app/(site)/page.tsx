@@ -1,5 +1,4 @@
 import Link from "next/link";
-import HeroArt from "@/components/HeroArt";
 import HeroSlides from "@/components/HeroSlides";
 import HomeSlots from "@/components/HomeSlots";
 import { OriginalsShowcase, liveCount } from "@/components/Originals";
@@ -9,7 +8,7 @@ import ContactPanel from "@/components/ContactPanel";
 import PartnerLogo from "@/components/PartnerLogo";
 import Ticker from "@/components/Ticker";
 import {
-    getStudioOffer, listGames, listNews, listOperators, listOriginals, listPartnerStudios,
+    getHeroSlides, getStudioOffer, listGames, listNews, listOperators, listOriginals, listPartnerStudios,
 } from "@/lib/cms";
 import {
     GAP_OPERATOR_POINTS, GAP_ROUTES, OPERATOR_INTEGRATIONS, RGS_ENGINE, RGS_OPTIONS, THIRD_PARTY_GAMES, pillar,
@@ -19,34 +18,19 @@ export const revalidate = 300;
 
 /* Section copy follows Ryan's homepage wireframe (revolver-gaming-redesign-v9). */
 export default async function Home() {
-    const [news, games, studios, operators, originalGames, offer] = await Promise.all([
-        listNews(3), listGames(), listPartnerStudios(), listOperators(), listOriginals(), getStudioOffer(),
+    const [news, games, studios, operators, originalGames, offer, slides] = await Promise.all([
+        listNews(3), listGames(), listPartnerStudios(), listOperators(), listOriginals(), getStudioOffer(), getHeroSlides(),
     ]);
     const featured = games.filter((g) => g.featured);
-    const branded = games.filter((g) => g.tags.some((t) => /brand|seasonal/i.test(t)));
     const originals = pillar("originals"), rgs = pillar("rgs");
-    const heroOriginal = originalGames.find((o) => o.featured && !o.coming_soon) ?? originalGames[0];
-    // RGS and Platform borrow slot art until their own hero figures are designed.
-    const others = games.filter((g) => !g.featured && !branded.includes(g));
-    // Hero art should be a title operators can actually take, so skip anything still coming soon.
     const live = featured.filter((g) => !g.coming_soon);
-    const [introGame, slotsGame, exclusiveGame] = [live.at(-1), live[1] ?? live[0], branded[0] ?? live[0]];
-    const [rgsGame, gapGame] = [others[0] ?? live[0], others[1] ?? live[1]];
-    const visuals = {
-        intro: <HeroArt src={introGame?.image} alt={introGame?.title} />,
-        slots: <HeroArt src={slotsGame?.image} alt={slotsGame?.title} />,
-        originals: <HeroArt src={heroOriginal?.card_image} alt={heroOriginal?.title} />,
-        rgs: <HeroArt src={rgsGame?.image} alt={rgsGame?.title} />,
-        gap: <HeroArt src={gapGame?.image} alt={gapGame?.title} />,
-        exclusives: <HeroArt src={exclusiveGame?.image} alt={exclusiveGame?.title} />,
-    };
     return (
         <main>
             {/* hero */}
             <section className="hero" data-chamber id="top">
                 <div className="grid-mask" aria-hidden />
                 <div className="shell">
-                    <HeroSlides visuals={visuals} />
+                    <HeroSlides slides={slides} />
                     <div className="hero-meta">
                         <span>Slots studio</span>
                         <span>Branded originals</span>

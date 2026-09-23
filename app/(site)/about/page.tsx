@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { listGames } from "@/lib/cms";
-import { OPERATOR_INTEGRATIONS, PILLARS } from "@/lib/pillars";
+import Accent from "@/components/Accent";
+import { getAboutPage, listGames } from "@/lib/cms";
+import { PILLARS } from "@/lib/pillars";
 
 export const revalidate = 300;
 
@@ -11,53 +12,22 @@ export const metadata: Metadata = {
         "Revolver Gaming is a fully faceted iGaming products and services provider: licensable slots, brandable originals, RGS licensing, the aggregation platform and bespoke games. London, since 2010.",
 };
 
-/* Copy is Ryan's (wireframe v9), with MGA and "GAP" adapted to what we claim and call it. */
-const OFFERINGS: Record<string, { title: string; text: string; cta: string }> = {
-    slots: { title: "Original slots", text: "Proven, licensable, brandable slots built in-house, led by flagship Irish Coins and a growing line of branded and seasonal titles.", cta: "Explore slots" },
-    originals: { title: "Casual originals", text: "A full lobby of brandable casual games, crash, dice, mines, plinko and more, every round provably fair, with a new title every month.", cta: "Explore originals" },
-    rgs: { title: "Remote Gaming Server", text: "License our RGS, independent, managed or hybrid, and plug straight into our distribution network of operators and aggregators.", cta: "Explore RGS" },
-    gap: { title: "Game Aggregation Platform", text: "Studios bring their games in, operators take the whole catalogue out, Revolver's own games plus every partner studio, through one integration.", cta: "Explore the platform" },
-    exclusives: { title: "Custom & branded games", text: "Branded reskins, seasonal editions and fully bespoke games, built in-house on the certified engine and exclusive to your casino.", cta: "Explore exclusives" },
-};
-
-const PRINCIPLES = [
-    { title: "Founder-led", text: "Close to the detail, fast to decide, straight to deal with." },
-    { title: "Studio-first", text: "We make the games, so we know what makes them perform." },
-    { title: "Licensed & compliant", text: "UK and MGA licenced, built for regulated markets." },
-    { title: "Lean & fast", text: "No legacy, no bloat. Speed and precision as standard." },
-];
-
 export default async function About() {
-    const games = await listGames();
-    const hero = games.find((g) => g.featured) ?? games[0];
+    /* Copy is Ryan's (wireframe v9), edited in /admin/pages/about. */
+    const [games, page] = await Promise.all([listGames(), getAboutPage()]);
+    const art = page.hero_image || (games.find((g) => g.featured) ?? games[0])?.image;
     return (
         <main>
-            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${hero?.image})` } as React.CSSProperties}>
-                {hero && <img className="art-peek" src={hero.image} alt="" />}
+            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${art})` } as React.CSSProperties}>
+                {art && <img className="art-peek" src={art} alt="" />}
                 <div className="shell">
                     <div className="section-head about-hero">
-                        <p className="eyebrow">About Revolver</p>
-                        <h1 className="display">A fully faceted iGaming <em>products and services</em> provider.</h1>
-                        <p className="lede">
-                            Established in 2010, Revolver is a licensed games software provider.
-                            We started as a slots studio, and every layer we&apos;ve added since has
-                            been built on the same standard: make games operators want, and run the
-                            tech that gets them live.
-                        </p>
-                        <p className="lede">
-                            Today we&apos;re a full-stack, multi-layered iGaming business. Licensable
-                            slots, brandable casual originals, a Remote Gaming Server we license with
-                            distribution, the aggregation platform that connects studios and
-                            operators, and bespoke games built exclusively to brief. One team, close
-                            to the detail, across the whole chain from concept to lobby.
-                        </p>
-                        <p className="lede">
-                            Founder-led, UK and MGA licenced, and lean by design. No bloat, no
-                            legacy weight, no excuses.
-                        </p>
+                        <p className="eyebrow">{page.eyebrow}</p>
+                        <h1 className="display"><Accent text={page.title} /></h1>
+                        {page.paragraphs.map((text, i) => <p className="lede" key={i}>{text}</p>)}
                     </div>
                     <div className="tag-bar">
-                        {["Since 2010", "Licenced + Certified", `${games.length} original slots`, `${OPERATOR_INTEGRATIONS} operator integrations`].map((t) => <span key={t}>{t}</span>)}
+                        {page.tags.map((t) => <span key={t}>{t.replace("{slots}", String(games.length))}</span>)}
                     </div>
                 </div>
             </section>
@@ -65,13 +35,14 @@ export default async function About() {
             <section className="on-bone" data-chamber>
                 <div className="shell">
                     <div className="section-head" data-reveal>
-                        <p className="eyebrow">Every layer of the business</p>
-                        <h2 className="display">What we <em>do.</em></h2>
-                        <p className="lede">Five connected offerings under one licensed roof. Explore each in detail.</p>
+                        <p className="eyebrow">{page.offer.eyebrow}</p>
+                        <h2 className="display"><Accent text={page.offer.title} /></h2>
+                        <p className="lede">{page.offer.lede}</p>
                     </div>
                     <div className="feat-grid offer-grid">
                         {PILLARS.map((p, i) => {
-                            const o = OFFERINGS[p.key];
+                            const o = page.offer.cards[p.key];
+                            if (!o) return null;
                             return (
                                 <Link className="feat-card offer-card" href={p.href} key={p.key} data-reveal style={{ transitionDelay: `${(i % 3) * 80}ms` }}>
                                     <span className="offer-kicker">{p.kicker}</span>
@@ -88,15 +59,12 @@ export default async function About() {
             <section data-chamber className="rings-bg">
                 <div className="shell">
                     <div className="section-head" data-reveal>
-                        <p className="eyebrow">How we work</p>
-                        <h2 className="display">iGaming is <em>our DNA.</em></h2>
-                        <p className="lede">
-                            Years of hands-on experience across games, technology and the commercial
-                            side of the business.
-                        </p>
+                        <p className="eyebrow">{page.principles.eyebrow}</p>
+                        <h2 className="display"><Accent text={page.principles.title} /></h2>
+                        <p className="lede">{page.principles.lede}</p>
                     </div>
                     <div className="steps">
-                        {PRINCIPLES.map((s, i) => (
+                        {page.principles.items.map((s, i) => (
                             <div className="step" key={s.title} data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
                                 <h3>{s.title}</h3>
                                 <p>{s.text}</p>
@@ -109,13 +77,11 @@ export default async function About() {
             <section data-chamber>
                 <div className="shell">
                     <div className="cta-card" data-reveal>
-                        <p className="eyebrow">Last chamber</p>
-                        <h2 className="display">Loaded and <em>ready?</em></h2>
-                        <p className="lede">
-                            Tell us what you&apos;re building and we&apos;ll show you how fast it can be live.
-                        </p>
+                        <p className="eyebrow">{page.cta.eyebrow}</p>
+                        <h2 className="display"><Accent text={page.cta.title} /></h2>
+                        <p className="lede">{page.cta.lede}</p>
                         <div className="hero-ctas">
-                            <Link href="/#contact" className="btn btn-fire">Talk to the team</Link>
+                            <Link href="/#contact" className="btn btn-fire">{page.cta.label}</Link>
                         </div>
                     </div>
                 </div>
