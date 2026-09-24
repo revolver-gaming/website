@@ -214,7 +214,7 @@ export type AboutPage = {
     cta: { eyebrow: string; title: string; lede: string; label: string };
 };
 
-export type ExclusivesPage = { hero_image: string };
+export type ExclusivesPage = { hero_image: string; banner_image?: string; banner_caption?: string };
 
 export const getHeroSlides = () => content<HeroSlide[]>("hero_slides");
 export const getAboutPage = () => content<AboutPage>("about_page");

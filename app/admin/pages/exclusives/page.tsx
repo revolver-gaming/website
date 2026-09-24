@@ -29,6 +29,18 @@ export default function AdminExclusives() {
                         value={page.hero_image} onChange={(hero_image) => set({ ...page, hero_image })} />
                 </div>
             </div>
+            <div className="admin-panel">
+                <h2>“Name the game” banner</h2>
+                <p className="admin-hint">Shown on the homepage and the Games page. Leave empty to use the first branded game.</p>
+                <div className="admin-form">
+                    <ImageField label="Banner image" folder="pages"
+                        value={page.banner_image ?? ""} onChange={(banner_image) => set({ ...page, banner_image })} />
+                    <label>
+                        Caption — “Pictured: …”, leave empty to hide
+                        <input value={page.banner_caption ?? ""} onChange={(e) => set({ ...page, banner_caption: e.target.value })} />
+                    </label>
+                </div>
+            </div>
         </section>
     );
 }
