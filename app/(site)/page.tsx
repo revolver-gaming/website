@@ -171,6 +171,7 @@ export default async function Home() {
                     </div>
                     <div className="roster" data-reveal>
                         {operators.map((o) => <div key={o.name}><PartnerLogo {...o} /></div>)}
+                        <div className="more"><b>+ More</b></div>
                     </div>
                 </div>
             </section>
