@@ -53,3 +53,19 @@ export async function prepareLogo(file: File): Promise<{ file: File; warning: st
 }
 
 export const errMsg =(e: unknown) => (e instanceof Error ? e.message : String(e));
+
+// Replace a game's tags with `names`, in that order, creating any tag that doesn't exist yet.
+export async function saveGameTags(gameId: string, names: string[]) {
+    if (names.length) {
+        const { error } = await sb.from("tags").upsert(names.map((name) => ({ name })), { onConflict: "name", ignoreDuplicates: true });
+        if (error) throw error;
+    }
+    const { data: tags, error } = await sb.from("tags").select("id, name").in("name", names);
+    if (error) throw error;
+    const { error: clearError } = await sb.from("game_tags").delete().eq("game_id", gameId);
+    if (clearError) throw clearError;
+    if (!names.length) return;
+    const rows = names.map((name, position) => ({ game_id: gameId, tag_id: tags.find((t) => t.name === name)!.id, position }));
+    const { error: linkError } = await sb.from("game_tags").insert(rows);
+    if (linkError) throw linkError;
+}

@@ -8,6 +8,7 @@ const cards = [
     ["/admin/hero", "Hero", null, "Homepage hero slides: titles, text, buttons, images"],
     ["/admin/news", "News", "news", "Articles on /news and the homepage"],
     ["/admin/games", "Games", "games", "Game pages, cards, screenshots, PDFs"],
+    ["/admin/tags", "Tags", "tags", "Game tags and the filter buttons on /games"],
     ["/admin/originals", "Originals", "originals", "Casual originals: specs, features, art, demos"],
     ["/admin/jobs", "Jobs", "jobs", "Careers postings on /job"],
     ["/admin/pages", "Pages", "pages", "About, Exclusives, Terms, Privacy and other pages"],

@@ -23,7 +23,10 @@ export default function AdminGames() {
         <section>
             <div className="admin-head">
                 <h1 className="display">Games</h1>
-                <Link className="btn btn-fire" href="/admin/games/new">+ New game</Link>
+                <div className="admin-actions">
+                    <Link href="/admin/tags">Tags &amp; filters</Link>
+                    <Link className="btn btn-fire" href="/admin/games/new">+ New game</Link>
+                </div>
             </div>
             {error && <p className="admin-error">{error}</p>}
             <p className="admin-hint">Order here = order on the site (drag not supported — edit “Position”).</p>

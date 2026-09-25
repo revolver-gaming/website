@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import GamesExplorer from "./GamesExplorer";
 import BespokeBanner from "@/components/BespokeBanner";
-import { listGames } from "@/lib/cms";
+import { listGameFilters, listGames } from "@/lib/cms";
 
 export const revalidate = 300;
 
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default async function GamesPage() {
-    const games = await listGames();
+    const [games, filters] = await Promise.all([listGames(), listGameFilters()]);
     return (
         <main>
-            <GamesExplorer games={games} />
+            <GamesExplorer games={games} filters={filters} />
             <section data-chamber className="tight">
                 <div className="shell">
                     <BespokeBanner games={games} />

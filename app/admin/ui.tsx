@@ -107,3 +107,44 @@ export function ImageField({ label, value, folder, onChange }: {
         </label>
     );
 }
+
+// Chips for a game's tags, in order: pick an existing tag or type a new one (commas are fine).
+export function TagPicker({ value, onChange }: { value: string[]; onChange: (tags: string[]) => void }) {
+    const [all, setAll] = useState<string[]>([]);
+    const [draft, setDraft] = useState("");
+
+    useEffect(() => {
+        sb.from("tags").select("name").order("name").then(({ data }) => setAll((data ?? []).map((t) => t.name)));
+    }, []);
+
+    const add = () => {
+        const typed = draft.trim();
+        // Reuse an existing tag's spelling so "hold & win" doesn't become a second tag.
+        const name = all.find((t) => t.toLowerCase() === typed.toLowerCase()) ?? typed;
+        if (name && !value.some((t) => t.toLowerCase() === name.toLowerCase())) onChange([...value, name]);
+        setDraft("");
+    };
+    const move = (i: number) => onChange(value.map((t, j) => (j === i - 1 ? value[i] : j === i ? value[i - 1] : t)));
+
+    return (
+        <div className="wide admin-tag-picker">
+            <div className="admin-subhead"><span>Tags — shown on the card, in this order (manage all in Tags)</span></div>
+            <div className="admin-chips">
+                {value.map((t, i) => (
+                    <span key={t} className="chip on">
+                        {i > 0 && <button onClick={() => move(i)} aria-label={`Move ${t} left`}>←</button>}
+                        {t}
+                        <button onClick={() => onChange(value.filter((x) => x !== t))} aria-label={`Remove ${t}`}>✕</button>
+                    </span>
+                ))}
+                <input list="all-tags" placeholder="Add a tag…" value={draft}
+                    onChange={(e) => setDraft(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); add(); } }}
+                    onBlur={add} />
+                <datalist id="all-tags">
+                    {all.filter((t) => !value.includes(t)).map((t) => <option key={t} value={t} />)}
+                </datalist>
+            </div>
+        </div>
+    );
+}

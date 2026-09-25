@@ -4,19 +4,12 @@ import { useMemo, useState } from "react";
 import GameCard from "@/components/GameCard";
 import type { Game } from "@/lib/cms";
 
-export default function GamesExplorer({ games }: { games: Game[] }) {
+export default function GamesExplorer({ games, filters }: { games: Game[]; filters: string[] }) {
     const [query, setQuery] = useState("");
     const [tag, setTag] = useState<string | null>(null);
 
-    const topTags = useMemo(() => {
-        const counts = new Map<string, number>();
-        for (const g of games) for (const t of g.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
-        return [...counts.entries()]
-            .filter(([, n]) => n > 1)
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 5)
-            .map(([t]) => t);
-    }, [games]);
+    // Hide filters no published game carries, so a chip never leads to an empty grid.
+    const chips = useMemo(() => filters.filter((f) => games.some((g) => g.tags.includes(f))), [filters, games]);
 
     const q = query.trim().toLowerCase();
     const shown = games.filter(
@@ -40,7 +33,7 @@ export default function GamesExplorer({ games }: { games: Game[] }) {
                     <button className={`chip${tag === null ? " on" : ""}`} onClick={() => setTag(null)}>
                         All
                     </button>
-                    {topTags.map((t) => (
+                    {chips.map((t) => (
                         <button
                             key={t}
                             className={`chip${tag === t ? " on" : ""}`}

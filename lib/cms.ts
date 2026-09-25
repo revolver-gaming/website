@@ -84,7 +84,15 @@ export type GameDetail = Game & {
     asset_pack: string | null;
 };
 
-const GAME_FIELDS = "slug, title, blurb, image:card_image, year, tags, featured, demo_url, is_new, coming_soon";
+const GAME_FIELDS = "slug, title, blurb, image:card_image, year, featured, demo_url, is_new, coming_soon, game_tags(position, tag:tags(name))";
+
+type GameRow = Omit<Game, "tags"> & { game_tags: { position: number; tag: { name: string } }[] };
+
+// Tags live in `tags`, linked through `game_tags`; flatten them to names in the game's own order.
+const withTags = <T extends GameRow>({ game_tags, ...game }: T) => ({
+    ...game,
+    tags: [...game_tags].sort((a, b) => a.position - b.position).map((gt) => gt.tag.name),
+});
 
 export async function listGames(): Promise<Game[]> {
     const { data, error } = await supabase
@@ -92,7 +100,14 @@ export async function listGames(): Promise<Game[]> {
         .select(GAME_FIELDS)
         .order("sort_order");
     if (error) throw error;
-    return data as unknown as Game[];
+    return (data as unknown as GameRow[]).map(withTags);
+}
+
+// Tags the admin marked "Show as filter", in their chosen order.
+export async function listGameFilters(): Promise<string[]> {
+    const { data, error } = await supabase.from("tags").select("name").eq("is_filter", true).order("sort_order");
+    if (error) throw error;
+    return data.map((t) => t.name);
 }
 
 export async function getGame(slug: string): Promise<GameDetail | null> {
@@ -102,7 +117,7 @@ export async function getGame(slug: string): Promise<GameDetail | null> {
         .eq("slug", slug)
         .maybeSingle();
     if (error) throw error;
-    return data as unknown as GameDetail | null;
+    return data && (withTags(data as unknown as GameRow & GameDetail) as GameDetail);
 }
 
 // Studios quote RTP as a list of certified bands ("90% / 92% / 94% / 96%").

@@ -2306,6 +2306,8 @@ a.pager-step:hover {
 .admin-pager button,
 .admin-panel > button:not(.btn),
 .admin-actions button:not(.btn),
+.admin-actions a:not(.btn),
+.admin-filter-row button,
 .admin-subhead button {
     display: inline-block;
     white-space: nowrap;
@@ -2325,6 +2327,8 @@ a.pager-step:hover {
 .admin-pager button:hover:not(:disabled),
 .admin-panel > button:not(.btn):hover,
 .admin-actions button:not(.btn):hover,
+.admin-actions a:not(.btn):hover,
+.admin-filter-row button:hover:not(:disabled),
 .admin-subhead button:hover {
     color: var(--amber);
     border-color: var(--amber);
@@ -2508,6 +2512,81 @@ a.pager-step:hover {
 
 .admin-panel textarea {
     width: 100%;
+}
+
+.admin-filter-row {
+    display: grid;
+    grid-template-columns: 24px 1fr auto auto auto auto;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.admin-filter-row button:disabled {
+    opacity: 0.35;
+}
+
+.admin-new-tag {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-tag-name {
+    font: 15px var(--font-b);
+    color: var(--bone);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 6px 10px;
+    width: 100%;
+}
+
+.admin-tag-name:hover,
+.admin-tag-name:focus {
+    outline: none;
+    background: var(--chamber);
+    border-color: var(--velvet-3);
+}
+
+.admin-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+/* chips sit inside .admin-table / .admin-form, whose generic button and input styles would restyle them */
+.admin-chips .chip {
+    font: 14px var(--font-b);
+    letter-spacing: 0;
+    text-transform: none;
+    border-radius: 999px;
+    padding: 7px 16px;
+}
+
+.admin-tag-picker .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 10px;
+}
+
+.admin-tag-picker .chip:hover {
+    transform: none;
+}
+
+.admin-tag-picker .chip button {
+    color: inherit;
+    opacity: 0.6;
+    font-size: 12px;
+}
+
+.admin-tag-picker .chip button:hover {
+    opacity: 1;
+}
+
+.admin-tag-picker input {
+    width: 220px;
 }
 
 .admin-link-row {

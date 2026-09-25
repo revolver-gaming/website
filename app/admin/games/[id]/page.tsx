@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { sb, slugify, uploadMedia, errMsg } from "../../lib";
-import { useUnsavedWarning } from "../../ui";
+import { sb, slugify, uploadMedia, errMsg, saveGameTags } from "../../lib";
+import { useUnsavedWarning, TagPicker } from "../../ui";
 
 type Row = {
     id?: string;
@@ -51,8 +51,16 @@ export default function EditGame() {
 
     useEffect(() => {
         if (isNew) return;
-        sb.from("games").select("*").eq("id", id).single()
-            .then(({ data, error }) => (error ? setLoadError(errMsg(error)) : setRow(data)));
+        sb.from("games").select("*, game_tags(position, tag:tags(name))").eq("id", id).single()
+            .then(({ data, error }) => {
+                if (error) return setLoadError(errMsg(error));
+                const { game_tags, ...game } = data;
+                setRow({
+                    ...game,
+                    tags: (game_tags as { position: number; tag: { name: string } }[])
+                        .sort((a, b) => a.position - b.position).map((gt) => gt.tag.name),
+                });
+            });
     }, [id, isNew]);
 
     if (loadError) return <p className="admin-error">{loadError}</p>;
@@ -76,11 +84,15 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
     const save = async () => {
         setBusy("save");
         setError("");
-        const record = { ...row, slug: row.slug || slugify(row.title), updated_at: new Date().toISOString() };
-        const { error } = isNew
-            ? await sb.from("games").insert(record)
-            : await sb.from("games").update(record).eq("id", row.id!);
+        // Tags are stored in `game_tags`, not on the game row.
+        const { tags, ...game } = row;
+        const record = { ...game, slug: row.slug || slugify(row.title), updated_at: new Date().toISOString() };
+        const { data, error } = isNew
+            ? await sb.from("games").insert(record).select("id").single()
+            : await sb.from("games").update(record).eq("id", row.id!).select("id").single();
         if (error) { setError(errMsg(error)); setBusy(""); return; }
+        try { await saveGameTags(data.id, tags); }
+        catch (e) { setError(errMsg(e)); setBusy(""); return; }
         setDirty(false);
         done();
     };
@@ -134,11 +146,7 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     Position (lower = first)
                     <input type="number" value={row.sort_order} onChange={(e) => set({ sort_order: +e.target.value })} />
                 </label>
-                <label>
-                    Tags — comma-separated, shown on the card
-                    {/* don't split numeric thousands separators, e.g. "2,000x Jackpot" */}
-                    <input value={row.tags.join(", ")} onChange={(e) => set({ tags: e.target.value.split(/,(?!\d{3})/).map((t) => t.trim()).filter(Boolean) })} />
-                </label>
+                <TagPicker value={row.tags} onChange={(tags) => set({ tags })} />
                 <label className="check">
                     <input type="checkbox" checked={row.featured} onChange={(e) => set({ featured: e.target.checked })} />
                     Featured (homepage hero art & games row)
