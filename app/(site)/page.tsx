@@ -240,7 +240,7 @@ export default async function Home() {
                         <div className="roster roster-studios">
                             <div><PartnerLogo name="Revolver Gaming" logo="/brand/logo-horizontal-white.svg" logoScale={1.2} /><span>Games &amp; originals</span></div>
                             {studios.map((s) => <div key={s.name}><PartnerLogo {...s} /><span>{s.knownFor} · {s.genre}</span></div>)}
-                            <div className="more"><b>+ More</b><span>Added continuously</span></div>
+                            <div className="more"><b>+ More</b></div>
                         </div>
                     </div>
                 </div>

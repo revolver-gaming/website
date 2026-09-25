@@ -180,7 +180,7 @@ export default async function Rgs() {
                     </div>
                     <div className="roster" data-reveal>
                         {operators.map((o) => <div key={o.name}><PartnerLogo {...o} /></div>)}
-                        <div className="more"><b>+ More</b><span>Added continuously</span></div>
+                        <div className="more"><b>+ More</b></div>
                     </div>
                 </div>
             </section>
