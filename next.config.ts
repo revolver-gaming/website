@@ -1,6 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    // The admin handles logins and password resets: never frameable, never leaks its URL as a referrer.
+    async headers() {
+        return [
+            {
+                source: "/admin/:path*",
+                headers: [
+                    { key: "X-Frame-Options", value: "DENY" },
+                    { key: "Content-Security-Policy", value: "frame-ancestors 'none'" },
+                    { key: "Referrer-Policy", value: "no-referrer" },
+                ],
+            },
+        ];
+    },
     async redirects() {
         return [
             {
