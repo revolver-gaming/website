@@ -3440,8 +3440,10 @@ section[data-chamber].tight {
     border-style: dashed;
 }
 
+/* inked like the monochrome logos around it (.partner-logo), not as an accent */
 .roster .more b {
-    color: var(--amber);
+    color: #fff;
+    opacity: 0.72;
 }
 
 .on-bone .roster > div {
@@ -3449,9 +3451,17 @@ section[data-chamber].tight {
     border-color: var(--bone-2);
 }
 
-.on-bone .roster span,
-.on-bone .roster .more b {
+.on-bone .roster span {
     color: var(--rust);
+}
+
+.on-bone .roster .more b {
+    color: #000;
+    opacity: 0.68;
+}
+
+.roster .more:hover b {
+    opacity: 1;
 }
 
 /* ---- steps -------------------------------------------------------------------------- */
