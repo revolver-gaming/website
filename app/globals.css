@@ -1967,6 +1967,40 @@ a.pager-step:hover {
     background: #000;
 }
 
+/* Phones and small tablets, portrait or landscape: the games are responsive and lay
+   themselves out for the orientation, so hand them the whole screen instead of a 16:9
+   box (which shrinks to a strip in portrait). Full-bleed is the one case where an
+   explicit height is right — there is no ratio left to preserve. */
+@media (max-width: 860px), (max-height: 500px) {
+    .overlay:has(.demo-frame) {
+        padding: 0;
+        background: #000;
+    }
+
+    .demo-frame {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        border: 0;
+        border-radius: 0;
+    }
+
+    /* Floats over the game, so it needs its own backing to stay visible on any art. */
+    .overlay:has(.demo-frame) .overlay-close {
+        z-index: 1;
+        top: max(10px, env(safe-area-inset-top));
+        right: max(10px, env(safe-area-inset-right));
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        font-size: 16px;
+        color: var(--bone);
+        background: rgba(0, 0, 0, 0.55);
+        border-radius: 50%;
+    }
+}
+
 .lightbox figure {
     max-width: min(1100px, 88vw);
     text-align: center;
@@ -3886,21 +3920,32 @@ section[data-chamber].tight {
 
 .game-banner-wrap {
     position: relative;
+    margin-top: 24px;
 }
 
 /* Same pill as the card, scaled up for the hero banner. */
 .game-banner-wrap .tag-badge {
-    top: 40px;
+    top: 16px;
     left: 16px;
     font-size: 12px;
     padding: 7px 14px;
+}
+
+/* The banner is only ~110px tall on phones, so fall back to the card-sized pill. */
+@media (max-width: 640px) {
+    .game-banner-wrap .tag-badge {
+        top: 10px;
+        left: 10px;
+        font-size: 10px;
+        padding: 4px 9px;
+    }
 }
 
 .game-banner {
     width: 100%;
     aspect-ratio: 1400 / 430;
     object-fit: cover;
-    margin-top: 24px;
+    display: block;
     border-radius: var(--radius);
     border: 1px solid var(--velvet-2);
 }
