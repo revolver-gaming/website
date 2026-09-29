@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 import { getGame, listGames, rtpRange } from "@/lib/cms";
+import { safeHtml } from "@/lib/html";
 
 export const revalidate = 300;
 
@@ -84,7 +85,7 @@ export default async function GamePage({ params }: Props) {
                             </>
                         )}
                     </aside>
-                    <div className="game-copy article-body" dangerouslySetInnerHTML={{ __html: game.description_html ?? "" }} />
+                    <div className="game-copy article-body" dangerouslySetInnerHTML={{ __html: safeHtml(game.description_html) }} />
                 </div>
                 {game.screenshots.length > 0 && (
                     <section className="shot-section">

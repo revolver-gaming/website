@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { sb, slugify, errMsg } from "../../lib";
 import { useUnsavedWarning } from "../../ui";
+import { safeHtml } from "@/lib/html";
 
 type Row = {
     id?: string;
@@ -105,7 +106,7 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                         <button onClick={() => setPreview(!preview)}>{preview ? "Edit HTML" : "Preview"}</button>
                     </div>
                     {preview
-                        ? <div className="article-body admin-preview" dangerouslySetInnerHTML={{ __html: row.content_html }} />
+                        ? <div className="article-body admin-preview" dangerouslySetInnerHTML={{ __html: safeHtml(row.content_html) }} />
                         : <textarea className="mono" rows={16} value={row.content_html} onChange={(e) => set({ content_html: e.target.value })} />}
                 </div>
             </div>

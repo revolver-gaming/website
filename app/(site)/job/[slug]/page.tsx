@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getJob, listJobs, newsDate } from "@/lib/cms";
+import { safeHtml } from "@/lib/html";
 
 export const revalidate = 300;
 
@@ -31,7 +32,7 @@ export default async function JobPage({ params }: Props) {
                 <h1 className="display">{job.title}</h1>
                 <div
                     className="article-body"
-                    dangerouslySetInnerHTML={{ __html: job.content_html }}
+                    dangerouslySetInnerHTML={{ __html: safeHtml(job.content_html) }}
                 />
                 <p className="job-apply">
                     <a className="btn btn-fire" href={`mailto:hello@revolvergaming.com?subject=Application: ${job.title}`}>

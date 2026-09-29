@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getNews, listNews, newsDate } from "@/lib/cms";
+import { safeHtml } from "@/lib/html";
 
 export const revalidate = 300;
 
@@ -43,7 +44,7 @@ export default async function NewsArticlePage({ params }: Props) {
                 )}
                 <div
                     className="article-body"
-                    dangerouslySetInnerHTML={{ __html: article.content_html }}
+                    dangerouslySetInnerHTML={{ __html: safeHtml(article.content_html) }}
                 />
             </article>
         </main>

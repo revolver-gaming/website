@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPage, listPages } from "@/lib/cms";
+import { safeHtml } from "@/lib/html";
 
 export const revalidate = 300;
 
@@ -28,7 +29,7 @@ export default async function ContentPage({ params }: Props) {
                 <h1 className="display">{page.title}</h1>
                 <div
                     className="article-body"
-                    dangerouslySetInnerHTML={{ __html: page.content_html }}
+                    dangerouslySetInnerHTML={{ __html: safeHtml(page.content_html) }}
                 />
             </article>
         </main>
