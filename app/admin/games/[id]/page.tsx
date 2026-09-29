@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { sb, slugify, uploadMedia, errMsg, saveGameTags } from "../../lib";
 import { useUnsavedWarning, TagPicker } from "../../ui";
-import { safeHtml } from "@/lib/html";
+import { RichText } from "../../RichText";
 
 type Row = {
     id?: string;
@@ -74,7 +74,6 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
     const [dirty, setDirty] = useState(false);
     const [busy, setBusy] = useState("");
     const [error, setError] = useState("");
-    const [preview, setPreview] = useState(false);
     const isNew = !initial.id;
     const set = (patch: Partial<Row>) => {
         setDirty(true);
@@ -207,15 +206,7 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     {row.banner_image && <img className="admin-thumb" src={row.banner_image} alt="" />}
                     <input type="file" accept="image/*" onChange={(e) => upload("banners", e.target.files?.[0], (url) => set({ banner_image: url }))} />
                 </label>
-                <div className="wide">
-                    <div className="admin-subhead">
-                        <span>Description (HTML)</span>
-                        <button onClick={() => setPreview(!preview)}>{preview ? "Edit HTML" : "Preview"}</button>
-                    </div>
-                    {preview
-                        ? <div className="article-body admin-preview" dangerouslySetInnerHTML={{ __html: safeHtml(row.description_html) }} />
-                        : <textarea className="mono" rows={12} value={row.description_html ?? ""} onChange={(e) => set({ description_html: e.target.value })} />}
-                </div>
+                <RichText label="Description" value={row.description_html ?? ""} folder="games" onChange={(description_html) => set({ description_html })} />
                 <label className="wide">
                     Features &amp; USPs — one per line
                     <textarea className="mono" rows={8} value={row.features.join("\n")}

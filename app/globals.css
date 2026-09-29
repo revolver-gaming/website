@@ -2470,6 +2470,67 @@ a.pager-step:hover {
     padding: 22px;
 }
 
+.rich {
+    border: 1px solid var(--velvet-3);
+    border-radius: 10px;
+    background: var(--chamber);
+}
+
+.rich:focus-within {
+    border-color: var(--amber);
+}
+
+.rich-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px;
+    border-bottom: 1px solid var(--velvet-3);
+    background: var(--chamber);
+    border-radius: 10px 10px 0 0;
+}
+
+.rich-toolbar button,
+.rich-upload {
+    font: 12px var(--font-m);
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: var(--bone);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.rich-toolbar button:hover,
+.rich-upload:hover {
+    border-color: var(--velvet-3);
+}
+
+.rich-toolbar button.on {
+    color: var(--amber);
+    border-color: var(--amber);
+}
+
+.rich-upload input {
+    display: none;
+}
+
+.rich-body {
+    min-height: 320px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 18px 20px;
+    outline: none;
+}
+
+.rich-body img.ProseMirror-selectednode {
+    outline: 2px solid var(--amber);
+}
+
 .admin-shots {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));

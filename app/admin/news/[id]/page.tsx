@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { sb, slugify, uploadMedia, errMsg } from "../../lib";
 import { useUnsavedWarning } from "../../ui";
-import { safeHtml } from "@/lib/html";
+import { RichText } from "../../RichText";
 
 type Row = {
     id?: string;
@@ -45,7 +45,6 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
     const [dirty, setDirty] = useState(false);
     const [busy, setBusy] = useState("");
     const [error, setError] = useState("");
-    const [preview, setPreview] = useState(false);
     const isNew = !initial.id;
     const set = (patch: Partial<Row>) => {
         setDirty(true);
@@ -124,23 +123,7 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     <input type="file" accept="image/*" onChange={(e) => upload(e.target.files?.[0], (url) => set({ cover_image: url }))} />
                     {busy === "upload" && <small>Uploading…</small>}
                 </label>
-                <div className="wide">
-                    <div className="admin-subhead">
-                        <span>Body (HTML — wrap paragraphs in &lt;p&gt;…&lt;/p&gt;)</span>
-                        <span>
-                            <label className="admin-inline-upload">
-                                Insert image
-                                <input type="file" accept="image/*" onChange={(e) =>
-                                    upload(e.target.files?.[0], (url) =>
-                                        set({ content_html: `${row.content_html}\n<p><img src="${url}" alt=""></p>` }))} />
-                            </label>
-                            <button onClick={() => setPreview(!preview)}>{preview ? "Edit HTML" : "Preview"}</button>
-                        </span>
-                    </div>
-                    {preview
-                        ? <div className="article-body admin-preview" dangerouslySetInnerHTML={{ __html: safeHtml(row.content_html) }} />
-                        : <textarea className="mono" rows={18} value={row.content_html} onChange={(e) => set({ content_html: e.target.value })} />}
-                </div>
+                <RichText label="Body" value={row.content_html} folder="news" onChange={(content_html) => set({ content_html })} />
             </div>
         </section>
     );

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { sb, slugify, errMsg } from "../../lib";
 import { useUnsavedWarning } from "../../ui";
-import { safeHtml } from "@/lib/html";
+import { RichText } from "../../RichText";
 
 type Row = {
     slug: string;
@@ -38,7 +38,6 @@ function Editor({ row: initial, isNew, done }: { row: Row; isNew: boolean; done:
     const [dirty, setDirty] = useState(false);
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState("");
-    const [preview, setPreview] = useState(false);
     const set = (patch: Partial<Row>) => {
         setDirty(true);
         setRow((r) => ({ ...r, ...patch }));
@@ -92,15 +91,7 @@ function Editor({ row: initial, isNew, done }: { row: Row; isNew: boolean; done:
                     <input type="checkbox" checked={row.published} onChange={(e) => set({ published: e.target.checked })} />
                     Published (visible on the site)
                 </label>
-                <div className="wide">
-                    <div className="admin-subhead">
-                        <span>Content (HTML)</span>
-                        <button onClick={() => setPreview(!preview)}>{preview ? "Edit HTML" : "Preview"}</button>
-                    </div>
-                    {preview
-                        ? <div className="article-body admin-preview" dangerouslySetInnerHTML={{ __html: safeHtml(row.content_html) }} />
-                        : <textarea className="mono" rows={18} value={row.content_html} onChange={(e) => set({ content_html: e.target.value })} />}
-                </div>
+                <RichText label="Content" value={row.content_html} folder="pages" onChange={(content_html) => set({ content_html })} />
             </div>
         </section>
     );
