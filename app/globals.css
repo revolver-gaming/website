@@ -2057,8 +2057,42 @@ a.pager-step:hover {
 
 /* ---- admin --------------------------------------------------------------- */
 
-.admin {
+/* The admin is a light, neutral workspace for editing content: it reuses the site's tokens,
+   remapped here, so every admin rule below stays token-driven. The public site is untouched. */
+.admin,
+.admin-login {
+    --chamber: #ffffff;        /* inputs, editor */
+    --velvet: #ffffff;         /* bar, cards, panels */
+    --velvet-2: #efeeeb;       /* active nav, chip borders */
+    --velvet-3: #dcdad5;       /* borders */
+    --bone: #1d1c1f;           /* text */
+    --smoke: #6c6a70;          /* muted text */
+    --amber: #c4620e;          /* accents readable on white */
+    --lift: 0 1px 3px rgba(0, 0, 0, 0.06);
     min-height: 100vh;
+    background: #f6f5f3;
+    color: var(--bone);
+    color-scheme: light;
+}
+
+body:has(.admin, .admin-login) {
+    background: #f6f5f3;
+}
+
+.admin .btn-fire,
+.admin-login .btn-fire,
+.admin .chip.on {
+    color: #2a1a0c;
+    box-shadow: none;
+}
+
+.admin .chip.on {
+    background: #ffd9b3;
+    border-color: #f0b27a;
+}
+
+.admin .article-body {
+    color: #3b3a3f;
 }
 
 .admin-bar {
@@ -2174,7 +2208,7 @@ a.pager-step:hover {
 }
 
 .admin-error {
-    color: #ff7a7a;
+    color: #c62828;
     font-family: var(--font-m);
     font-size: 13px;
     margin-bottom: 16px;
@@ -2243,7 +2277,7 @@ a.pager-step:hover {
 
 .admin-table td {
     padding: 12px;
-    border-bottom: 1px solid rgba(87, 40, 90, 0.4);
+    border-bottom: 1px solid var(--velvet-2);
 }
 
 .admin-table td.mono {
@@ -2341,13 +2375,13 @@ a.pager-step:hover {
 
 .admin button.danger,
 .admin .admin-link-row .danger {
-    color: #ff7a7a;
+    color: #c62828;
 }
 
 .admin button.danger:hover,
 .admin .admin-link-row .danger:hover {
-    color: #ff4d4d;
-    border-color: #ff4d4d;
+    color: #a51c1c;
+    border-color: #a51c1c;
 }
 
 .mono {
@@ -3863,14 +3897,14 @@ section[data-chamber].tight {
     gap: 22px 40px;
     padding: 20px 24px;
     border-radius: 12px;
-    background: var(--chamber);
+    background: #1f0e1f;       /* the site's own colours, not the light admin's: this previews the logos live */
     font-family: var(--font-m);
     font-size: 13px;
-    color: var(--smoke);
+    color: #d7c1d4;
 }
 
 .admin-logo-strip.on-bone {
-    background: var(--bone);
+    background: #f7f1ea;
     color: var(--ink);
 }
 
@@ -3894,7 +3928,7 @@ section[data-chamber].tight {
     border: 1px dashed var(--velvet-3);
     border-radius: 10px;
     cursor: pointer;
-    background: repeating-conic-gradient(#ffffff10 0 25%, transparent 0 50%) 0 0 / 12px 12px;
+    background: repeating-conic-gradient(#0000000d 0 25%, transparent 0 50%) 0 0 / 12px 12px;
     font-family: var(--font-m);
     font-size: 11px;
     color: var(--amber);
