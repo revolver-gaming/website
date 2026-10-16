@@ -1885,6 +1885,31 @@ a.pager-step:hover {
     margin-top: 32px;
 }
 
+/* ---- insights (white papers) ------------------------------------------------ */
+
+.news-row .excerpt {
+    grid-column: 2;
+    color: var(--smoke);
+    font-size: 15px;
+}
+
+.on-bone .news-row .excerpt {
+    color: var(--ink-soft);
+}
+
+.article-lede {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.article-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 40px;
+}
+
 /* ---- game detail ----------------------------------------------------------- */
 
 .game-detail {

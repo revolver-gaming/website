@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { getContact, getFooterLinks, getSocials } from "@/lib/cms";
+import { getContact, getFooterLinks, getSocials, listInsights } from "@/lib/cms";
 import { PILLARS } from "@/lib/pillars";
 
 export default async function Footer() {
-    const [contact, links, socials] = await Promise.all([
-        getContact(), getFooterLinks(), getSocials(),
+    const [contact, links, socials, insights] = await Promise.all([
+        getContact(), getFooterLinks(), getSocials(), listInsights(),
     ]);
     return (
         <footer className="footer">
@@ -28,6 +28,7 @@ export default async function Footer() {
                     <nav className="footer-col" aria-label="Company">
                         <h4>Company</h4>
                         <Link href="/news">News</Link>
+                        {insights.length > 0 && <Link href="/insights">Insights</Link>}
                         <Link href="/#contact">Contact</Link>
                         <Link href="/fairness">Fairness</Link>
                         {links.filter((l) => l.label === "Careers").map((l) => (

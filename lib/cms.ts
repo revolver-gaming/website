@@ -55,6 +55,30 @@ export async function getNews(slug: string): Promise<NewsArticle | null> {
     return data;
 }
 
+// White papers on /insights: long-form answers to the questions operators and studios ask.
+export type Insight = NewsArticle & { pdf_url: string | null; updated_at: string };
+
+export type InsightListItem = Omit<Insight, "content_html">;
+
+export async function listInsights(): Promise<InsightListItem[]> {
+    const { data, error } = await supabase
+        .from("insights")
+        .select("slug, title, excerpt, cover_image, pdf_url, published_at, updated_at")
+        .order("published_at", { ascending: false });
+    if (error) throw error;
+    return data;
+}
+
+export async function getInsight(slug: string): Promise<Insight | null> {
+    const { data, error } = await supabase
+        .from("insights")
+        .select("slug, title, excerpt, content_html, cover_image, pdf_url, published_at, updated_at")
+        .eq("slug", slug)
+        .maybeSingle();
+    if (error) throw error;
+    return data;
+}
+
 export type Game = {
     slug: string;
     title: string;
