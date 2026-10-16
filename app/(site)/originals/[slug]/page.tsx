@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
+import JsonLd from "@/components/JsonLd";
 import { OriginalsGrid } from "@/components/Originals";
 import { listOriginals, rtpRange } from "@/lib/cms";
+import { absolute, publisher } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -39,6 +41,17 @@ export default async function OriginalPage({ params }: Props) {
     const more = all.filter((x) => x.slug !== o.slug && !x.coming_soon).slice(0, 4);
     return (
         <main>
+            <JsonLd data={{
+                "@context": "https://schema.org",
+                "@type": "VideoGame",
+                name: o.title,
+                description: o.blurb,
+                url: absolute(`/originals/${o.slug}`),
+                image: o.hero_image ?? o.card_image ?? undefined,
+                genre: ["Provably fair casual game", o.category],
+                gamePlatform: "HTML5",
+                publisher,
+            }} />
             <div className="shell game-detail">
                 <Link className="article-back" href="/originals">← Originals</Link>
                 {o.hero_image && (

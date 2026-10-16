@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
+import JsonLd from "@/components/JsonLd";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
 import { getGame, listGames, releaseDate, rtpRange } from "@/lib/cms";
 import { safeHtml } from "@/lib/html";
+import { absolute, publisher } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -45,6 +47,18 @@ export default async function GamePage({ params }: Props) {
     ] as const).filter(([, href]) => href);
     return (
         <main>
+            <JsonLd data={{
+                "@context": "https://schema.org",
+                "@type": "VideoGame",
+                name: game.title,
+                description: game.blurb,
+                url: absolute(`/game/${game.slug}`),
+                image: game.banner_image ?? game.image,
+                genre: ["Online slot", ...game.tags],
+                gamePlatform: "HTML5",
+                datePublished: game.release_date ?? String(game.year),
+                publisher,
+            }} />
             <div className="shell game-detail">
                 <Link className="article-back" href="/games">← All games</Link>
                 <div className="game-banner-wrap">

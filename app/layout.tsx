@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Big_Shoulders, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import { SITE_DESCRIPTION, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const display = Big_Shoulders({
@@ -21,10 +22,9 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://revolvergaming.com"),
+    metadataBase: new URL(SITE_URL),
     title: "Revolver Gaming — One integration. 300+ games.",
-    description:
-        "London-based games studio and game aggregation platform. Original HTML5 games, partner studios and a UKGC-licensed engine — live in your lobby the same day.",
+    description: SITE_DESCRIPTION,
     icons: { icon: "/brand/favicon.png" },
 };
 

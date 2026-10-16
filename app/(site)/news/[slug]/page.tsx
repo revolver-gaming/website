@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import JsonLd from "@/components/JsonLd";
 import { getNews, listNews, newsDate } from "@/lib/cms";
 import { safeHtml } from "@/lib/html";
+import { absolute, publisher } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -35,6 +37,17 @@ export default async function NewsArticlePage({ params }: Props) {
     if (!article) notFound();
     return (
         <main>
+            <JsonLd data={{
+                "@context": "https://schema.org",
+                "@type": "NewsArticle",
+                headline: article.title,
+                description: article.excerpt ?? undefined,
+                url: absolute(`/news/${article.slug}`),
+                image: article.cover_image ?? undefined,
+                datePublished: article.published_at,
+                author: publisher,
+                publisher,
+            }} />
             <article className="shell article">
                 <Link className="article-back" href="/news">← All news</Link>
                 <p className="article-date">{newsDate(article.published_at)}</p>
