@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
-import { getGame, listGames, rtpRange } from "@/lib/cms";
+import { getGame, listGames, releaseDate, rtpRange } from "@/lib/cms";
 import { safeHtml } from "@/lib/html";
 
 export const revalidate = 300;
@@ -34,7 +34,7 @@ export default async function GamePage({ params }: Props) {
     if (!game) notFound();
     // Spec order is Ryan's: release date, RTP, volatility, max multiplier, paylines, bonus buy.
     const specs = [
-        ["Release date", String(game.year)], ["RTP", rtpRange(game.rtp)],
+        ["Release date", game.release_date ? releaseDate(game.release_date) : String(game.year)], ["RTP", rtpRange(game.rtp)],
         ["Volatility", game.volatility], ["Max multiplier", game.max_win],
         ["Paylines", game.paylines],
         ["Bonus buy", game.bonus_buy === null ? null : game.bonus_buy ? "Yes" : "No"],

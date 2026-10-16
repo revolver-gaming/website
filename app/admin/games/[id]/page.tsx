@@ -13,6 +13,7 @@ type Row = {
     blurb: string;
     card_image: string;
     year: number;
+    release_date: string | null;
     tags: string[];
     featured: boolean;
     sort_order: number;
@@ -36,7 +37,7 @@ type Row = {
 };
 
 const blank = (): Row => ({
-    slug: "", title: "", blurb: "", card_image: "", year: new Date().getFullYear(),
+    slug: "", title: "", blurb: "", card_image: "", year: new Date().getFullYear(), release_date: null,
     tags: [], featured: false, sort_order: -1, description_html: "", features: [],
     screenshots: [], product_sheet: null, demo_url: null, video_url: null, published: true,
     rtp: null, volatility: null, banner_image: null, max_win: null, paylines: null,
@@ -139,8 +140,14 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     {!isNew && <small>Locked: this URL may be shared or indexed.</small>}
                 </label>
                 <label>
+                    Release date
+                    <input type="date" value={row.release_date ?? ""}
+                        onChange={(e) => set({ release_date: e.target.value || null, ...(e.target.value ? { year: +e.target.value.slice(0, 4) } : {}) })} />
+                    <small>Leave empty if only the year is known.</small>
+                </label>
+                <label>
                     Year
-                    <input type="number" value={row.year} onChange={(e) => set({ year: +e.target.value })} />
+                    <input type="number" value={row.year} disabled={!!row.release_date} onChange={(e) => set({ year: +e.target.value })} />
                 </label>
                 <label>
                     Position (lower = first)

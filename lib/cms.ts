@@ -77,6 +77,7 @@ export type GameDetail = Game & {
     rtp: string | null;
     volatility: string | null;
     banner_image: string | null;
+    release_date: string | null;
     max_win: string | null;
     paylines: string | null;
     bonus_buy: boolean | null;
@@ -113,7 +114,7 @@ export async function listGameFilters(): Promise<string[]> {
 export async function getGame(slug: string): Promise<GameDetail | null> {
     const { data, error } = await supabase
         .from("games")
-        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url, rtp, volatility, banner_image, max_win, paylines, bonus_buy, languages, asset_pack`)
+        .select(`${GAME_FIELDS}, description_html, features, screenshots, product_sheet, video_url, release_date, rtp, volatility, banner_image, max_win, paylines, bonus_buy, languages, asset_pack`)
         .eq("slug", slug)
         .maybeSingle();
     if (error) throw error;
@@ -299,6 +300,10 @@ export async function getJob(slug: string): Promise<Job | null> {
 
 export const newsDate = (iso: string) =>
     new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
+// Release dates are plain `date` columns — format in UTC so the day never shifts.
+export const releaseDate = (date: string) =>
+    new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
 export const newsDateShort = (iso: string) =>
     new Date(iso)
