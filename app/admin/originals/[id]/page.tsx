@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { sb, slugify, uploadMedia, errMsg } from "../../lib";
 import { useUnsavedWarning } from "../../ui";
+import { SEASONS } from "@/components/Seasons";
 
 type Feature = { title: string; text: string };
 
@@ -23,6 +24,7 @@ type Row = {
     is_new: boolean;
     featured: boolean;
     coming_soon: boolean;
+    seasons: Record<string, string>;
     sort_order: number;
     published: boolean;
 };
@@ -30,7 +32,7 @@ type Row = {
 const blank = (): Row => ({
     slug: "", title: "", category: "", blurb: "", max_win: null, rtp: null, volatility: null,
     features: [], card_image: null, hero_image: null, demo_url: null, is_new: true, featured: false,
-    coming_soon: false, sort_order: 0, published: true,
+    coming_soon: false, seasons: {}, sort_order: 0, published: true,
 });
 
 const featuresToText = (features: Feature[]) => features.map((f) => `${f.title} | ${f.text}`).join("\n");
@@ -196,6 +198,15 @@ function Editor({ initial, done }: { initial: Row; done: () => void }) {
                     Demo launch URL
                     <input {...text("demo_url")} />
                 </label>
+                {SEASONS.map((s) => (
+                    <label key={s.key}>
+                        {s.label} demo URL (optional — adds a seasonal version)
+                        <input value={row.seasons[s.key] ?? ""} onChange={(e) => {
+                            const { [s.key]: _, ...rest } = row.seasons;
+                            set({ seasons: e.target.value ? { ...rest, [s.key]: e.target.value } : rest });
+                        }} />
+                    </label>
+                ))}
                 {busy === "upload" && <p className="admin-hint">Uploading…</p>}
             </div>
         </section>

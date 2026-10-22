@@ -3148,6 +3148,40 @@ section[data-chamber].tight {
     transform: translateY(-5px);
 }
 
+/* ---- seasonal versions (Halloween / Christmas originals) ----------------- */
+
+.season-icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    color: var(--season);
+}
+
+/* Top-right of the artwork, opposite the New badge. */
+.season-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-m);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: rgba(31, 14, 31, 0.72);
+    border: 1px solid rgba(247, 241, 234, 0.2);
+    border-radius: 999px;
+    padding: 5px 10px;
+    backdrop-filter: blur(6px);
+}
+
+.o-feature-art {
+    position: relative;
+}
+
 /* ---- originals (spec cards, featured title, detail art) ------------------------------ */
 
 .o-grid {
@@ -4279,6 +4313,84 @@ section[data-chamber].tight {
 .panel-ctas .btn {
     justify-content: center;
     text-align: center;
+}
+
+/* Play demo + a toggle for the seasonal versions, one pill split in two. */
+.btn-split {
+    position: relative;
+    display: flex;
+}
+
+.btn-split > .btn {
+    flex: 1;
+    border-radius: 999px 0 0 999px;
+}
+
+.btn-split > .btn:hover {
+    transform: none;
+}
+
+.btn-split > .split-end {
+    flex: none;
+    gap: 6px;
+    padding-inline: 16px 18px;
+    border-radius: 0 999px 999px 0;
+    border-left: 1px solid rgba(31, 14, 31, 0.25);
+}
+
+/* Season colours wash out on amber, so the toggle draws its icons in the button ink. */
+.split-end .season-icon {
+    color: inherit;
+}
+
+.split-chevron {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.2s;
+}
+
+.split-end[aria-expanded="true"] .split-chevron {
+    transform: rotate(180deg);
+}
+
+/* Doubled class to beat .game-panel ul's list indent. */
+.btn-split .split-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: 0;
+    z-index: 5;
+    gap: 2px;
+    margin: 0;
+    list-style: none;
+    background: var(--chamber);
+    border: 1px solid var(--velvet-2);
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: var(--lift);
+}
+
+.split-menu button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--bone);
+    text-align: left;
+}
+
+.split-menu button:hover,
+.split-menu button:focus-visible {
+    background: var(--velvet);
+}
+
+.split-menu .season-icon {
+    width: 18px;
+    height: 18px;
 }
 
 .panel-links {

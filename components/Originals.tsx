@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Original } from "@/lib/cms";
+import { SeasonBadge } from "./Seasons";
 
 // Line icons stand in for card art until each title's artwork is uploaded.
 const ICONS: Record<string, React.ReactNode> = {
@@ -47,6 +48,7 @@ export function OriginalCard({ o }: { o: Original }) {
     return (
         <Link className={`o-card${o.coming_soon ? " is-soon" : ""}`} href={o.coming_soon ? "/#contact" : `/originals/${o.slug}`}>
             {(o.is_new || o.coming_soon) && <span className="tag-badge">{o.coming_soon ? "Coming soon" : "New"}</span>}
+            <SeasonBadge seasons={o.seasons} />
             <OriginalArt o={o} />
             <div className="o-meta">
                 <h3>{o.title}</h3>
@@ -68,7 +70,10 @@ export function OriginalsGrid({ items }: { items: Original[] }) {
 export function OriginalFeature({ o }: { o: Original }) {
     return (
         <div className="o-feature" data-reveal>
-            <OriginalArt o={o} />
+            <div className="o-feature-art">
+                <SeasonBadge seasons={o.seasons} />
+                <OriginalArt o={o} />
+            </div>
             <div>
                 <p className="eyebrow">Featured original</p>
                 <h3 className="display">{o.title}</h3>

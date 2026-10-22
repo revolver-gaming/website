@@ -171,12 +171,13 @@ export type Original = {
     is_new: boolean;
     featured: boolean;
     coming_soon: boolean;
+    seasons: Record<string, string>;
 };
 
 export async function listOriginals(): Promise<Original[]> {
     const { data, error } = await supabase
         .from("originals")
-        .select("slug, title, category, blurb, max_win, rtp, volatility, features, card_image, hero_image, demo_url, is_new, featured, coming_soon")
+        .select("slug, title, category, blurb, max_win, rtp, volatility, features, card_image, hero_image, demo_url, is_new, featured, coming_soon, seasons")
         .order("sort_order");
     if (error) throw error;
     return data;

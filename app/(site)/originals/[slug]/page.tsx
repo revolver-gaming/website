@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import DemoLauncher from "@/components/DemoLauncher";
 import JsonLd from "@/components/JsonLd";
 import { OriginalsGrid } from "@/components/Originals";
+import { seasonsOf } from "@/components/Seasons";
 import { listOriginals, rtpRange } from "@/lib/cms";
 import { absolute, publisher } from "@/lib/seo";
 
@@ -37,6 +38,7 @@ export default async function OriginalPage({ params }: Props) {
     const specs = [
         ["Max win", o.max_win], ["RTP", rtpRange(o.rtp)], ["Volatility", o.volatility],
         ["Category", o.category], ["Fairness", "Provably fair"], ["Brandable", "Yes"],
+        ["Seasonal", seasonsOf(o.seasons).map((s) => s.label).join(", ")],
     ].filter(([, v]) => v);
     const more = all.filter((x) => x.slug !== o.slug && !x.coming_soon).slice(0, 4);
     return (
@@ -73,7 +75,7 @@ export default async function OriginalPage({ params }: Props) {
                         </dl>
                         <div className="panel-ctas">
                             {o.demo_url
-                                ? <DemoLauncher url={o.demo_url} title={o.title} />
+                                ? <DemoLauncher url={o.demo_url} title={o.title} seasons={o.seasons} />
                                 : <span className="btn btn-ghost btn-inert">Demo soon</span>}
                             <Link className="btn btn-ghost" href="/originals#branding">Branding demo</Link>
                             <Link className="btn btn-ghost" href="/#contact">Add to your lobby</Link>
