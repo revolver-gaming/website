@@ -5,6 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import { getNews, listNews, newsDate } from "@/lib/cms";
 import { safeHtml } from "@/lib/html";
 import { absolute, publisher } from "@/lib/seo";
+import { media } from "@/lib/media";
 
 export const revalidate = 300;
 
@@ -53,7 +54,7 @@ export default async function NewsArticlePage({ params }: Props) {
                 <p className="article-date">{newsDate(article.published_at)}</p>
                 <h1 className="display">{article.title}</h1>
                 {article.cover_image && (
-                    <img className="article-cover" src={article.cover_image} alt={article.title} />
+                    <img className="article-cover" src={media(article.cover_image, 1200)} alt={article.title} />
                 )}
                 <div
                     className="article-body"

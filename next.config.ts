@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    // CMS media is served through the optimizer (lib/media.ts) to keep Supabase egress down.
+    // Uploads get timestamped names, so a cached file never goes stale. SVGs are never optimized.
+    images: {
+        remotePatterns: [new URL("https://jqsgkwtgtdtssuudtwqe.supabase.co/storage/v1/object/public/media/**")],
+        minimumCacheTTL: 2678400,
+    },
     // The admin handles logins and password resets: never frameable, never leaks its URL as a referrer.
     async headers() {
         return [

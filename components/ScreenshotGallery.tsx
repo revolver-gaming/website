@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { media } from "@/lib/media";
 
 /* A snap-scrolling strip of screenshots; any shot opens the lightbox. */
 export default function ScreenshotGallery({ shots, title }: { shots: string[]; title: string }) {
@@ -31,7 +32,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
                 <div className="shot-track" ref={track}>
                     {shots.map((s, i) => (
                         <button key={s} className="shot" onClick={() => setIndex(i)} aria-label={`Open screenshot ${i + 1}`}>
-                            <img src={s} alt={`${title} screenshot ${i + 1}`} loading="lazy" />
+                            <img src={media(s, 640)} alt={`${title} screenshot ${i + 1}`} loading="lazy" />
                         </button>
                     ))}
                 </div>
@@ -59,7 +60,7 @@ export default function ScreenshotGallery({ shots, title }: { shots: string[]; t
                         ‹
                     </button>
                     <figure onClick={(e) => e.stopPropagation()}>
-                        <img src={shots[index]} alt={`${title} screenshot ${index + 1}`} />
+                        <img src={media(shots[index], 1920)} alt={`${title} screenshot ${index + 1}`} />
                         <figcaption>{index + 1} / {shots.length}</figcaption>
                     </figure>
                     <button

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Original } from "@/lib/cms";
 import { SeasonBadge } from "./Seasons";
+import { media } from "@/lib/media";
 
 // Line icons stand in for card art until each title's artwork is uploaded.
 const ICONS: Record<string, React.ReactNode> = {
@@ -25,7 +26,7 @@ const ICONS: Record<string, React.ReactNode> = {
 };
 
 export function OriginalArt({ o }: { o: Original }) {
-    if (o.card_image) return <img className="o-art" src={o.card_image} alt={`${o.title} artwork`} />;
+    if (o.card_image) return <img className="o-art" src={media(o.card_image, 828)} alt={`${o.title} artwork`} />;
     return (
         <div className="o-art o-art-ph" aria-hidden>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

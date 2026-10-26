@@ -3,6 +3,7 @@ import Link from "next/link";
 import Accent from "@/components/Accent";
 import { getAboutPage, listGames } from "@/lib/cms";
 import { PILLARS } from "@/lib/pillars";
+import { media } from "@/lib/media";
 
 export const revalidate = 300;
 
@@ -18,8 +19,8 @@ export default async function About() {
     const art = page.hero_image || (games.find((g) => g.featured) ?? games[0])?.image;
     return (
         <main>
-            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${art})` } as React.CSSProperties}>
-                {art && <img className="art-peek" src={art} alt="" />}
+            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${media(art, 640)})` } as React.CSSProperties}>
+                {art && <img className="art-peek" src={media(art, 1080)} alt="" />}
                 <div className="shell">
                     <div className="section-head about-hero">
                         <p className="eyebrow">{page.eyebrow}</p>

@@ -7,6 +7,7 @@ import { OriginalsGrid } from "@/components/Originals";
 import { seasonsOf } from "@/components/Seasons";
 import { listOriginals, rtpRange } from "@/lib/cms";
 import { absolute, publisher } from "@/lib/seo";
+import { media } from "@/lib/media";
 
 export const revalidate = 300;
 
@@ -58,7 +59,7 @@ export default async function OriginalPage({ params }: Props) {
                 <Link className="article-back" href="/originals">← Originals</Link>
                 {o.hero_image && (
                     <div className="game-banner-wrap">
-                        <img className="game-banner" src={o.hero_image} alt={`${o.title} banner`} />
+                        <img className="game-banner" src={media(o.hero_image, 1080)} alt={`${o.title} banner`} />
                         {o.is_new && <span className="tag-badge">New</span>}
                     </div>
                 )}

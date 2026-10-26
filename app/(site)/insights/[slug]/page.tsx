@@ -5,6 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import { getInsight, listInsights, newsDate } from "@/lib/cms";
 import { safeHtml } from "@/lib/html";
 import { absolute, publisher } from "@/lib/seo";
+import { media } from "@/lib/media";
 
 export const revalidate = 300;
 
@@ -55,7 +56,7 @@ export default async function InsightPage({ params }: Props) {
                 <h1 className="display">{paper.title}</h1>
                 {paper.excerpt && <p className="article-lede">{paper.excerpt}</p>}
                 {paper.cover_image && (
-                    <img className="article-cover" src={paper.cover_image} alt={paper.title} />
+                    <img className="article-cover" src={media(paper.cover_image, 1200)} alt={paper.title} />
                 )}
                 <div
                     className="article-body"

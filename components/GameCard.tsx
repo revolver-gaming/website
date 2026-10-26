@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Game } from "@/lib/cms";
+import { media } from "@/lib/media";
 
 export default function GameCard({ game }: { game: Game }) {
     return (
@@ -7,7 +8,7 @@ export default function GameCard({ game }: { game: Game }) {
             {(game.coming_soon || game.is_new) && (
                 <span className="tag-badge">{game.coming_soon ? "Coming soon" : "New"}</span>
             )}
-            <img className="art" src={game.image} alt={`${game.title} artwork`} loading="lazy" />
+            <img className="art" src={media(game.image, 640)} alt={`${game.title} artwork`} loading="lazy" />
             <span className="gc-title">
                 <span>{game.title}</span>
                 <span className="yr">{game.year}</span>

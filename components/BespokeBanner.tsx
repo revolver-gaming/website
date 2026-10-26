@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getExclusivesPage, type Game } from "@/lib/cms";
 import { pillar } from "@/lib/pillars";
+import { media } from "@/lib/media";
 
 /* Picks a branded title as the backdrop so the "exclusives" promise has a
    real example behind it — unless an image is set in /admin/pages/exclusives. */
@@ -15,7 +16,7 @@ export default async function BespokeBanner({ games }: { games: Game[] }) {
     const caption = page.banner_image ? page.banner_caption : game?.title;
     return (
         <Link className="bespoke" href={p.href} data-reveal>
-            {image && <img src={image} alt="" loading="lazy" />}
+            {image && <img src={media(image, 1200)} alt="" loading="lazy" />}
             <p className="eyebrow">Your brief</p>
             <h2 className="display">Name the <em>game.</em></h2>
             <p>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { listNewsPage, newsDateShort, type NewsListItem } from "@/lib/cms";
+import { media } from "@/lib/media";
 
 const pageHref = (p: number) => (p === 1 ? "/news" : `/news/page/${p}`);
 
@@ -27,7 +28,7 @@ export default async function NewsIndex({ page }: { page: number }) {
 
                 {page === 1 && (
                     <Link className="news-feat" href={`/news/${lead.slug}`}>
-                        {lead.cover_image && <img src={lead.cover_image} alt="" />}
+                        {lead.cover_image && <img src={media(lead.cover_image, 1080)} alt="" />}
                         <div className="news-feat-copy">
                             <div className="feat-badges">
                                 <span className="badge-latest">LATEST</span>

@@ -13,6 +13,7 @@ import {
 import {
     GAP_OPERATOR_POINTS, GAP_ROUTES, OPERATOR_INTEGRATIONS, RGS_ENGINE, RGS_OPTIONS, THIRD_PARTY_GAMES, pillar,
 } from "@/lib/pillars";
+import { media } from "@/lib/media";
 
 export const revalidate = 300;
 
@@ -74,7 +75,7 @@ export default async function Home() {
             </section>
 
             {/* slots */}
-            <section className="art-bg" data-chamber id="slots" style={{ "--art": `url(${live[0]?.image})` } as React.CSSProperties}>
+            <section className="art-bg" data-chamber id="slots" style={{ "--art": `url(${media(live[0]?.image, 640)})` } as React.CSSProperties}>
                 <div className="shell">
                     <div className="section-row">
                         <div className="section-head" data-reveal>

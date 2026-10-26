@@ -4,6 +4,7 @@ import GameCard from "@/components/GameCard";
 import { brandedGame } from "@/components/BespokeBanner";
 import { getExclusivesPage, getStudioOffer, listGames } from "@/lib/cms";
 import { BESPOKE_STEPS, pillar } from "@/lib/pillars";
+import { media } from "@/lib/media";
 
 export const revalidate = 300;
 
@@ -20,8 +21,8 @@ export default async function Exclusives() {
     const examples = games.filter((g) => g.tags.some((t) => /brand|seasonal/i.test(t))).slice(0, 6);
     return (
         <main>
-            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${art})` } as React.CSSProperties}>
-                {art && <img className="art-peek" src={art} alt="" />}
+            <section className="plat-hero art-bg" data-chamber style={{ "--art": `url(${media(art, 640)})` } as React.CSSProperties}>
+                {art && <img className="art-peek" src={media(art, 1080)} alt="" />}
                 <div className="shell">
                     <div className="section-head">
                         <p className="eyebrow">{p.kicker}</p>

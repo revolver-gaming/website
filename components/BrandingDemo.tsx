@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Original } from "@/lib/cms";
+import { media } from "@/lib/media";
 
 /* Live re-skin of a mock originals lobby: one palette change lands on every
    surface, so operators can picture the product under their own brand. */
@@ -73,7 +74,7 @@ export default function BrandingDemo({ items }: { items: Original[] }) {
                     <div className="bp-lobby">
                         {tiles.map((o) => (
                             <figure key={o.slug}>
-                                <img src={o.card_image!} alt="" loading="lazy" />
+                                <img src={media(o.card_image, 256)} alt="" loading="lazy" />
                                 <figcaption>{o.title}</figcaption>
                             </figure>
                         ))}

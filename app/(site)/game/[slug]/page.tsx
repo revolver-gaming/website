@@ -7,6 +7,7 @@ import ScreenshotGallery from "@/components/ScreenshotGallery";
 import { getGame, listGames, releaseDate, rtpRange } from "@/lib/cms";
 import { safeHtml } from "@/lib/html";
 import { absolute, publisher } from "@/lib/seo";
+import { media } from "@/lib/media";
 
 export const revalidate = 300;
 
@@ -62,7 +63,7 @@ export default async function GamePage({ params }: Props) {
             <div className="shell game-detail">
                 <Link className="article-back" href="/games">← All games</Link>
                 <div className="game-banner-wrap">
-                    <img className="game-banner" src={game.banner_image ?? game.image} alt={`${game.title} banner`} />
+                    <img className="game-banner" src={media(game.banner_image ?? game.image, 1080)} alt={`${game.title} banner`} />
                     {(game.coming_soon || game.is_new) && (
                         <span className="tag-badge">{game.coming_soon ? "Coming soon" : "New"}</span>
                     )}
