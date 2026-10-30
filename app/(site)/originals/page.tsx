@@ -20,10 +20,10 @@ const PROMISES = [
 ];
 
 const STEPS = [
-    { title: "Pick the lobby", text: "Choose the titles you want live on day one. Crash, dice, mines, plinko — the whole set or a curated few." },
-    { title: "We brand it", text: "Assets, palette and naming applied across every game, so the lobby reads as yours." },
-    { title: "Plug in once", text: "Delivered through the same platform integration as our games. Already integrated? Nothing new to build." },
-    { title: "Keep it fresh", text: "New originals are added to your lobby as they ship, at no extra integration cost." },
+    { title: "Send us your brand", text: "Logo, palette, typeface and any background art. Your brand guidelines are the brief." },
+    { title: "We build your theme", text: "One theme for your brand, not a skin per game, carried across every original in the lobby." },
+    { title: "Review it", text: "Check every title on demo links before anything goes live." },
+    { title: "Switch it on", text: "Launches carry your brand, and next month's release arrives already branded." },
 ];
 
 export default async function Originals() {
@@ -81,10 +81,10 @@ export default async function Originals() {
                 <div className="shell">
                     <div className="section-head" data-reveal>
                         <p className="eyebrow">Branding demo</p>
-                        <h2 className="display">Your lobby, <em>your colours</em></h2>
+                        <h2 className="display">Branded to the <em>last pixel</em></h2>
                         <p className="lede">
-                            White-labelling here isn&apos;t a logo in the corner. Pick a palette,
-                            name your casino, and watch the same originals lobby take on your brand.
+                            White-labelling here isn&apos;t a logo in the corner. Set a name, two colours
+                            and a typeface: the logo, palette and controls change; the game underneath doesn&apos;t.
                         </p>
                     </div>
                     <BrandingDemo items={items} />
